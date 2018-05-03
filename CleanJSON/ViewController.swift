@@ -9,17 +9,22 @@
 import UIKit
 
 struct TestModel: Codable {
-    let boolean: String
+    let boolean: Int
     let integer: Float
-    let double: Int
-    let string: Int
-    let array: [Int]
+    let double: String
+    let string: Double
+    let array: [String]
     let nested: Nested
+    let notPresent: NotPresent
     
     struct Nested: Codable {
         let a: String
-        let b: Double
+        let b: Bool
         let c: Int
+    }
+    
+    struct NotPresent: Codable {
+        let a: String
     }
 }
 
@@ -43,16 +48,17 @@ class ViewController: UIViewController {
              }
         """.data(using: .utf8)!
         
-        let model = try! JSONDecoder().decode(TestModel.self, from: json)
-        
-        debugPrint(model.boolean)
-        debugPrint(model.integer)
-        debugPrint(model.double)
-        debugPrint(model.string)
-        debugPrint(model.array)
-        debugPrint(model.nested.a)
-        debugPrint(model.nested.b)
-        debugPrint(model.nested.c)
+        if let model = try? JSONDecoder().decode(TestModel.self, from: json) {
+            debugPrint(model.boolean)
+            debugPrint(model.integer)
+            debugPrint(model.double)
+            debugPrint(model.string)
+            debugPrint(model.array)
+            debugPrint(model.nested.a)
+            debugPrint(model.nested.b)
+            debugPrint(model.nested.c)
+            debugPrint(model.notPresent.a)
+        }
     }
 
     override func didReceiveMemoryWarning() {
