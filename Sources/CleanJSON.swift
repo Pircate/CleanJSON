@@ -14,8 +14,9 @@ public extension KeyedDecodingContainer {
         guard contains(key) else { return false }
         
         let decoder = try superDecoder(forKey: key)
+        let container = try decoder.singleValueContainer()
         
-        if let value = try? type.init(from: decoder) {
+        if let value = try? container.decode(type) {
             return value
         }
         return false
@@ -26,14 +27,15 @@ public extension KeyedDecodingContainer {
         guard contains(key) else { return "" }
         
         let decoder = try superDecoder(forKey: key)
+        let container = try decoder.singleValueContainer()
         
-        if let value = try? type.init(from: decoder) {
+        if let value = try? container.decode(type) {
             return value
-        } else if let intValue = try? Int(from: decoder) {
+        } else if let intValue = try? container.decode(Int.self) {
             return String(intValue)
-        } else if let doubleValue = try? Double(from: decoder) {
+        } else if let doubleValue = try? container.decode(Double.self) {
             return String(doubleValue)
-        } else if let boolValue = try? Bool(from: decoder) {
+        } else if let boolValue = try? container.decode(Bool.self) {
             return String(boolValue)
         }
         return ""
@@ -44,10 +46,11 @@ public extension KeyedDecodingContainer {
         guard contains(key) else { return 0.0 }
         
         let decoder = try superDecoder(forKey: key)
+        let container = try decoder.singleValueContainer()
         
-        if let value = try? type.init(from: decoder) {
+        if let value = try? container.decode(type) {
             return value
-        } else if let stringValue = try? String(from: decoder) {
+        } else if let stringValue = try? container.decode(String.self) {
             return Double(stringValue) ?? 0.0
         }
         return 0.0
@@ -58,10 +61,11 @@ public extension KeyedDecodingContainer {
         guard contains(key) else { return 0.0 }
         
         let decoder = try superDecoder(forKey: key)
+        let container = try decoder.singleValueContainer()
         
-        if let value = try? type.init(from: decoder) {
+        if let value = try? container.decode(type) {
             return value
-        } else if let stringValue = try? String(from: decoder) {
+        } else if let stringValue = try? container.decode(String.self) {
             return Float(stringValue) ?? 0.0
         }
         return 0.0
@@ -72,10 +76,11 @@ public extension KeyedDecodingContainer {
         guard contains(key) else { return 0 }
         
         let decoder = try superDecoder(forKey: key)
+        let container = try decoder.singleValueContainer()
         
-        if let value = try? type.init(from: decoder) {
+        if let value = try? container.decode(type) {
             return value
-        } else if let stringValue = try? String(from: decoder) {
+        } else if let stringValue = try? container.decode(String.self) {
             return Int(stringValue) ?? 0
         }
         return 0
@@ -86,10 +91,11 @@ public extension KeyedDecodingContainer {
         guard contains(key) else { return 0 }
         
         let decoder = try superDecoder(forKey: key)
+        let container = try decoder.singleValueContainer()
         
-        if let value = try? type.init(from: decoder) {
+        if let value = try? container.decode(type) {
             return value
-        } else if let stringValue = try? String(from: decoder) {
+        } else if let stringValue = try? container.decode(String.self) {
             return UInt(stringValue) ?? 0
         }
         return 0
@@ -108,14 +114,15 @@ public extension KeyedDecodingContainer {
         }
         
         let decoder = try superDecoder(forKey: key)
+        let container = try decoder.singleValueContainer()
         
-        if let value = try? type.init(from: decoder) {
+        if let value = try? container.decode(type) {
             return value
         } else if let objectValue = try? JSONDecoder().decode(type, from: "{}".data(using: .utf8)!) {
             return objectValue
         } else if let arrayValue = try? JSONDecoder().decode(type, from: "[]".data(using: .utf8)!) {
             return arrayValue
         }
-        throw DecodingError.dataCorruptedError(forKey: key, in: self, debugDescription: "Key: <\(key.stringValue)> cannot be decoded")
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "Key: <\(key.stringValue)> cannot be decoded")
     }
 }
