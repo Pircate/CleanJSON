@@ -13,6 +13,7 @@ struct TestModel: Codable {
     let array: [String]
     let nested: Nested
     let notPresent: NotPresent
+    let optional: String?
     
     struct Nested: Codable {
         let a: String
@@ -50,6 +51,7 @@ if let model = try? JSONDecoder().decode(TestModel.self, from: json) {
     debugPrint(model.nested.b)     // false
     debugPrint(model.nested.c)     // 0
     debugPrint(model.notPresent.a) // ""
+    debugPrint(model.optional)     // nil
 }
 
 ```
