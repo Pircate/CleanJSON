@@ -16,6 +16,7 @@ struct TestModel: Codable {
     let array: [String]
     let nested: Nested
     let notPresent: NotPresent
+    let optional: String?
     
     struct Nested: Codable {
         let a: String
@@ -58,6 +59,7 @@ class ViewController: UIViewController {
             debugPrint(model.nested.b)
             debugPrint(model.nested.c)
             debugPrint(model.notPresent.a)
+            debugPrint(model.optional)
         }
     }
 
