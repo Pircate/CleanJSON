@@ -125,4 +125,32 @@ public extension KeyedDecodingContainer {
         }
         throw DecodingError.dataCorruptedError(in: container, debugDescription: "Key: <\(key.stringValue)> cannot be decoded")
     }
+    
+    public func decodeIfPresent(_ type: Bool.Type, forKey key: K) throws -> Bool? {
+        return try decode(type, forKey: key)
+    }
+    
+    public func decodeIfPresent(_ type: String.Type, forKey key: K) throws -> String? {
+        return try decode(type, forKey: key)
+    }
+    
+    public func decodeIfPresent(_ type: Double.Type, forKey key: K) throws -> Double? {
+        return try decode(type, forKey: key)
+    }
+    
+    public func decodeIfPresent(_ type: Float.Type, forKey key: K) throws -> Float? {
+        return try decode(type, forKey: key)
+    }
+    
+    public func decodeIfPresent(_ type: Int.Type, forKey key: K) throws -> Int? {
+        return try decode(type, forKey: key)
+    }
+    
+    public func decodeIfPresent(_ type: UInt.Type, forKey key: K) throws -> UInt? {
+        return try decode(type, forKey: key)
+    }
+    
+    public func decodeIfPresent<T>(_ type: T.Type, forKey key: K) throws -> T? where T : Decodable {
+        return try decode(type, forKey: key)
+    }
 }
