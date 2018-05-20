@@ -1,5 +1,4 @@
 # CleanJSON
-Clean all optional type in JSON decode
 
 在类型不一致或者键值不存在的时候不会解析失败，部分类型增加了类型转换。
 
