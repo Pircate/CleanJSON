@@ -140,6 +140,38 @@ public extension KeyedDecodingContainer {
         
         let decoder = try superDecoder(forKey: key)
         let container = try decoder.singleValueContainer()
-        return try? container.decode(type)
+        
+        if let value = try? container.decode(type) {
+            return value
+        } else if let nestedUnkeyedContainer = try? nestedUnkeyedContainer(forKey: key) {
+            let mirror = Mirror(reflecting: nestedUnkeyedContainer)
+            var array: [Any]? = []
+            mirror.children.forEach({
+                if $0.label == "container" {
+                    array = $0.value as? [Any]
+                    return
+                }
+            })
+            return array?.map({ String(anyValue: $0) }) as? T
+        }
+        
+        return nil
+    }
+}
+
+fileprivate extension String {
+    
+    init(anyValue: Any) {
+        if let value = anyValue as? String {
+            self = value
+        } else if let value = anyValue as? Int {
+            self = String(value)
+        } else if let value = anyValue as? Double {
+            self = String(value)
+        } else if let value = anyValue as? Bool {
+            self = String(value)
+        } else {
+            self = ""
+        }
     }
 }

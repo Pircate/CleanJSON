@@ -40,7 +40,7 @@ class ViewController: UIViewController {
                  "integer": 1,
                  "double": -3.14159265358979323846,
                  "string": "string",
-                 "array": [1, 2, 3],
+                 "array": [1, 2.1, "3", true],
                  "nested": {
                      "a": "alpha",
                      "b": "bravo",
