@@ -136,6 +136,20 @@ public extension KeyedDecodingContainer {
     
     public func decodeIfPresent<T>(_ type: T.Type, forKey key: K) throws -> T? where T : Decodable {
         
+        if let stringValue = try? decode(String.self, forKey: key) {
+            return stringValue as? T
+        } else if let boolValue = try? decode(Bool.self, forKey: key) {
+            return boolValue as? T
+        } else if let intValue = try? decode(Int.self, forKey: key) {
+            return intValue as? T
+        } else if let uintValue = try? decode(UInt.self, forKey: key) {
+            return uintValue as? T
+        } else if let doubleValue = try? decode(Double.self, forKey: key) {
+            return doubleValue as? T
+        } else if let floatValue = try? decode(Float.self, forKey: key) {
+            return floatValue as? T
+        }
+        
         guard contains(key) else { return nil }
         
         let decoder = try superDecoder(forKey: key)
