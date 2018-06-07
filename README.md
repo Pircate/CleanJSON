@@ -4,14 +4,14 @@
 
 ``` swift
 
-struct TestModel: Codable {
+struct TestModel<T: Codable>: Codable {
     let boolean: Int
     let integer: Float
     let double: String
     let string: Double
     let array: [String]
     let nested: Nested
-    let notPresent: NotPresent
+    let notPresent: T
     let optional: String?
     
     struct Nested: Codable {
@@ -40,7 +40,7 @@ let json = """
              }
         """.data(using: .utf8)!
         
-if let model = try? JSONDecoder().decode(TestModel.self, from: json) {
+if let model = try? JSONDecoder().decode(TestModel<String>.self, from: json) {
     debugPrint(model.boolean)      // 0
     debugPrint(model.integer)      // 1.0
     debugPrint(model.double)       // "-3.14159265358979"
@@ -49,7 +49,7 @@ if let model = try? JSONDecoder().decode(TestModel.self, from: json) {
     debugPrint(model.nested.a)     // "alpha"
     debugPrint(model.nested.b)     // false
     debugPrint(model.nested.c)     // 0
-    debugPrint(model.notPresent.a) // ""
+    debugPrint(model.notPresent)   // ""
     debugPrint(model.optional)     // nil
 }
 
