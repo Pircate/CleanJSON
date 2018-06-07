@@ -49,7 +49,7 @@ class ViewController: UIViewController {
              }
         """.data(using: .utf8)!
         
-        if let model = try? JSONDecoder().decode(TestModel<String>.self, from: json) {
+        if let model = try? JSONDecoder().decode(TestModel<Bool>.self, from: json) {
             debugPrint(model.boolean)
             debugPrint(model.integer)
             debugPrint(model.double)
