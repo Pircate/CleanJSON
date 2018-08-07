@@ -7,6 +7,12 @@
 
 ```
 
+## Installation
+
+将CleanJSON.swift文件放到项目工程模块即可
+
+## Demo
+
 ``` swift
 
 struct TestModel<T: Codable>: Codable {
