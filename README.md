@@ -3,9 +3,7 @@
 在类型不一致或者键值不存在的时候不会解析失败，部分类型增加了类型转换。
 ```diff 
 
-- 注意: 不可选类型只支持JSON数据类型的默认值
-- Number, Boolean, String, Object, Array
-- 对应swift的Int, UInt, Float, Double, Bool, String, T: Codable, Array<E: Codable>
+- 注意: 不可选类型不支持非JSON数据类型的默认值
 
 ```
 
