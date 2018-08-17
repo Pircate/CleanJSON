@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6CFC59112127101600BFA963 /* CleanJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56ED3AB209AD10B0054B464 /* CleanJSON.swift */; };
+		6CFC59132127126200BFA963 /* CleanJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFC59122127126200BFA963 /* CleanJSON.swift */; };
 		B56ED37D209AD0190054B464 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56ED37C209AD0190054B464 /* AppDelegate.swift */; };
 		B56ED37F209AD0190054B464 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56ED37E209AD0190054B464 /* ViewController.swift */; };
 		B56ED382209AD0190054B464 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B56ED380209AD0190054B464 /* Main.storyboard */; };
@@ -14,7 +16,6 @@
 		B56ED387209AD01A0054B464 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B56ED385209AD01A0054B464 /* LaunchScreen.storyboard */; };
 		B56ED392209AD01B0054B464 /* CleanJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56ED391209AD01B0054B464 /* CleanJSONTests.swift */; };
 		B56ED39D209AD01B0054B464 /* CleanJSONUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56ED39C209AD01B0054B464 /* CleanJSONUITests.swift */; };
-		B56ED3AC209AD10B0054B464 /* CleanJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56ED3AB209AD10B0054B464 /* CleanJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6CFC59122127126200BFA963 /* CleanJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CleanJSON.swift; sourceTree = "<group>"; };
 		B56ED379209AD0190054B464 /* CleanJSON.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanJSON.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B56ED37C209AD0190054B464 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B56ED37E209AD0190054B464 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 		B56ED390209AD01B0054B464 /* CleanJSONTests */ = {
 			isa = PBXGroup;
 			children = (
+				B56ED3AB209AD10B0054B464 /* CleanJSON.swift */,
 				B56ED391209AD01B0054B464 /* CleanJSONTests.swift */,
 				B56ED393209AD01B0054B464 /* Info.plist */,
 			);
@@ -131,7 +134,7 @@
 		B56ED3AA209AD0F80054B464 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				B56ED3AB209AD10B0054B464 /* CleanJSON.swift */,
+				6CFC59122127126200BFA963 /* CleanJSON.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -268,7 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B56ED37F209AD0190054B464 /* ViewController.swift in Sources */,
-				B56ED3AC209AD10B0054B464 /* CleanJSON.swift in Sources */,
+				6CFC59132127126200BFA963 /* CleanJSON.swift in Sources */,
 				B56ED37D209AD0190054B464 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B56ED392209AD01B0054B464 /* CleanJSONTests.swift in Sources */,
+				6CFC59112127101600BFA963 /* CleanJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
