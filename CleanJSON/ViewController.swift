@@ -34,6 +34,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // @see CleanJSONTests
+        
         let json = """
              {
                  "boolean": true,

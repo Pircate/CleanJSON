@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6CA82BFD2138CFEA004A2F2A /* airports100.json in Resources */ = {isa = PBXBuildFile; fileRef = 6CA82BF82138CFEA004A2F2A /* airports100.json */; };
+		6CA82BFE2138CFEA004A2F2A /* airports1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6CA82BF92138CFEA004A2F2A /* airports1.json */; };
+		6CA82BFF2138CFEA004A2F2A /* airports1000.json in Resources */ = {isa = PBXBuildFile; fileRef = 6CA82BFA2138CFEA004A2F2A /* airports1000.json */; };
+		6CA82C002138CFEA004A2F2A /* airports10.json in Resources */ = {isa = PBXBuildFile; fileRef = 6CA82BFB2138CFEA004A2F2A /* airports10.json */; };
+		6CA82C012138CFEA004A2F2A /* airports10000.json in Resources */ = {isa = PBXBuildFile; fileRef = 6CA82BFC2138CFEA004A2F2A /* airports10000.json */; };
+		6CA82C032138D01D004A2F2A /* CleanJSONPerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA82C022138D01D004A2F2A /* CleanJSONPerformanceTest.swift */; };
 		6CFC59112127101600BFA963 /* CleanJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56ED3AB209AD10B0054B464 /* CleanJSON.swift */; };
 		6CFC59132127126200BFA963 /* CleanJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFC59122127126200BFA963 /* CleanJSON.swift */; };
 		B56ED37D209AD0190054B464 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56ED37C209AD0190054B464 /* AppDelegate.swift */; };
@@ -36,6 +42,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6CA82BF82138CFEA004A2F2A /* airports100.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports100.json; sourceTree = "<group>"; };
+		6CA82BF92138CFEA004A2F2A /* airports1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1.json; sourceTree = "<group>"; };
+		6CA82BFA2138CFEA004A2F2A /* airports1000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1000.json; sourceTree = "<group>"; };
+		6CA82BFB2138CFEA004A2F2A /* airports10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10.json; sourceTree = "<group>"; };
+		6CA82BFC2138CFEA004A2F2A /* airports10000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10000.json; sourceTree = "<group>"; };
+		6CA82C022138D01D004A2F2A /* CleanJSONPerformanceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanJSONPerformanceTest.swift; sourceTree = "<group>"; };
 		6CFC59122127126200BFA963 /* CleanJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CleanJSON.swift; sourceTree = "<group>"; };
 		B56ED379209AD0190054B464 /* CleanJSON.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanJSON.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B56ED37C209AD0190054B464 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -115,8 +127,14 @@
 		B56ED390209AD01B0054B464 /* CleanJSONTests */ = {
 			isa = PBXGroup;
 			children = (
+				6CA82BF92138CFEA004A2F2A /* airports1.json */,
+				6CA82BFB2138CFEA004A2F2A /* airports10.json */,
+				6CA82BF82138CFEA004A2F2A /* airports100.json */,
+				6CA82BFA2138CFEA004A2F2A /* airports1000.json */,
+				6CA82BFC2138CFEA004A2F2A /* airports10000.json */,
 				B56ED3AB209AD10B0054B464 /* CleanJSON.swift */,
 				B56ED391209AD01B0054B464 /* CleanJSONTests.swift */,
+				6CA82C022138D01D004A2F2A /* CleanJSONPerformanceTest.swift */,
 				B56ED393209AD01B0054B464 /* Info.plist */,
 			);
 			path = CleanJSONTests;
@@ -253,6 +271,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CA82C002138CFEA004A2F2A /* airports10.json in Resources */,
+				6CA82BFF2138CFEA004A2F2A /* airports1000.json in Resources */,
+				6CA82BFD2138CFEA004A2F2A /* airports100.json in Resources */,
+				6CA82BFE2138CFEA004A2F2A /* airports1.json in Resources */,
+				6CA82C012138CFEA004A2F2A /* airports10000.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B56ED392209AD01B0054B464 /* CleanJSONTests.swift in Sources */,
+				6CA82C032138D01D004A2F2A /* CleanJSONPerformanceTest.swift in Sources */,
 				6CFC59112127101600BFA963 /* CleanJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
