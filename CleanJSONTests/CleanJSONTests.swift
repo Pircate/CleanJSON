@@ -19,7 +19,7 @@ struct KeyNotFound: Codable {
 struct TypeMismatch: Codable {
     let integer: Double
     let double: String
-    let boolean: String
+    let boolean: Float
     let string: Int
 }
 
@@ -86,7 +86,7 @@ class CleanJSONTests: XCTestCase {
             let object = try JSONDecoder().decode(TypeMismatch.self, from: data)
             XCTAssertEqual(object.integer, 1.0)
             XCTAssertEqual(object.double, "3.14")
-            XCTAssertEqual(object.boolean, "true")
+            XCTAssertEqual(object.boolean, 0)
             XCTAssertEqual(object.string, 10)
         } catch {
             XCTAssertNil(error)
