@@ -13,7 +13,13 @@ struct ValueNotFound<T: Codable>: Codable {
 }
 
 struct KeyNotFound: Codable {
-    let keyNotFound: String
+    let string: String
+    let boolean: Bool
+    let int: Int
+    let uint: UInt
+    let float: Float
+    let double: Double
+    let array: [String]
 }
 
 struct TypeMismatch: Codable {
@@ -21,6 +27,14 @@ struct TypeMismatch: Codable {
     let double: String
     let boolean: Float
     let string: Int
+    
+    let stringToUInt: UInt
+    let stringToInt: Int
+    let stringToFloat: Float
+    let stringToDouble: Double
+    let stringToBool: Bool
+    
+    let boolToString: String?
 }
 
 struct Nested: Codable {
@@ -32,7 +46,12 @@ struct Wrapper: Codable {
 }
 
 struct Optional: Codable {
-    let optional: String?
+    let string: String?
+    let boolean: Bool?
+    let int: Int?
+    let uint: UInt?
+    let float: Float?
+    let double: Double?
 }
 
 class CleanJSONTests: XCTestCase {
@@ -44,14 +63,19 @@ class CleanJSONTests: XCTestCase {
                     }
                 """.data(using: .utf8)!
         do {
-            let stringValue = try JSONDecoder().decode(ValueNotFound<String>.self, from: data)
-            let intValue = try JSONDecoder().decode(ValueNotFound<Int>.self, from: data)
-            let doubleValue = try JSONDecoder().decode(ValueNotFound<Double>.self, from: data)
-            let boolValue = try JSONDecoder().decode(ValueNotFound<Bool>.self, from: data)
-            let arrayValue = try JSONDecoder().decode(ValueNotFound<[String]>.self, from: data)
-            let objectValue = try JSONDecoder().decode(ValueNotFound<Nested>.self, from: data)
+            let decoder = JSONDecoder()
+            let stringValue = try decoder.decode(ValueNotFound<String>.self, from: data)
+            let intValue = try decoder.decode(ValueNotFound<Int>.self, from: data)
+            let uintValue = try decoder.decode(ValueNotFound<UInt>.self, from: data)
+            let floatValue = try decoder.decode(ValueNotFound<Float>.self, from: data)
+            let doubleValue = try decoder.decode(ValueNotFound<Double>.self, from: data)
+            let boolValue = try decoder.decode(ValueNotFound<Bool>.self, from: data)
+            let arrayValue = try decoder.decode(ValueNotFound<[String]>.self, from: data)
+            let objectValue = try decoder.decode(ValueNotFound<Nested>.self, from: data)
             XCTAssertEqual(stringValue.null, "")
             XCTAssertEqual(intValue.null, 0)
+            XCTAssertEqual(uintValue.null, 0)
+            XCTAssertEqual(floatValue.null, 0)
             XCTAssertEqual(doubleValue.null, 0)
             XCTAssertEqual(boolValue.null, false)
             XCTAssertEqual(arrayValue.null, [])
@@ -59,13 +83,25 @@ class CleanJSONTests: XCTestCase {
         } catch {
             XCTAssertNil(error)
         }
+        
+        do {
+            _ = try JSONDecoder().decode(ValueNotFound<Date>.self, from: data)
+        } catch {
+            XCTAssertNotNil(error)
+        }
     }
     
     func testKeyNotFound() {
         let data = "{}".data(using: .utf8)!
         do {
             let object = try JSONDecoder().decode(KeyNotFound.self, from: data)
-            XCTAssertEqual(object.keyNotFound, "")
+            XCTAssertEqual(object.string, "")
+            XCTAssertEqual(object.boolean, false)
+            XCTAssertEqual(object.int, 0)
+            XCTAssertEqual(object.uint, 0)
+            XCTAssertEqual(object.float, 0)
+            XCTAssertEqual(object.double, 0)
+            XCTAssertEqual(object.array, [])
         } catch {
             XCTAssertNil(error)
         }
@@ -78,7 +114,13 @@ class CleanJSONTests: XCTestCase {
                       "integer": 1,
                       "double": 3.14,
                       "boolean": true,
-                      "string": "10"
+                      "string": "10",
+                      "stringToUInt": "520",
+                      "stringToInt": "1314",
+                      "stringToFloat": "1.414",
+                      "stringToDouble": "3.141592654",
+                      "stringToBool": "false",
+                      "boolToString": true
                     }
                 """.data(using: .utf8)!
         
@@ -88,6 +130,12 @@ class CleanJSONTests: XCTestCase {
             XCTAssertEqual(object.double, "3.14")
             XCTAssertEqual(object.boolean, 0)
             XCTAssertEqual(object.string, 10)
+            XCTAssertEqual(object.stringToUInt, 520)
+            XCTAssertEqual(object.stringToInt, 1314)
+            XCTAssertEqual(object.stringToFloat, 1.414)
+            XCTAssertEqual(object.stringToDouble, 3.141592654)
+            XCTAssertEqual(object.stringToBool, false)
+            XCTAssertEqual(object.boolToString, "true")
         } catch {
             XCTAssertNil(error)
         }
@@ -112,12 +160,19 @@ class CleanJSONTests: XCTestCase {
     func testOptional() {
         let data = """
                     {
-                      "optional": null
+                      "string": null,
+                      "uint": 10,
+                      "float": 4.9
                     }
                 """.data(using: .utf8)!
         do {
             let object = try JSONDecoder().decode(Optional.self, from: data)
-            XCTAssertNil(object.optional)
+            XCTAssertNil(object.string)
+            XCTAssertNil(object.boolean)
+            XCTAssertNil(object.int)
+            XCTAssertEqual(object.uint, 10)
+            XCTAssertEqual(object.float, 4.9)
+            XCTAssertNil(object.double)
         } catch {
             XCTAssertNil(error)
         }
