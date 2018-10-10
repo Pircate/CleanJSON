@@ -3,7 +3,7 @@
 //  CleanJSON
 //
 //  Created by Pircate(gao497868860@gmail.com) on 2018/10/11
-//  Copyright © 2018 gaoX. All rights reserved.
+//  Copyright © 2018 Pircate. All rights reserved.
 //
 
 import Foundation
