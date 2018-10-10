@@ -63,7 +63,7 @@ class CleanJSONTests: XCTestCase {
                     }
                 """.data(using: .utf8)!
         do {
-            let decoder = JSONDecoder()
+            let decoder = CleanJSONDecoder()
             let stringValue = try decoder.decode(ValueNotFound<String>.self, from: data)
             let intValue = try decoder.decode(ValueNotFound<Int>.self, from: data)
             let uintValue = try decoder.decode(ValueNotFound<UInt>.self, from: data)
@@ -85,7 +85,7 @@ class CleanJSONTests: XCTestCase {
         }
         
         do {
-            _ = try JSONDecoder().decode(ValueNotFound<Date>.self, from: data)
+            _ = try CleanJSONDecoder().decode(ValueNotFound<Date>.self, from: data)
         } catch {
             XCTAssertNotNil(error)
         }
@@ -94,7 +94,7 @@ class CleanJSONTests: XCTestCase {
     func testKeyNotFound() {
         let data = "{}".data(using: .utf8)!
         do {
-            let object = try JSONDecoder().decode(KeyNotFound.self, from: data)
+            let object = try CleanJSONDecoder().decode(KeyNotFound.self, from: data)
             XCTAssertEqual(object.string, "")
             XCTAssertEqual(object.boolean, false)
             XCTAssertEqual(object.int, 0)
@@ -125,7 +125,7 @@ class CleanJSONTests: XCTestCase {
                 """.data(using: .utf8)!
         
         do {
-            let object = try JSONDecoder().decode(TypeMismatch.self, from: data)
+            let object = try CleanJSONDecoder().decode(TypeMismatch.self, from: data)
             XCTAssertEqual(object.integer, 1.0)
             XCTAssertEqual(object.double, "3.14")
             XCTAssertEqual(object.boolean, 0)
@@ -150,7 +150,7 @@ class CleanJSONTests: XCTestCase {
                     }
                 """.data(using: .utf8)!
         do {
-            let object = try JSONDecoder().decode(Wrapper.self, from: data)
+            let object = try CleanJSONDecoder().decode(Wrapper.self, from: data)
             XCTAssertEqual(object.nested.string, "10")
         } catch {
             XCTAssertNil(error)
@@ -166,7 +166,7 @@ class CleanJSONTests: XCTestCase {
                     }
                 """.data(using: .utf8)!
         do {
-            let object = try JSONDecoder().decode(Optional.self, from: data)
+            let object = try CleanJSONDecoder().decode(Optional.self, from: data)
             XCTAssertNil(object.string)
             XCTAssertNil(object.boolean)
             XCTAssertNil(object.int)
