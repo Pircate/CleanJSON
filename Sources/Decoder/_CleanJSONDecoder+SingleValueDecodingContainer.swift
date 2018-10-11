@@ -26,7 +26,12 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     
     public func decode(_ type: Int.Type) throws -> Int {
         try expectNonNull(Int.self)
-        return try self.unbox(self.storage.topContainer, as: Int.self) ?? 0
+        if let value = try self.unbox(self.storage.topContainer, as: Int.self) {
+            return value
+        } else if let stringValue = try self.unbox(self.storage.topContainer, as: String.self) {
+            return Int(stringValue) ?? 0
+        }
+        return 0
     }
     
     public func decode(_ type: Int8.Type) throws -> Int8 {
@@ -51,7 +56,12 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     
     public func decode(_ type: UInt.Type) throws -> UInt {
         try expectNonNull(UInt.self)
-        return try self.unbox(self.storage.topContainer, as: UInt.self) ?? 0
+        if let value = try self.unbox(self.storage.topContainer, as: UInt.self) {
+            return value
+        } else if let stringValue = try self.unbox(self.storage.topContainer, as: String.self) {
+            return UInt(stringValue) ?? 0
+        }
+        return 0
     }
     
     public func decode(_ type: UInt8.Type) throws -> UInt8 {
@@ -76,17 +86,36 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     
     public func decode(_ type: Float.Type) throws -> Float {
         try expectNonNull(Float.self)
-        return try self.unbox(self.storage.topContainer, as: Float.self) ?? 0
+        if let value = try self.unbox(self.storage.topContainer, as: Float.self) {
+            return value
+        } else if let stringValue = try self.unbox(self.storage.topContainer, as: String.self) {
+            return Float(stringValue) ?? 0
+        }
+        return 0
     }
     
     public func decode(_ type: Double.Type) throws -> Double {
         try expectNonNull(Double.self)
-        return try self.unbox(self.storage.topContainer, as: Double.self) ?? 0
+        if let value = try self.unbox(self.storage.topContainer, as: Double.self) {
+            return value
+        } else if let stringValue = try self.unbox(self.storage.topContainer, as: String.self) {
+            return Double(stringValue) ?? 0
+        }
+        return 0
     }
     
     public func decode(_ type: String.Type) throws -> String {
         try expectNonNull(String.self)
-        return try self.unbox(self.storage.topContainer, as: String.self) ?? ""
+        if let value = try self.unbox(self.storage.topContainer, as: String.self) {
+            return value
+        } else if let intValue = try self.unbox(self.storage.topContainer, as: Int.self) {
+            return String(intValue)
+        } else if let doubleValue = try self.unbox(self.storage.topContainer, as: Double.self) {
+            return String(doubleValue)
+        } else if let boolValue = try self.unbox(self.storage.topContainer, as: Bool.self) {
+            return String(boolValue)
+        }
+        return ""
     }
     
     public func decode<T : Decodable>(_ type: T.Type) throws -> T {
