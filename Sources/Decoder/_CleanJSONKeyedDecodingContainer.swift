@@ -350,16 +350,7 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        guard let value = self.container[key.stringValue] else {
-            throw DecodingError.keyNotFound(key,
-                                            DecodingError.Context(codingPath: self.codingPath,
-                                                                  debugDescription: "Cannot get \(KeyedDecodingContainer<NestedKey>.self) -- no value found for key \(_errorDescription(of: key))"))
-        }
-        
-        guard let dictionary = value as? [String : Any] else {
-            throw DecodingError._typeMismatch(at: self.codingPath, expectation: [String : Any].self, reality: value)
-        }
-        
+        let dictionary = self.container[key.stringValue] as? [String : Any] ?? [:]
         let container = _CleanJSONKeyedDecodingContainer<NestedKey>(referencing: self.decoder, wrapping: dictionary)
         return KeyedDecodingContainer(container)
     }

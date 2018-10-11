@@ -123,14 +123,14 @@
 		6C810B30216E511100C2D942 /* Decoder */ = {
 			isa = PBXGroup;
 			children = (
-				6C810B3D216E562B00C2D942 /* CleanJSONDecoder.swift */,
 				6C810B3F216E569300C2D942 /* _CleanJSONDecoder.swift */,
+				6C810B4B216E5DA600C2D942 /* _CleanJSONDecoder+SingleValueDecodingContainer.swift */,
+				6C810B45216E595C00C2D942 /* _CleanJSONDecoder+Unbox.swift */,
 				6C810B41216E571600C2D942 /* _CleanJSONDecodingStorage.swift */,
+				6C810B47216E5A4300C2D942 /* _CleanJSONKey.swift */,
 				6C810B43216E57A400C2D942 /* _CleanJSONKeyedDecodingContainer.swift */,
 				6C810B49216E5B7300C2D942 /* _CleanJSONUnkeyedDecodingContainer.swift */,
-				6C810B45216E595C00C2D942 /* _CleanJSONDecoder+Unbox.swift */,
-				6C810B4B216E5DA600C2D942 /* _CleanJSONDecoder+SingleValueDecodingContainer.swift */,
-				6C810B47216E5A4300C2D942 /* _CleanJSONKey.swift */,
+				6C810B3D216E562B00C2D942 /* CleanJSONDecoder.swift */,
 				6C810B6F216E7F5500C2D942 /* DecodingError+TypeMismatch.swift */,
 			);
 			path = Decoder;
