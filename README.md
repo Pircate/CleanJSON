@@ -1,70 +1,50 @@
 # CleanJSON
 
-在类型不一致或者键值不存在的时候不会解析失败，部分类型增加了类型转换。
-
-#### 单元测试覆盖率100%!
-
-```diff 
-
-- 注意: 不可选类型不支持非JSON数据类型的默认值
-
-```
-
-## Installation
-
-将CleanJSON.swift文件放到项目工程模块即可
+[![Version](https://img.shields.io/cocoapods/v/CleanJSON.svg?style=flat)](http://cocoapods.org/pods/CleanJSON)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![License](https://img.shields.io/cocoapods/l/CleanJSON.svg?style=flat)](http://cocoapods.org/pods/CleanJSON)
+![iOS 9.0+](https://img.shields.io/badge/iOS-9.0%2B-blue.svg)
 
 ## Example
 
-``` swift
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-struct TestModel<T: Codable>: Codable {
-    let boolean: Int
-    let integer: Float
-    let double: String
-    let string: Double
-    let array: [String]
-    let nested: Nested
-    let notPresent: T
-    let optional: String?
-    
-    struct Nested: Codable {
-        let a: String
-        let b: Bool
-        let c: Int
-    }
-    
-    struct NotPresent: Codable {
-        let a: String
-    }
-}
+## Requirements
 
-let json = """
-             {
-                 "boolean": true,
-                 "integer": 1,
-                 "double": -3.14159265358979323846,
-                 "string": "string",
-                 "array": [1, 2, 3],
-                 "nested": {
-                     "a": "alpha",
-                     "b": "bravo",
-                     "c": "charlie"
-                 }
-             }
-        """.data(using: .utf8)!
-        
-if let model = try? JSONDecoder().decode(TestModel<String>.self, from: json) {
-    debugPrint(model.boolean)      // 0
-    debugPrint(model.integer)      // 1.0
-    debugPrint(model.double)       // "-3.14159265358979"
-    debugPrint(model.string)       // 0.0
-    debugPrint(model.array)        // []
-    debugPrint(model.nested.a)     // "alpha"
-    debugPrint(model.nested.b)     // false
-    debugPrint(model.nested.c)     // 0
-    debugPrint(model.notPresent)   // ""
-    debugPrint(model.optional)     // nil
-}
+* iOS 9.0+
+* Swift 4
 
+## Installation
+
+CleanJSON is available through [CocoaPods](http://cocoapods.org) or [Carthage](https://github.com/Carthage/Carthage). To install
+it, simply add the following line to your Podfile or Cartfile:
+
+### CocoaPods
+
+```ruby
+pod 'CleanJSON'
 ```
+
+### Carthage
+```ruby
+github "Pircate/CleanJSON"
+```
+
+## Import
+
+``` swift
+import CleanJSON
+```
+## Usage
+```swift
+let decoder = CleanJSONDecoder()
+try decoder.decode(Model.self, from: data)
+```
+
+## Author
+
+Pircate, gao497868860@163.com
+
+## License
+
+CleanJSON is available under the MIT license. See the LICENSE file for more info.
