@@ -6,6 +6,10 @@
 [![License](https://img.shields.io/cocoapods/l/CleanJSON.svg?style=flat)](https://cocoapods.org/pods/CleanJSON)
 [![Platform](https://img.shields.io/cocoapods/p/CleanJSON.svg?style=flat)](https://cocoapods.org/pods/CleanJSON)
 
+## Introduce
+
+解决 JSONDecoder 各种解析失败的问题，如键值不存在，值为 null，类型不一致。
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
