@@ -29,19 +29,19 @@ extension _CleanJSONDecoder {
             
         }
         
-        return nil
+        throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
     }
     
     func unbox(_ value: Any, as type: Int.Type) throws -> Int? {
         guard !(value is NSNull) else { return nil }
         
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
-            return nil
+            throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
         let int = number.intValue
         guard NSNumber(value: int) == number else {
-            return nil
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed JSON number <\(number)> does not fit in \(type)."))
         }
         
         return int
@@ -51,12 +51,12 @@ extension _CleanJSONDecoder {
         guard !(value is NSNull) else { return nil }
         
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
-            return nil
+            throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
         let int8 = number.int8Value
         guard NSNumber(value: int8) == number else {
-            return nil
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed JSON number <\(number)> does not fit in \(type)."))
         }
         
         return int8
@@ -66,12 +66,12 @@ extension _CleanJSONDecoder {
         guard !(value is NSNull) else { return nil }
         
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
-            return nil
+            throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
         let int16 = number.int16Value
         guard NSNumber(value: int16) == number else {
-            return nil
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed JSON number <\(number)> does not fit in \(type)."))
         }
         
         return int16
@@ -81,12 +81,12 @@ extension _CleanJSONDecoder {
         guard !(value is NSNull) else { return nil }
         
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
-            return nil
+            throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
         let int32 = number.int32Value
         guard NSNumber(value: int32) == number else {
-            return nil
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed JSON number <\(number)> does not fit in \(type)."))
         }
         
         return int32
@@ -96,12 +96,12 @@ extension _CleanJSONDecoder {
         guard !(value is NSNull) else { return nil }
         
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
-            return nil
+            throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
         let int64 = number.int64Value
         guard NSNumber(value: int64) == number else {
-            return nil
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed JSON number <\(number)> does not fit in \(type)."))
         }
         
         return int64
@@ -111,12 +111,12 @@ extension _CleanJSONDecoder {
         guard !(value is NSNull) else { return nil }
         
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
-            return nil
+            throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
         let uint = number.uintValue
         guard NSNumber(value: uint) == number else {
-            return nil
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed JSON number <\(number)> does not fit in \(type)."))
         }
         
         return uint
@@ -126,12 +126,12 @@ extension _CleanJSONDecoder {
         guard !(value is NSNull) else { return nil }
         
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
-            return nil
+            throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
         let uint8 = number.uint8Value
         guard NSNumber(value: uint8) == number else {
-            return nil
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed JSON number <\(number)> does not fit in \(type)."))
         }
         
         return uint8
@@ -141,12 +141,12 @@ extension _CleanJSONDecoder {
         guard !(value is NSNull) else { return nil }
         
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
-            return nil
+            throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
         let uint16 = number.uint16Value
         guard NSNumber(value: uint16) == number else {
-            return nil
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed JSON number <\(number)> does not fit in \(type)."))
         }
         
         return uint16
@@ -156,12 +156,12 @@ extension _CleanJSONDecoder {
         guard !(value is NSNull) else { return nil }
         
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
-            return nil
+            throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
         let uint32 = number.uint32Value
         guard NSNumber(value: uint32) == number else {
-            return nil
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed JSON number <\(number)> does not fit in \(type)."))
         }
         
         return uint32
@@ -171,12 +171,12 @@ extension _CleanJSONDecoder {
         guard !(value is NSNull) else { return nil }
         
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
-            return nil
+            throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
         let uint64 = number.uint64Value
         guard NSNumber(value: uint64) == number else {
-            return nil
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed JSON number <\(number)> does not fit in \(type)."))
         }
         
         return uint64
@@ -194,7 +194,7 @@ extension _CleanJSONDecoder {
             // * If it was a Double or Decimal, you will get back the nearest approximation if it will fit
             let double = number.doubleValue
             guard abs(double) <= Double(Float.greatestFiniteMagnitude) else {
-                return nil
+                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed JSON number \(number) does not fit in \(type)."))
             }
             
             return Float(double)
@@ -225,7 +225,7 @@ extension _CleanJSONDecoder {
             }
         }
         
-        return nil
+        throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
     }
     
     func unbox(_ value: Any, as type: Double.Type) throws -> Double? {
@@ -260,14 +260,14 @@ extension _CleanJSONDecoder {
             }
         }
         
-        return nil
+        throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
     }
     
     func unbox(_ value: Any, as type: String.Type) throws -> String? {
         guard !(value is NSNull) else { return nil }
         
         guard let string = value as? String else {
-            return nil
+            throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
         return string

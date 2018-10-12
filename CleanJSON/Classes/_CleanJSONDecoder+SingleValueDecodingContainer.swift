@@ -12,7 +12,9 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     // MARK: SingleValueDecodingContainer Methods
     
     private func expectNonNull<T>(_ type: T.Type) throws {
-        
+        guard !self.decodeNil() else {
+            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.codingPath, debugDescription: "Expected \(type) but found null value instead."))
+        }
     }
     
     public func decodeNil() -> Bool {
