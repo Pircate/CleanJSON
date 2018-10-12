@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "CleanJSON"
-  spec.version      = "0.1.1"
+  spec.version      = "0.1.2"
   spec.summary      = "Custom JSON decoder for Decodable."
   spec.homepage     = "https://github.com/Pircate/CleanJSON"
   spec.license      = "MIT"
