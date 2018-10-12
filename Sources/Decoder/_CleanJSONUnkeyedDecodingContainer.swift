@@ -281,9 +281,9 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     }
     
     private mutating func decodeIfNeeded<T : Decodable>(_ type: T.Type) throws -> T {
-        if let objectValue = try? JSONDecoder().decode(type, from: "{}".data(using: .utf8)!) {
+        if let objectValue = try? CleanJSONDecoder().decode(type, from: "{}".data(using: .utf8)!) {
             return objectValue
-        } else if let arrayValue = try? JSONDecoder().decode(type, from: "[]".data(using: .utf8)!) {
+        } else if let arrayValue = try? CleanJSONDecoder().decode(type, from: "[]".data(using: .utf8)!) {
             return arrayValue
         } else if let stringValue = try decode(String.self) as? T {
             return stringValue

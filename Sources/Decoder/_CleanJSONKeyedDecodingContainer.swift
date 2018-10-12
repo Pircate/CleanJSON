@@ -310,9 +310,9 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     }
     
     private func decodeIfNeeded<T : Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
-        if let objectValue = try? JSONDecoder().decode(type, from: "{}".data(using: .utf8)!) {
+        if let objectValue = try? CleanJSONDecoder().decode(type, from: "{}".data(using: .utf8)!) {
             return objectValue
-        } else if let arrayValue = try? JSONDecoder().decode(type, from: "[]".data(using: .utf8)!) {
+        } else if let arrayValue = try? CleanJSONDecoder().decode(type, from: "[]".data(using: .utf8)!) {
             return arrayValue
         } else if let stringValue = try decode(String.self, forKey: key) as? T {
             return stringValue

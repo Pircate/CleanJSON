@@ -20,6 +20,7 @@ struct KeyNotFound: Codable {
     let float: Float
     let double: Double
     let array: [String]
+    let object: Nested
 }
 
 struct TypeMismatch: Codable {
@@ -102,6 +103,7 @@ class CleanJSONTests: XCTestCase {
             XCTAssertEqual(object.float, 0)
             XCTAssertEqual(object.double, 0)
             XCTAssertEqual(object.array, [])
+            XCTAssertEqual(object.object.string, "")
         } catch {
             XCTAssertNil(error)
         }
