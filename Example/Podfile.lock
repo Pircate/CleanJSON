@@ -1,0 +1,16 @@
+PODS:
+  - CleanJSON (0.1.2)
+
+DEPENDENCIES:
+  - CleanJSON (from `../`)
+
+EXTERNAL SOURCES:
+  CleanJSON:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  CleanJSON: 53467cfb491dcd161a8b0024dd7ce6349ecdd1f1
+
+PODFILE CHECKSUM: cc59291e8c27282294b8699d748b4665f04b79a5
+
+COCOAPODS: 1.6.0.beta.1

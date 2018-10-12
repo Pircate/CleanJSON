@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'CleanJSON_Example' do
+  pod 'CleanJSON', :path => '../'
+
+  target 'CleanJSON_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

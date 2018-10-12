@@ -1,15 +1,13 @@
 
-Pod::Spec.new do |spec|
-
-  spec.name         = "CleanJSON"
-  spec.version      = "0.1.2"
-  spec.summary      = "Custom JSON decoder for Decodable."
-  spec.homepage     = "https://github.com/Pircate/CleanJSON"
-  spec.license      = "MIT"
-  spec.author       = { "Pircate" => "gao497868860@163.com" }
-  spec.source       = { :git => "https://github.com/Pircate/CleanJSON.git", :tag => "#{spec.version}" }
-  spec.source_files = "Sources/**/*"
-  spec.ios.deployment_target = '9.0'
-  spec.swift_version = '4.0'
-
+Pod::Spec.new do |s|
+  s.name             = 'CleanJSON'
+  s.version          = '0.1.2'
+  s.summary          = 'Custom JSON decoder for Decodable.'
+  s.homepage         = 'https://github.com/Pircate/CleanJSON'
+  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.author           = { 'Pircate' => 'gao497868860@163.com' }
+  s.source           = { :git => 'https://github.com/Pircate/CleanJSON.git', :tag => s.version.to_s }
+  s.ios.deployment_target = '9.0'
+  s.swift_version = '4.0'
+  s.source_files = 'CleanJSON/Classes/**/*'
 end

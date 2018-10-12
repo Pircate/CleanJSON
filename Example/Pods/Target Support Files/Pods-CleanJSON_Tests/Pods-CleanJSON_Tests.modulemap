@@ -1,0 +1,6 @@
+framework module Pods_CleanJSON_Tests {
+  umbrella header "Pods-CleanJSON_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
