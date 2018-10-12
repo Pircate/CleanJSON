@@ -24,10 +24,6 @@ struct KeyNotFound: Codable {
 }
 
 struct TypeMismatch: Codable {
-    let integer: Double
-    let double: String
-    let boolean: Float
-    let string: Int
     
     let stringToUInt: UInt
     let stringToInt: Int
@@ -36,6 +32,8 @@ struct TypeMismatch: Codable {
     let stringToBool: Bool
     
     let boolToString: String?
+    let intToString: String
+    let doubleToString: String
 }
 
 struct Nested: Codable {
@@ -113,31 +111,27 @@ class CleanJSONTests: XCTestCase {
         
         let data = """
                     {
-                      "integer": 1,
-                      "double": 3.14,
-                      "boolean": true,
-                      "string": "10",
                       "stringToUInt": "520",
                       "stringToInt": "1314",
                       "stringToFloat": "1.414",
                       "stringToDouble": "3.141592654",
                       "stringToBool": "false",
-                      "boolToString": true
+                      "boolToString": true,
+                      "doubleToString": 3.14,
+                      "intToString": 10
                     }
                 """.data(using: .utf8)!
         
         do {
             let object = try CleanJSONDecoder().decode(TypeMismatch.self, from: data)
-            XCTAssertEqual(object.integer, 1.0)
-            XCTAssertEqual(object.double, "3.14")
-            XCTAssertEqual(object.boolean, 0)
-            XCTAssertEqual(object.string, 10)
             XCTAssertEqual(object.stringToUInt, 520)
             XCTAssertEqual(object.stringToInt, 1314)
             XCTAssertEqual(object.stringToFloat, 1.414)
             XCTAssertEqual(object.stringToDouble, 3.141592654)
             XCTAssertEqual(object.stringToBool, false)
             XCTAssertEqual(object.boolToString, "true")
+            XCTAssertEqual(object.intToString, "10")
+            XCTAssertEqual(object.doubleToString, "3.14")
         } catch {
             XCTAssertNil(error)
         }
