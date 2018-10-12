@@ -108,7 +108,6 @@ class CleanJSONTests: XCTestCase {
                       "stringToInt": "1314",
                       "stringToFloat": "1.414",
                       "stringToDouble": "3.141592654",
-                      "stringToBool": "false",
                       "boolToString": true,
                       "doubleToString": 3.14,
                       "intToString": 10
@@ -121,7 +120,6 @@ class CleanJSONTests: XCTestCase {
             XCTAssertEqual(object.stringToInt, 1314)
             XCTAssertEqual(object.stringToFloat, 1.414)
             XCTAssertEqual(object.stringToDouble, 3.141592654)
-            XCTAssertEqual(object.stringToBool, false)
             XCTAssertEqual(object.boolToString, "true")
             XCTAssertEqual(object.intToString, "10")
             XCTAssertEqual(object.doubleToString, "3.14")
