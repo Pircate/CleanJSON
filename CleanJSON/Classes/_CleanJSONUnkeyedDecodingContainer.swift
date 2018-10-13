@@ -280,38 +280,16 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         return decoded
     }
     
-    private mutating func decodeIfNeeded<T : Decodable>(_ type: T.Type) throws -> T {
-        if let objectValue = try? CleanJSONDecoder().decode(type, from: "{}".data(using: .utf8)!) {
-            return objectValue
-        } else if let arrayValue = try? CleanJSONDecoder().decode(type, from: "[]".data(using: .utf8)!) {
-            return arrayValue
-        } else if let stringValue = try decode(String.self) as? T {
-            return stringValue
-        } else if let boolValue = try decode(Bool.self) as? T {
-            return boolValue
-        } else if let intValue = try decode(Int.self) as? T {
-            return intValue
-        } else if let uintValue = try decode(UInt.self) as? T {
-            return uintValue
-        } else if let doubleValue = try decode(Double.self) as? T {
-            return doubleValue
-        } else if let floatValue = try decode(Float.self) as? T {
-            return floatValue
-        }
-        let context = DecodingError.Context(codingPath: self.decoder.codingPath + [_CleanJSONKey(index: self.currentIndex)], debugDescription: "Cannot be decoded")
-        throw DecodingError.dataCorrupted(context)
-    }
-    
     public mutating func decode<T : Decodable>(_ type: T.Type) throws -> T {
         guard !self.isAtEnd else {
-            return try decodeIfNeeded(type)
+            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath + [_CleanJSONKey(index: self.currentIndex)], debugDescription: "Unkeyed container is at end."))
         }
         
         self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: type) else {
-            return try decodeIfNeeded(type)
+            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath + [_CleanJSONKey(index: self.currentIndex)], debugDescription: "Expected \(type) but found null instead."))
         }
         
         self.currentIndex += 1
