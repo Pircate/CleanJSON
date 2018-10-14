@@ -35,7 +35,9 @@ extension _CleanJSONDecoder {
     func unbox(_ value: Any, as type: Int.Type) throws -> Int? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
+        guard let number = value as? NSNumber,
+            number !== kCFBooleanTrue,
+            number !== kCFBooleanFalse else {
             return nil
         }
         
@@ -50,7 +52,9 @@ extension _CleanJSONDecoder {
     func unbox(_ value: Any, as type: Int8.Type) throws -> Int8? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
+        guard let number = value as? NSNumber,
+            number !== kCFBooleanTrue,
+            number !== kCFBooleanFalse else {
             return nil
         }
         
@@ -65,7 +69,9 @@ extension _CleanJSONDecoder {
     func unbox(_ value: Any, as type: Int16.Type) throws -> Int16? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
+        guard let number = value as? NSNumber,
+            number !== kCFBooleanTrue,
+            number !== kCFBooleanFalse else {
             return nil
         }
         
@@ -80,7 +86,9 @@ extension _CleanJSONDecoder {
     func unbox(_ value: Any, as type: Int32.Type) throws -> Int32? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
+        guard let number = value as? NSNumber,
+            number !== kCFBooleanTrue,
+            number !== kCFBooleanFalse else {
             return nil
         }
         
@@ -95,7 +103,9 @@ extension _CleanJSONDecoder {
     func unbox(_ value: Any, as type: Int64.Type) throws -> Int64? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
+        guard let number = value as? NSNumber,
+            number !== kCFBooleanTrue,
+            number !== kCFBooleanFalse else {
             return nil
         }
         
@@ -110,7 +120,9 @@ extension _CleanJSONDecoder {
     func unbox(_ value: Any, as type: UInt.Type) throws -> UInt? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
+        guard let number = value as? NSNumber,
+            number !== kCFBooleanTrue,
+            number !== kCFBooleanFalse else {
             return nil
         }
         
@@ -125,7 +137,9 @@ extension _CleanJSONDecoder {
     func unbox(_ value: Any, as type: UInt8.Type) throws -> UInt8? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
+        guard let number = value as? NSNumber,
+            number !== kCFBooleanTrue,
+            number !== kCFBooleanFalse else {
             return nil
         }
         
@@ -140,7 +154,9 @@ extension _CleanJSONDecoder {
     func unbox(_ value: Any, as type: UInt16.Type) throws -> UInt16? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
+        guard let number = value as? NSNumber,
+            number !== kCFBooleanTrue,
+            number !== kCFBooleanFalse else {
             return nil
         }
         
@@ -155,7 +171,9 @@ extension _CleanJSONDecoder {
     func unbox(_ value: Any, as type: UInt32.Type) throws -> UInt32? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
+        guard let number = value as? NSNumber,
+            number !== kCFBooleanTrue,
+            number !== kCFBooleanFalse else {
             return nil
         }
         
@@ -170,7 +188,9 @@ extension _CleanJSONDecoder {
     func unbox(_ value: Any, as type: UInt64.Type) throws -> UInt64? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
+        guard let number = value as? NSNumber,
+            number !== kCFBooleanTrue,
+            number !== kCFBooleanFalse else {
             return nil
         }
         
@@ -185,7 +205,9 @@ extension _CleanJSONDecoder {
     func unbox(_ value: Any, as type: Float.Type) throws -> Float? {
         guard !(value is NSNull) else { return nil }
         
-        if let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse {
+        if let number = value as? NSNumber,
+            number !== kCFBooleanTrue,
+            number !== kCFBooleanFalse {
             // We are willing to return a Float by losing precision:
             // * If the original value was integral,
             //   * and the integral value was > Float.greatestFiniteMagnitude, we will fail
@@ -231,7 +253,9 @@ extension _CleanJSONDecoder {
     func unbox(_ value: Any, as type: Double.Type) throws -> Double? {
         guard !(value is NSNull) else { return nil }
         
-        if let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse {
+        if let number = value as? NSNumber,
+            number !== kCFBooleanTrue,
+            number !== kCFBooleanFalse {
             // We are always willing to return the number as a Double:
             // * If the original value was integral, it is guaranteed to fit in a Double; we are willing to lose precision past 2^53 if you encoded a UInt64 but requested a Double
             // * If it was a Float or Double, you will get back the precise value
@@ -305,7 +329,9 @@ extension _CleanJSONDecoder {
         case .formatted(let formatter):
             let string = try self.unbox(value, as: String.self)!
             guard let date = formatter.date(from: string) else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Date string does not match format expected by formatter."))
+                throw DecodingError.dataCorrupted(DecodingError.Context(
+                    codingPath: self.codingPath,
+                    debugDescription: "Date string does not match format expected by formatter."))
             }
             
             return date
@@ -328,11 +354,15 @@ extension _CleanJSONDecoder {
             
         case .base64:
             guard let string = value as? String else {
-                throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
+                throw DecodingError._typeMismatch(
+                    at: self.codingPath,
+                    expectation: type, reality: value)
             }
             
             guard let data = Data(base64Encoded: string) else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Encountered Data is not valid Base64."))
+                throw DecodingError.dataCorrupted(DecodingError.Context(
+                    codingPath: self.codingPath,
+                    debugDescription: "Encountered Data is not valid Base64."))
             }
             
             return data
@@ -361,7 +391,10 @@ extension _CleanJSONDecoder {
         
         var result = [String : Any]()
         guard let dict = value as? NSDictionary else {
-            throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
+            throw DecodingError._typeMismatch(
+                at: self.codingPath,
+                expectation: type,
+                reality: value)
         }
         let elementType = type.elementType
         for (key, value) in dict {
@@ -390,8 +423,9 @@ extension _CleanJSONDecoder {
             }
             
             guard let url = URL(string: urlString) else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath,
-                                                                        debugDescription: "Invalid URL string."))
+                throw DecodingError.dataCorrupted(DecodingError.Context(
+                    codingPath: self.codingPath,
+                    debugDescription: "Invalid URL string."))
             }
             return url
         } else if type == Decimal.self || type == NSDecimalNumber.self {

@@ -16,7 +16,8 @@ struct TestModel<T: Codable>: Codable {
     let string: Double
     let array: [String]
     let nested: Nested
-    let notPresent: T
+    let keyNotFound: T
+    let snakeCase: String
     let optional: String?
     
     struct Nested: Codable {
@@ -42,6 +43,7 @@ class ViewController: UIViewController {
                  "double": -3.14159265358979323846,
                  "string": "string",
                  "array": [1, 2.1, "3", true],
+                 "snake_case": "convertFromSnakeCase",
                  "nested": {
                      "a": "alpha",
                      "b": "bravo",
@@ -51,7 +53,9 @@ class ViewController: UIViewController {
         """.data(using: .utf8)!
         
         do {
-            let model = try CleanJSONDecoder().decode(TestModel<Bool>.self, from: json)
+            let decoder = CleanJSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            let model = try decoder.decode(TestModel<Bool>.self, from: json)
             debugPrint(model.boolean)
             debugPrint(model.integer)
             debugPrint(model.double)
@@ -60,7 +64,8 @@ class ViewController: UIViewController {
             debugPrint(model.nested.a)
             debugPrint(model.nested.b)
             debugPrint(model.nested.c)
-            debugPrint(model.notPresent)
+            debugPrint(model.keyNotFound)
+            debugPrint(model.snakeCase)
             debugPrint(model.optional ?? "nil")
         } catch {
             debugPrint(error)
