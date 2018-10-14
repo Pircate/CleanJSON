@@ -28,11 +28,6 @@ open class CleanJSONDecoder: JSONDecoder {
                         userInfo: userInfo)
     }
     
-    // MARK: - Constructing a JSON Decoder
-    
-    /// Initializes `self` with default strategies.
-    public override init() {}
-    
     // MARK: - Decoding Values
     
     /// Decodes a top-level value of the given type from the given JSON representation.
