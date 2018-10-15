@@ -10,4 +10,5 @@ before_install:
 - gem install cocoapods # Since Travis is not always on latest version
 - pod install --project-directory=Example
 script:
+- xcodebuild -scheme CleanJSON_Tests -workspace Example/CleanJSON.xcworkspace -destination 'platform=iOS Simulator,OS=11.4,name=iPhone SE' build test
 - pod lib lint
