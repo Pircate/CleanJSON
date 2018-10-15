@@ -45,7 +45,7 @@ try decoder.decode(Model.self, from: data)
 
 ## Author
 
-Pircate, gao497868860@163.com
+Pircate, gao497868860@gmail.com
 
 ## License
 
