@@ -29,7 +29,7 @@ pod 'CleanJSON'
 ```
 #### Cartfile
 ```ruby
-githut "Pircate/CleanJSON"
+github "Pircate/CleanJSON"
 ```
 
 ## Import
