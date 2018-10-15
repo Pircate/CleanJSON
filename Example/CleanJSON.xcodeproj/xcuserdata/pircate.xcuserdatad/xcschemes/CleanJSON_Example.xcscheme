@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BEECBC8F8D0F34DAFBEF957C07248BAA"
-               BuildableName = "Pods_CleanJSON_Tests.framework"
-               BlueprintName = "Pods-CleanJSON_Tests"
-               ReferencedContainer = "container:Pods.xcodeproj">
+               BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+               BuildableName = "CleanJSON_Example.app"
+               BlueprintName = "CleanJSON_Example"
+               ReferencedContainer = "container:CleanJSON.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,6 +29,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+            BuildableName = "CleanJSON_Example.app"
+            BlueprintName = "CleanJSON_Example"
+            ReferencedContainer = "container:CleanJSON.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -42,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BEECBC8F8D0F34DAFBEF957C07248BAA"
-            BuildableName = "Pods_CleanJSON_Tests.framework"
-            BlueprintName = "Pods-CleanJSON_Tests"
-            ReferencedContainer = "container:Pods.xcodeproj">
+            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+            BuildableName = "CleanJSON_Example.app"
+            BlueprintName = "CleanJSON_Example"
+            ReferencedContainer = "container:CleanJSON.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -60,6 +70,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+            BuildableName = "CleanJSON_Example.app"
+            BlueprintName = "CleanJSON_Example"
+            ReferencedContainer = "container:CleanJSON.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
