@@ -58,7 +58,7 @@
 		6C810BA82170D60E00C2D942 /* airports1000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1000.json; sourceTree = "<group>"; };
 		D26FF17EF1A0E99CEC06736F /* Pods-CleanJSON_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanJSON_Example.debug.xcconfig"; path = "Target Support Files/Pods-CleanJSON_Example/Pods-CleanJSON_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		D7401AF4E81AB65E4EE0AFFF /* Pods-CleanJSON_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanJSON_Tests.debug.xcconfig"; path = "Target Support Files/Pods-CleanJSON_Tests/Pods-CleanJSON_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		F3191CD37202ABC989DD21DA /* CleanJSON.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CleanJSON.podspec; path = ../CleanJSON.podspec; sourceTree = "<group>"; };
+		F3191CD37202ABC989DD21DA /* CleanJSON.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CleanJSON.podspec; path = ../CleanJSON.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

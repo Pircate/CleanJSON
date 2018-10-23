@@ -1,5 +1,5 @@
 PODS:
-  - CleanJSON (0.2.3)
+  - CleanJSON (0.2.4)
 
 DEPENDENCIES:
   - CleanJSON (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CleanJSON: 05ddd9a53fab0d7c50dbfebdd6dc78d77079fe2f
+  CleanJSON: 8d2e5ae682520d0b8c8ee9452a3b2fc4b5672ddc
 
 PODFILE CHECKSUM: e8c1853f7f3f3a7d4bab6760cea3cbf98eec3eff
 
-COCOAPODS: 1.6.0.beta.1
+COCOAPODS: 1.6.0.beta.2
