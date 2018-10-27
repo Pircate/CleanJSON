@@ -50,28 +50,28 @@
 		0F6EBC86E735BDE6806F7E7B15495145 /* Pods-CleanJSON_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CleanJSON_Tests-dummy.m"; sourceTree = "<group>"; };
 		196EF9E661237DF2D4172FF97640F94D /* _CleanJSONKeyedDecodingContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = _CleanJSONKeyedDecodingContainer.swift; path = CleanJSON/Classes/_CleanJSONKeyedDecodingContainer.swift; sourceTree = "<group>"; };
 		20DDA7FE11879CDE5B5B41584853F7FF /* Pods-CleanJSON_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CleanJSON_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		230D8DABA9A0ECCFC68102BF30217AC6 /* CleanJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CleanJSON.framework; path = CleanJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		230D8DABA9A0ECCFC68102BF30217AC6 /* CleanJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CleanJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		264921C2CF776632C4203D5334AEC8B8 /* _CleanJSONDecoder+Unbox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "_CleanJSONDecoder+Unbox.swift"; path = "CleanJSON/Classes/_CleanJSONDecoder+Unbox.swift"; sourceTree = "<group>"; };
 		27003A435B73CD331C14DE5AF0198B11 /* Pods-CleanJSON_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CleanJSON_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		274F8B2AA6C67B9A4A92143167EB646B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		274F8B2AA6C67B9A4A92143167EB646B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		2C5AB4ADD56AB63CA87503BB697D06D0 /* _CleanJSONDecodingStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = _CleanJSONDecodingStorage.swift; path = CleanJSON/Classes/_CleanJSONDecodingStorage.swift; sourceTree = "<group>"; };
 		31B7C2797DD4E5E0073E8FBF47A10948 /* CleanJSON-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "CleanJSON-Info.plist"; sourceTree = "<group>"; };
 		34DBDFA3436BC1FC8335E2E416927112 /* _CleanJSONKey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = _CleanJSONKey.swift; path = CleanJSON/Classes/_CleanJSONKey.swift; sourceTree = "<group>"; };
 		3F530602F30EA5C1E995D509D94BE7DA /* CleanJSONDecoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CleanJSONDecoder.swift; path = CleanJSON/Classes/CleanJSONDecoder.swift; sourceTree = "<group>"; };
 		45387003765D6ED7C97343B42A460343 /* Pods-CleanJSON_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CleanJSON_Example.modulemap"; sourceTree = "<group>"; };
-		456C2C023E945A32BAF34450EE867B32 /* CleanJSON.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = CleanJSON.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		456C2C023E945A32BAF34450EE867B32 /* CleanJSON.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = CleanJSON.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		4D371FE54ADB658F6967EFAE4FDBB7B0 /* _CleanJSONUnkeyedDecodingContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = _CleanJSONUnkeyedDecodingContainer.swift; path = CleanJSON/Classes/_CleanJSONUnkeyedDecodingContainer.swift; sourceTree = "<group>"; };
-		656261372B82196E5B1F814E12AAD8A2 /* Pods_CleanJSON_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_CleanJSON_Tests.framework; path = "Pods-CleanJSON_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		656261372B82196E5B1F814E12AAD8A2 /* Pods_CleanJSON_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CleanJSON_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		681B19933CBD66A68C8DCFE22682910B /* Pods-CleanJSON_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CleanJSON_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		76CB8EEE168A55A77CBC405D11E2DF07 /* DecodingError+TypeMismatch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DecodingError+TypeMismatch.swift"; path = "CleanJSON/Classes/DecodingError+TypeMismatch.swift"; sourceTree = "<group>"; };
 		7AC5ED79B466539355ABCBB0173562DF /* Pods-CleanJSON_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CleanJSON_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		7C8CFE26647EFF3C0CF8887706C64003 /* _CleanJSONDecoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = _CleanJSONDecoder.swift; path = CleanJSON/Classes/_CleanJSONDecoder.swift; sourceTree = "<group>"; };
-		8C0BF47D6098C221CA98CA61C1F6D335 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		8C0BF47D6098C221CA98CA61C1F6D335 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		922CF22DE7F5A6F6674234B6BECAFC89 /* Pods-CleanJSON_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CleanJSON_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		9A2488479319FE680A4AC0201A4844F9 /* ToJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToJSON.swift; path = CleanJSON/Classes/ToJSON.swift; sourceTree = "<group>"; };
-		AB59D7539BB3E92A8E9CEAAD2E25585B /* Pods_CleanJSON_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_CleanJSON_Example.framework; path = "Pods-CleanJSON_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB59D7539BB3E92A8E9CEAAD2E25585B /* Pods_CleanJSON_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CleanJSON_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD75CC309DADBFCDFA5BA5A9788158DD /* CleanJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CleanJSON-dummy.m"; sourceTree = "<group>"; };
-		B36AB396275697EEE1A5B13BA8A38FE3 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		B36AB396275697EEE1A5B13BA8A38FE3 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BE0B69834B49E0CA7452B2259D033D2C /* Pods-CleanJSON_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CleanJSON_Tests-umbrella.h"; sourceTree = "<group>"; };
 		C063D6134F55A3C78E9E2D0693385317 /* Pods-CleanJSON_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CleanJSON_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		C1A3AF77BC446C706EBC4F7040B21856 /* Pods-CleanJSON_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CleanJSON_Tests-Info.plist"; sourceTree = "<group>"; };
@@ -342,6 +342,11 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
+				TargetAttributes = {
+					4373064D804B3171795F5D0517B4E921 = {
+						LastSwiftMigration = 1000;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -527,7 +532,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -659,7 +664,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -753,8 +758,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
