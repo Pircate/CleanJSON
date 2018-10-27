@@ -38,6 +38,8 @@ platform :ios do
     version_bump_podspec(
     	path: "CleanJSON.podspec", 
     	version_number: target_version)
+    git_add(path: "./CleanJSON.podspec")
+    git_commit(path: "./CleanJSON.podspec", message: "release #{target_version} version")
     add_git_tag tag: target_version
     push_to_git_remote
     pod_push
