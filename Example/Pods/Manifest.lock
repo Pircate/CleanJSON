@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CleanJSON: 8d2e5ae682520d0b8c8ee9452a3b2fc4b5672ddc
+  CleanJSON: 5c87b825558c90fcb8fbefad2000107fa73cebd4
 
 PODFILE CHECKSUM: e8c1853f7f3f3a7d4bab6760cea3cbf98eec3eff
 

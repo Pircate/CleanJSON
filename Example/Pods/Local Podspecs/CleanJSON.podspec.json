@@ -20,6 +20,6 @@
     "tvos": "9.0",
     "watchos": "2.0"
   },
-  "swift_version": "4.0",
+  "swift_version": "4.2",
   "source_files": "CleanJSON/Classes/**/*"
 }
