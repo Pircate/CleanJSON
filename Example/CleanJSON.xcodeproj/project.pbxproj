@@ -36,6 +36,7 @@
 /* Begin PBXFileReference section */
 		07C4F440509FFE06EFB4585A /* Pods_CleanJSON_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CleanJSON_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AC80555FB8BF7C4FE42B42D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		13C04CFBC3D9A19DC1D6D5AC /* Pods-CleanJSON_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanJSON_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleanJSON_Tests/Pods-CleanJSON_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		25EC7CE9FAD26F41F28DC449 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		2E29CB7863EEBAA5DC8938FD /* Pods-CleanJSON_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanJSON_Tests.release.xcconfig"; path = "Target Support Files/Pods-CleanJSON_Tests/Pods-CleanJSON_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		432D8697BBE14AE877C685D8 /* Pods-CleanJSON_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanJSON_Example.release.xcconfig"; path = "Target Support Files/Pods-CleanJSON_Example/Pods-CleanJSON_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -50,6 +51,8 @@
 		607FACE51AFB9204008FA782 /* CleanJSON_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CleanJSON_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		638EAC03C86093768BF6CB13 /* Pods-CleanJSON_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanJSON_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleanJSON_Example/Pods-CleanJSON_Example.release.xcconfig"; sourceTree = "<group>"; };
+		6B0AA72565676DCE6F2BDDB5 /* Pods-CleanJSON_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanJSON_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleanJSON_Example/Pods-CleanJSON_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		6C810BA22170D56B00C2D942 /* PerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
 		6C810BA42170D60E00C2D942 /* airports100.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports100.json; sourceTree = "<group>"; };
 		6C810BA52170D60E00C2D942 /* airports10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10.json; sourceTree = "<group>"; };
@@ -57,6 +60,7 @@
 		6C810BA72170D60E00C2D942 /* airports10000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10000.json; sourceTree = "<group>"; };
 		6C810BA82170D60E00C2D942 /* airports1000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1000.json; sourceTree = "<group>"; };
 		D26FF17EF1A0E99CEC06736F /* Pods-CleanJSON_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanJSON_Example.debug.xcconfig"; path = "Target Support Files/Pods-CleanJSON_Example/Pods-CleanJSON_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		D6AA27D7ED5CE1FBF13C4931 /* Pods-CleanJSON_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanJSON_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleanJSON_Tests/Pods-CleanJSON_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		D7401AF4E81AB65E4EE0AFFF /* Pods-CleanJSON_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanJSON_Tests.debug.xcconfig"; path = "Target Support Files/Pods-CleanJSON_Tests/Pods-CleanJSON_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		F3191CD37202ABC989DD21DA /* CleanJSON.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CleanJSON.podspec; path = ../CleanJSON.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
@@ -88,6 +92,10 @@
 				432D8697BBE14AE877C685D8 /* Pods-CleanJSON_Example.release.xcconfig */,
 				D7401AF4E81AB65E4EE0AFFF /* Pods-CleanJSON_Tests.debug.xcconfig */,
 				2E29CB7863EEBAA5DC8938FD /* Pods-CleanJSON_Tests.release.xcconfig */,
+				6B0AA72565676DCE6F2BDDB5 /* Pods-CleanJSON_Example.debug.xcconfig */,
+				638EAC03C86093768BF6CB13 /* Pods-CleanJSON_Example.release.xcconfig */,
+				13C04CFBC3D9A19DC1D6D5AC /* Pods-CleanJSON_Tests.debug.xcconfig */,
+				D6AA27D7ED5CE1FBF13C4931 /* Pods-CleanJSON_Tests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";

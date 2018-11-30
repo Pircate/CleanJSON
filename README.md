@@ -43,6 +43,20 @@ let decoder = CleanJSONDecoder()
 try decoder.decode(Model.self, from: data)
 ```
 
+对于枚举使用不可选类型请遵循 DefaultEnumCodable 协议
+```swift
+enum Enum: Int, DefaultEnumCodable {
+    
+    case case1
+    case case2
+    case case3
+    
+    static var defaultCase: Enum {
+        return .case1
+    }
+}
+```
+
 ## Author
 
 Pircate, gao497868860@gmail.com

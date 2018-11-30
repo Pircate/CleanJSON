@@ -7,25 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00E8EC070BC83C7649D27A586A50F788 /* _CleanJSONUnkeyedDecodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248CDF0261D05C01622B4FD9DA2B60B9 /* _CleanJSONUnkeyedDecodingContainer.swift */; };
 		0563D1F0A65BDF4845EA0C3EC5451FD5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DFF15000AFE2A371BF499E7AFDA808 /* Foundation.framework */; };
-		224E140743D4542B5A029A722EDCE2D4 /* _CleanJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CFE26647EFF3C0CF8887706C64003 /* _CleanJSONDecoder.swift */; };
-		3423701F8D89AFA9905CA8DA415395C6 /* _CleanJSONDecodingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5AB4ADD56AB63CA87503BB697D06D0 /* _CleanJSONDecodingStorage.swift */; };
+		27E0FDBC309B69CA9C6BBF2CA43BC7FE /* ToJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16655E16C7ADA909231503484ED79182 /* ToJSON.swift */; };
+		282616FE7CB25377210A4735D3B69275 /* _CleanJSONDecodingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19C4386404025162669EE5C36D031EB /* _CleanJSONDecodingStorage.swift */; };
 		42389FC1F0527E201F2CC58D3A642647 /* Pods-CleanJSON_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CDA409B717A2136A4A7841C66FC9D689 /* Pods-CleanJSON_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7047A172B00740693ECD1090761B07EC /* CleanJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CE249230EEDE849E37D0CECA01202B73 /* CleanJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		77299A3A97E85F10C88268877E1E8E11 /* _CleanJSONUnkeyedDecodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D371FE54ADB658F6967EFAE4FDBB7B0 /* _CleanJSONUnkeyedDecodingContainer.swift */; };
-		79D6CEFA250153959C22A699015A410F /* DecodingError+TypeMismatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CB8EEE168A55A77CBC405D11E2DF07 /* DecodingError+TypeMismatch.swift */; };
-		7EAEC2BD7820D5ADA6ED2D65C7AE5490 /* _CleanJSONDecoder+SingleValueDecodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D638EA04674679764E3E1FF3A25B3721 /* _CleanJSONDecoder+SingleValueDecodingContainer.swift */; };
+		4695B475ECF3DC636FE6BEB915AF7C01 /* _CleanJSONKeyedDecodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826029BCDE993E80549B48CA462F7B75 /* _CleanJSONKeyedDecodingContainer.swift */; };
+		66ABAA15D376FCA247E0D4564AC72F35 /* DecodingError+TypeMismatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EC0ED9377ACF11A29B17DEBE943779 /* DecodingError+TypeMismatch.swift */; };
+		68727A27B7998AF902B37C2B76F927A1 /* _CleanJSONKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658B1C29D99D85B37BB2411A93F64281 /* _CleanJSONKey.swift */; };
+		6F01707332F543FC57344C5DCFA31904 /* CleanJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EE99D9F7800FDF2E12E9AEF5D3EC9F7 /* CleanJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		74666956185C6008A31846F8160AFBD8 /* CleanJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CD354BB634938F16D08E2822366F7 /* CleanJSONDecoder.swift */; };
+		7A410DBB21CDF6D9F81F4657BA6A8561 /* _CleanJSONDecoder+SingleValueDecodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B56251760AA4781E2A2AA116F7D1533 /* _CleanJSONDecoder+SingleValueDecodingContainer.swift */; };
+		7A615E9A2E7056CBB0AD2412A9CE8A61 /* CleanJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5158CC53B4EE50798D81D580B0A39922 /* CleanJSON-dummy.m */; };
+		8DCFD3561453E1D15F71534BFDF846FD /* _CleanJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104B20FC5B990A868DB881696BECE8CD /* _CleanJSONDecoder.swift */; };
 		8E01BE74CFEC4D64C7BDF7D0AE422A1D /* Pods-CleanJSON_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D211AF24DDBB6ABD797C789F31682D9B /* Pods-CleanJSON_Example-dummy.m */; };
 		900F28C800190F792EAAEF82320FA35F /* Pods-CleanJSON_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6EBC86E735BDE6806F7E7B15495145 /* Pods-CleanJSON_Tests-dummy.m */; };
-		A6596DE968A7D3CF6432C386DE0792C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DFF15000AFE2A371BF499E7AFDA808 /* Foundation.framework */; };
-		A68A5EB0F5A820240AB70B6A2A0EFD83 /* CleanJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F530602F30EA5C1E995D509D94BE7DA /* CleanJSONDecoder.swift */; };
-		AF9295D97A4DF371C175E35BEFAFE112 /* _CleanJSONKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DBDFA3436BC1FC8335E2E416927112 /* _CleanJSONKey.swift */; };
-		C496B9A07B4A134BF3E14E96A59E97AA /* _CleanJSONDecoder+Unbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264921C2CF776632C4203D5334AEC8B8 /* _CleanJSONDecoder+Unbox.swift */; };
-		D60E2B84ED94F705A64B5CCE7410EF2D /* _CleanJSONKeyedDecodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196EF9E661237DF2D4172FF97640F94D /* _CleanJSONKeyedDecodingContainer.swift */; };
-		DB538EE9D49A20CAC91D2DA4353EE53B /* CleanJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AD75CC309DADBFCDFA5BA5A9788158DD /* CleanJSON-dummy.m */; };
-		E47597F2306DFF37B128CE18F0FFAD0F /* ToJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2488479319FE680A4AC0201A4844F9 /* ToJSON.swift */; };
+		952D80E3A772B713C621465CBADA0112 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DFF15000AFE2A371BF499E7AFDA808 /* Foundation.framework */; };
+		B24A18C409B22F991EF3841FF80531CF /* _CleanJSONDecoder+Unbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE34637DFAE95B190E10D004F1BCF3E /* _CleanJSONDecoder+Unbox.swift */; };
 		E89827773855522E3F166FB07A9C8594 /* Pods-CleanJSON_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BE0B69834B49E0CA7452B2259D033D2C /* Pods-CleanJSON_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F10E896D8A2F809284148A3B7348B2F9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DFF15000AFE2A371BF499E7AFDA808 /* Foundation.framework */; };
+		F24211EB6B7A68A4C876C9BB8C66533D /* DefaultEnumCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA99075529922B27009B8C94CD42F84D /* DefaultEnumCodable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +34,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4373064D804B3171795F5D0517B4E921;
+			remoteGlobalIDString = D3535D5687E358659C4A3B1816394966;
 			remoteInfo = CleanJSON;
 		};
 		F4D13F5A41B926CC06E494537115CD22 /* PBXContainerItemProxy */ = {
@@ -46,45 +47,46 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09EC0ED9377ACF11A29B17DEBE943779 /* DecodingError+TypeMismatch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DecodingError+TypeMismatch.swift"; path = "CleanJSON/Classes/DecodingError+TypeMismatch.swift"; sourceTree = "<group>"; };
 		0EAC5102E98356417B337FF60E74D980 /* Pods-CleanJSON_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CleanJSON_Example.release.xcconfig"; sourceTree = "<group>"; };
 		0F6EBC86E735BDE6806F7E7B15495145 /* Pods-CleanJSON_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CleanJSON_Tests-dummy.m"; sourceTree = "<group>"; };
-		196EF9E661237DF2D4172FF97640F94D /* _CleanJSONKeyedDecodingContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = _CleanJSONKeyedDecodingContainer.swift; path = CleanJSON/Classes/_CleanJSONKeyedDecodingContainer.swift; sourceTree = "<group>"; };
+		104B20FC5B990A868DB881696BECE8CD /* _CleanJSONDecoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = _CleanJSONDecoder.swift; path = CleanJSON/Classes/_CleanJSONDecoder.swift; sourceTree = "<group>"; };
+		16655E16C7ADA909231503484ED79182 /* ToJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToJSON.swift; path = CleanJSON/Classes/ToJSON.swift; sourceTree = "<group>"; };
 		20DDA7FE11879CDE5B5B41584853F7FF /* Pods-CleanJSON_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CleanJSON_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		230D8DABA9A0ECCFC68102BF30217AC6 /* CleanJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CleanJSON.framework; path = CleanJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		264921C2CF776632C4203D5334AEC8B8 /* _CleanJSONDecoder+Unbox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "_CleanJSONDecoder+Unbox.swift"; path = "CleanJSON/Classes/_CleanJSONDecoder+Unbox.swift"; sourceTree = "<group>"; };
+		247CD354BB634938F16D08E2822366F7 /* CleanJSONDecoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CleanJSONDecoder.swift; path = CleanJSON/Classes/CleanJSONDecoder.swift; sourceTree = "<group>"; };
+		248CDF0261D05C01622B4FD9DA2B60B9 /* _CleanJSONUnkeyedDecodingContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = _CleanJSONUnkeyedDecodingContainer.swift; path = CleanJSON/Classes/_CleanJSONUnkeyedDecodingContainer.swift; sourceTree = "<group>"; };
 		27003A435B73CD331C14DE5AF0198B11 /* Pods-CleanJSON_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CleanJSON_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		274F8B2AA6C67B9A4A92143167EB646B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
-		2C5AB4ADD56AB63CA87503BB697D06D0 /* _CleanJSONDecodingStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = _CleanJSONDecodingStorage.swift; path = CleanJSON/Classes/_CleanJSONDecodingStorage.swift; sourceTree = "<group>"; };
-		31B7C2797DD4E5E0073E8FBF47A10948 /* CleanJSON-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "CleanJSON-Info.plist"; sourceTree = "<group>"; };
-		34DBDFA3436BC1FC8335E2E416927112 /* _CleanJSONKey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = _CleanJSONKey.swift; path = CleanJSON/Classes/_CleanJSONKey.swift; sourceTree = "<group>"; };
-		3F530602F30EA5C1E995D509D94BE7DA /* CleanJSONDecoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CleanJSONDecoder.swift; path = CleanJSON/Classes/CleanJSONDecoder.swift; sourceTree = "<group>"; };
 		45387003765D6ED7C97343B42A460343 /* Pods-CleanJSON_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CleanJSON_Example.modulemap"; sourceTree = "<group>"; };
-		456C2C023E945A32BAF34450EE867B32 /* CleanJSON.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = CleanJSON.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		4D371FE54ADB658F6967EFAE4FDBB7B0 /* _CleanJSONUnkeyedDecodingContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = _CleanJSONUnkeyedDecodingContainer.swift; path = CleanJSON/Classes/_CleanJSONUnkeyedDecodingContainer.swift; sourceTree = "<group>"; };
+		45736F77F08BFABAEE96C8E9CADFB42C /* CleanJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CleanJSON-prefix.pch"; sourceTree = "<group>"; };
+		5158CC53B4EE50798D81D580B0A39922 /* CleanJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CleanJSON-dummy.m"; sourceTree = "<group>"; };
+		5B56251760AA4781E2A2AA116F7D1533 /* _CleanJSONDecoder+SingleValueDecodingContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "_CleanJSONDecoder+SingleValueDecodingContainer.swift"; path = "CleanJSON/Classes/_CleanJSONDecoder+SingleValueDecodingContainer.swift"; sourceTree = "<group>"; };
+		5EE99D9F7800FDF2E12E9AEF5D3EC9F7 /* CleanJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CleanJSON-umbrella.h"; sourceTree = "<group>"; };
 		656261372B82196E5B1F814E12AAD8A2 /* Pods_CleanJSON_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_CleanJSON_Tests.framework; path = "Pods-CleanJSON_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		658B1C29D99D85B37BB2411A93F64281 /* _CleanJSONKey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = _CleanJSONKey.swift; path = CleanJSON/Classes/_CleanJSONKey.swift; sourceTree = "<group>"; };
 		681B19933CBD66A68C8DCFE22682910B /* Pods-CleanJSON_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CleanJSON_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		76CB8EEE168A55A77CBC405D11E2DF07 /* DecodingError+TypeMismatch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DecodingError+TypeMismatch.swift"; path = "CleanJSON/Classes/DecodingError+TypeMismatch.swift"; sourceTree = "<group>"; };
 		7AC5ED79B466539355ABCBB0173562DF /* Pods-CleanJSON_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CleanJSON_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		7C8CFE26647EFF3C0CF8887706C64003 /* _CleanJSONDecoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = _CleanJSONDecoder.swift; path = CleanJSON/Classes/_CleanJSONDecoder.swift; sourceTree = "<group>"; };
-		8C0BF47D6098C221CA98CA61C1F6D335 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		826029BCDE993E80549B48CA462F7B75 /* _CleanJSONKeyedDecodingContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = _CleanJSONKeyedDecodingContainer.swift; path = CleanJSON/Classes/_CleanJSONKeyedDecodingContainer.swift; sourceTree = "<group>"; };
+		8DE34637DFAE95B190E10D004F1BCF3E /* _CleanJSONDecoder+Unbox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "_CleanJSONDecoder+Unbox.swift"; path = "CleanJSON/Classes/_CleanJSONDecoder+Unbox.swift"; sourceTree = "<group>"; };
 		922CF22DE7F5A6F6674234B6BECAFC89 /* Pods-CleanJSON_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CleanJSON_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		9A2488479319FE680A4AC0201A4844F9 /* ToJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToJSON.swift; path = CleanJSON/Classes/ToJSON.swift; sourceTree = "<group>"; };
+		A540A7A383F85EFA2F779AE44D3F4873 /* CleanJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CleanJSON.xcconfig; sourceTree = "<group>"; };
+		A7A1EEDCE99B2F188899300702AE6AEF /* CleanJSON-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "CleanJSON-Info.plist"; sourceTree = "<group>"; };
 		AB59D7539BB3E92A8E9CEAAD2E25585B /* Pods_CleanJSON_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_CleanJSON_Example.framework; path = "Pods-CleanJSON_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD75CC309DADBFCDFA5BA5A9788158DD /* CleanJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CleanJSON-dummy.m"; sourceTree = "<group>"; };
+		B19C4386404025162669EE5C36D031EB /* _CleanJSONDecodingStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = _CleanJSONDecodingStorage.swift; path = CleanJSON/Classes/_CleanJSONDecodingStorage.swift; sourceTree = "<group>"; };
 		B36AB396275697EEE1A5B13BA8A38FE3 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BA99075529922B27009B8C94CD42F84D /* DefaultEnumCodable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultEnumCodable.swift; path = CleanJSON/Classes/DefaultEnumCodable.swift; sourceTree = "<group>"; };
 		BE0B69834B49E0CA7452B2259D033D2C /* Pods-CleanJSON_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CleanJSON_Tests-umbrella.h"; sourceTree = "<group>"; };
+		BE5E00303A082611AC1282B6FE44A24F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		C063D6134F55A3C78E9E2D0693385317 /* Pods-CleanJSON_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CleanJSON_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		C1A3AF77BC446C706EBC4F7040B21856 /* Pods-CleanJSON_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CleanJSON_Tests-Info.plist"; sourceTree = "<group>"; };
-		CCD0612136AD9D5257EDB2E0210FD315 /* CleanJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CleanJSON.xcconfig; sourceTree = "<group>"; };
+		C1B6EA5EB3C31F921FE36CF1528B8048 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		CDA409B717A2136A4A7841C66FC9D689 /* Pods-CleanJSON_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CleanJSON_Example-umbrella.h"; sourceTree = "<group>"; };
-		CE249230EEDE849E37D0CECA01202B73 /* CleanJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CleanJSON-umbrella.h"; sourceTree = "<group>"; };
 		D211AF24DDBB6ABD797C789F31682D9B /* Pods-CleanJSON_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CleanJSON_Example-dummy.m"; sourceTree = "<group>"; };
-		D638EA04674679764E3E1FF3A25B3721 /* _CleanJSONDecoder+SingleValueDecodingContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "_CleanJSONDecoder+SingleValueDecodingContainer.swift"; path = "CleanJSON/Classes/_CleanJSONDecoder+SingleValueDecodingContainer.swift"; sourceTree = "<group>"; };
 		D6DFF15000AFE2A371BF499E7AFDA808 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		E0634C2273C083814EEF8825DA20A10D /* CleanJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CleanJSON-prefix.pch"; sourceTree = "<group>"; };
 		EE1423C77B8620AB9AEDFF8BF50F5C64 /* Pods-CleanJSON_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CleanJSON_Tests.modulemap"; sourceTree = "<group>"; };
 		F1668831FA503C4238F6CA4D9E0558C9 /* Pods-CleanJSON_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CleanJSON_Example-frameworks.sh"; sourceTree = "<group>"; };
-		F3F002FF07A766975FBEEF7B13B9C3E3 /* CleanJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = CleanJSON.modulemap; sourceTree = "<group>"; };
+		F1C2605DCD652181C6715B82AB05C651 /* CleanJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = CleanJSON.modulemap; sourceTree = "<group>"; };
+		F3D569F7B2B4EEBE78BCBC57A722AE49 /* CleanJSON.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = CleanJSON.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F61081206E1F7D0A1CD4D1B738861E25 /* Pods-CleanJSON_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CleanJSON_Example-Info.plist"; sourceTree = "<group>"; };
 		FEC9C3B4327523A6625AA7E9E8D82A1B /* Pods-CleanJSON_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CleanJSON_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,35 +108,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6FC6AA2821574E65E69C7FF0B735FF9F /* Frameworks */ = {
+		3B7FBE165934F292DCD4A8FDD3EDE264 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6596DE968A7D3CF6432C386DE0792C5 /* Foundation.framework in Frameworks */,
+				952D80E3A772B713C621465CBADA0112 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2713371E524E14CD9F162B089D42C108 /* CleanJSON */ = {
+		0F5414D6CEB44251DA29C9D764A4D53F /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				7C8CFE26647EFF3C0CF8887706C64003 /* _CleanJSONDecoder.swift */,
-				D638EA04674679764E3E1FF3A25B3721 /* _CleanJSONDecoder+SingleValueDecodingContainer.swift */,
-				264921C2CF776632C4203D5334AEC8B8 /* _CleanJSONDecoder+Unbox.swift */,
-				2C5AB4ADD56AB63CA87503BB697D06D0 /* _CleanJSONDecodingStorage.swift */,
-				34DBDFA3436BC1FC8335E2E416927112 /* _CleanJSONKey.swift */,
-				196EF9E661237DF2D4172FF97640F94D /* _CleanJSONKeyedDecodingContainer.swift */,
-				4D371FE54ADB658F6967EFAE4FDBB7B0 /* _CleanJSONUnkeyedDecodingContainer.swift */,
-				3F530602F30EA5C1E995D509D94BE7DA /* CleanJSONDecoder.swift */,
-				76CB8EEE168A55A77CBC405D11E2DF07 /* DecodingError+TypeMismatch.swift */,
-				9A2488479319FE680A4AC0201A4844F9 /* ToJSON.swift */,
-				CD14F25D8AE9809C177DB5A835844867 /* Pod */,
-				8B1C053F06CF2CA547873361788B3E48 /* Support Files */,
+				F1C2605DCD652181C6715B82AB05C651 /* CleanJSON.modulemap */,
+				A540A7A383F85EFA2F779AE44D3F4873 /* CleanJSON.xcconfig */,
+				5158CC53B4EE50798D81D580B0A39922 /* CleanJSON-dummy.m */,
+				A7A1EEDCE99B2F188899300702AE6AEF /* CleanJSON-Info.plist */,
+				45736F77F08BFABAEE96C8E9CADFB42C /* CleanJSON-prefix.pch */,
+				5EE99D9F7800FDF2E12E9AEF5D3EC9F7 /* CleanJSON-umbrella.h */,
 			);
-			name = CleanJSON;
-			path = ../..;
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/CleanJSON";
 			sourceTree = "<group>";
 		};
 		42B76643C5614C56EC18065DFFDBC8B8 /* Pods-CleanJSON_Example */ = {
@@ -162,37 +158,36 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		7D2E2178DF3ADCD92385C97CD9C69D13 /* CleanJSON */ = {
+			isa = PBXGroup;
+			children = (
+				104B20FC5B990A868DB881696BECE8CD /* _CleanJSONDecoder.swift */,
+				5B56251760AA4781E2A2AA116F7D1533 /* _CleanJSONDecoder+SingleValueDecodingContainer.swift */,
+				8DE34637DFAE95B190E10D004F1BCF3E /* _CleanJSONDecoder+Unbox.swift */,
+				B19C4386404025162669EE5C36D031EB /* _CleanJSONDecodingStorage.swift */,
+				658B1C29D99D85B37BB2411A93F64281 /* _CleanJSONKey.swift */,
+				826029BCDE993E80549B48CA462F7B75 /* _CleanJSONKeyedDecodingContainer.swift */,
+				248CDF0261D05C01622B4FD9DA2B60B9 /* _CleanJSONUnkeyedDecodingContainer.swift */,
+				247CD354BB634938F16D08E2822366F7 /* CleanJSONDecoder.swift */,
+				09EC0ED9377ACF11A29B17DEBE943779 /* DecodingError+TypeMismatch.swift */,
+				BA99075529922B27009B8C94CD42F84D /* DefaultEnumCodable.swift */,
+				16655E16C7ADA909231503484ED79182 /* ToJSON.swift */,
+				E4CEF78B75F258CC6ADE581040679422 /* Pod */,
+				0F5414D6CEB44251DA29C9D764A4D53F /* Support Files */,
+			);
+			name = CleanJSON;
+			path = ../..;
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				B36AB396275697EEE1A5B13BA8A38FE3 /* Podfile */,
-				ACEA23991C0D85B6AAFE1EEB93894475 /* Development Pods */,
+				BECC7ECBDE8E6169FE41DDA9C62CC088 /* Development Pods */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
 				D5F402A25A88DD1900E1AF26C8B26286 /* Products */,
 				F942E14983816D3B8B72E526D4A31B66 /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		8B1C053F06CF2CA547873361788B3E48 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				F3F002FF07A766975FBEEF7B13B9C3E3 /* CleanJSON.modulemap */,
-				CCD0612136AD9D5257EDB2E0210FD315 /* CleanJSON.xcconfig */,
-				AD75CC309DADBFCDFA5BA5A9788158DD /* CleanJSON-dummy.m */,
-				31B7C2797DD4E5E0073E8FBF47A10948 /* CleanJSON-Info.plist */,
-				E0634C2273C083814EEF8825DA20A10D /* CleanJSON-prefix.pch */,
-				CE249230EEDE849E37D0CECA01202B73 /* CleanJSON-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/CleanJSON";
-			sourceTree = "<group>";
-		};
-		ACEA23991C0D85B6AAFE1EEB93894475 /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				2713371E524E14CD9F162B089D42C108 /* CleanJSON */,
-			);
-			name = "Development Pods";
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
@@ -203,14 +198,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		CD14F25D8AE9809C177DB5A835844867 /* Pod */ = {
+		BECC7ECBDE8E6169FE41DDA9C62CC088 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				456C2C023E945A32BAF34450EE867B32 /* CleanJSON.podspec */,
-				274F8B2AA6C67B9A4A92143167EB646B /* LICENSE */,
-				8C0BF47D6098C221CA98CA61C1F6D335 /* README.md */,
+				7D2E2178DF3ADCD92385C97CD9C69D13 /* CleanJSON */,
 			);
-			name = Pod;
+			name = "Development Pods";
 			sourceTree = "<group>";
 		};
 		D5F402A25A88DD1900E1AF26C8B26286 /* Products */ = {
@@ -221,6 +214,16 @@
 				656261372B82196E5B1F814E12AAD8A2 /* Pods_CleanJSON_Tests.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E4CEF78B75F258CC6ADE581040679422 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				F3D569F7B2B4EEBE78BCBC57A722AE49 /* CleanJSON.podspec */,
+				BE5E00303A082611AC1282B6FE44A24F /* LICENSE */,
+				C1B6EA5EB3C31F921FE36CF1528B8048 /* README.md */,
+			);
+			name = Pod;
 			sourceTree = "<group>";
 		};
 		F942E14983816D3B8B72E526D4A31B66 /* Targets Support Files */ = {
@@ -251,11 +254,11 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		2EC841A4FBE79480D6CEA5C72DF48BF2 /* Headers */ = {
+		AB6705164EE8B7798EE1D38017CA4382 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7047A172B00740693ECD1090761B07EC /* CleanJSON-umbrella.h in Headers */,
+				6F01707332F543FC57344C5DCFA31904 /* CleanJSON-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,24 +281,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		4373064D804B3171795F5D0517B4E921 /* CleanJSON */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 17DFF4404E4308152773255B25D48ED2 /* Build configuration list for PBXNativeTarget "CleanJSON" */;
-			buildPhases = (
-				2EC841A4FBE79480D6CEA5C72DF48BF2 /* Headers */,
-				1E801C50F415A7B4CAB1EA4E90606D27 /* Sources */,
-				6FC6AA2821574E65E69C7FF0B735FF9F /* Frameworks */,
-				EB589E3649009FCCAF81FBAE503250E8 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CleanJSON;
-			productName = CleanJSON;
-			productReference = 230D8DABA9A0ECCFC68102BF30217AC6 /* CleanJSON.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		97FFA1D2F186E4ECC3FADC23E4D265F0 /* Pods-CleanJSON_Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E430D94773F94F62746F9191045A7537 /* Build configuration list for PBXNativeTarget "Pods-CleanJSON_Example" */;
@@ -334,6 +319,24 @@
 			productReference = 656261372B82196E5B1F814E12AAD8A2 /* Pods_CleanJSON_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		D3535D5687E358659C4A3B1816394966 /* CleanJSON */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3844C940846527CECBC30C7E71EE78DD /* Build configuration list for PBXNativeTarget "CleanJSON" */;
+			buildPhases = (
+				AB6705164EE8B7798EE1D38017CA4382 /* Headers */,
+				4342A0987B08BF488FD6F5668B128794 /* Sources */,
+				3B7FBE165934F292DCD4A8FDD3EDE264 /* Frameworks */,
+				28CC0FE7DFB8945066B78ADCE1744948 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CleanJSON;
+			productName = CleanJSON;
+			productReference = 230D8DABA9A0ECCFC68102BF30217AC6 /* CleanJSON.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -355,7 +358,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4373064D804B3171795F5D0517B4E921 /* CleanJSON */,
+				D3535D5687E358659C4A3B1816394966 /* CleanJSON */,
 				97FFA1D2F186E4ECC3FADC23E4D265F0 /* Pods-CleanJSON_Example */,
 				BEECBC8F8D0F34DAFBEF957C07248BAA /* Pods-CleanJSON_Tests */,
 			);
@@ -363,6 +366,13 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		28CC0FE7DFB8945066B78ADCE1744948 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3B3EBD63BED95D5EC2150BEEA84DC385 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -371,13 +381,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		5331592B53F90022D33215EF3024DC14 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EB589E3649009FCCAF81FBAE503250E8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -395,21 +398,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1E801C50F415A7B4CAB1EA4E90606D27 /* Sources */ = {
+		4342A0987B08BF488FD6F5668B128794 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EAEC2BD7820D5ADA6ED2D65C7AE5490 /* _CleanJSONDecoder+SingleValueDecodingContainer.swift in Sources */,
-				C496B9A07B4A134BF3E14E96A59E97AA /* _CleanJSONDecoder+Unbox.swift in Sources */,
-				224E140743D4542B5A029A722EDCE2D4 /* _CleanJSONDecoder.swift in Sources */,
-				3423701F8D89AFA9905CA8DA415395C6 /* _CleanJSONDecodingStorage.swift in Sources */,
-				AF9295D97A4DF371C175E35BEFAFE112 /* _CleanJSONKey.swift in Sources */,
-				D60E2B84ED94F705A64B5CCE7410EF2D /* _CleanJSONKeyedDecodingContainer.swift in Sources */,
-				77299A3A97E85F10C88268877E1E8E11 /* _CleanJSONUnkeyedDecodingContainer.swift in Sources */,
-				DB538EE9D49A20CAC91D2DA4353EE53B /* CleanJSON-dummy.m in Sources */,
-				A68A5EB0F5A820240AB70B6A2A0EFD83 /* CleanJSONDecoder.swift in Sources */,
-				79D6CEFA250153959C22A699015A410F /* DecodingError+TypeMismatch.swift in Sources */,
-				E47597F2306DFF37B128CE18F0FFAD0F /* ToJSON.swift in Sources */,
+				7A410DBB21CDF6D9F81F4657BA6A8561 /* _CleanJSONDecoder+SingleValueDecodingContainer.swift in Sources */,
+				B24A18C409B22F991EF3841FF80531CF /* _CleanJSONDecoder+Unbox.swift in Sources */,
+				8DCFD3561453E1D15F71534BFDF846FD /* _CleanJSONDecoder.swift in Sources */,
+				282616FE7CB25377210A4735D3B69275 /* _CleanJSONDecodingStorage.swift in Sources */,
+				68727A27B7998AF902B37C2B76F927A1 /* _CleanJSONKey.swift in Sources */,
+				4695B475ECF3DC636FE6BEB915AF7C01 /* _CleanJSONKeyedDecodingContainer.swift in Sources */,
+				00E8EC070BC83C7649D27A586A50F788 /* _CleanJSONUnkeyedDecodingContainer.swift in Sources */,
+				7A615E9A2E7056CBB0AD2412A9CE8A61 /* CleanJSON-dummy.m in Sources */,
+				74666956185C6008A31846F8160AFBD8 /* CleanJSONDecoder.swift in Sources */,
+				66ABAA15D376FCA247E0D4564AC72F35 /* DecodingError+TypeMismatch.swift in Sources */,
+				F24211EB6B7A68A4C876C9BB8C66533D /* DefaultEnumCodable.swift in Sources */,
+				27E0FDBC309B69CA9C6BBF2CA43BC7FE /* ToJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,7 +431,7 @@
 		1B9C67BD934AC2A474751F73B5CB96BE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CleanJSON;
-			target = 4373064D804B3171795F5D0517B4E921 /* CleanJSON */;
+			target = D3535D5687E358659C4A3B1816394966 /* CleanJSON */;
 			targetProxy = AA14ED7C62EF36D1D761C59CF794D715 /* PBXContainerItemProxy */;
 		};
 		4228BED9D99353038CE217987CBCDB9C /* PBXTargetDependency */ = {
@@ -503,6 +507,37 @@
 			};
 			name = Debug;
 		};
+		2159773A841606FCB719BC8BD05BB64A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A540A7A383F85EFA2F779AE44D3F4873 /* CleanJSON.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/CleanJSON/CleanJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CleanJSON/CleanJSON-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/CleanJSON/CleanJSON.modulemap";
+				PRODUCT_MODULE_NAME = CleanJSON;
+				PRODUCT_NAME = CleanJSON;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		602AE5375D978261F41AA8EF521E1919 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0EAC5102E98356417B337FF60E74D980 /* Pods-CleanJSON_Example.release.xcconfig */;
@@ -537,37 +572,6 @@
 			};
 			name = Release;
 		};
-		6F84E60D9900737A5A5C9BAE440B5F77 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CCD0612136AD9D5257EDB2E0210FD315 /* CleanJSON.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/CleanJSON/CleanJSON-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CleanJSON/CleanJSON-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/CleanJSON/CleanJSON.modulemap";
-				PRODUCT_MODULE_NAME = CleanJSON;
-				PRODUCT_NAME = CleanJSON;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		860C218CECD3D6582FBCC71AB8254872 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 922CF22DE7F5A6F6674234B6BECAFC89 /* Pods-CleanJSON_Example.debug.xcconfig */;
@@ -601,9 +605,9 @@
 			};
 			name = Debug;
 		};
-		A021C6C4B1588AF6D0BD26A5BCF5A2FE /* Release */ = {
+		9A3891C8D7FA237AC7E2ED5A67B318B2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CCD0612136AD9D5257EDB2E0210FD315 /* CleanJSON.xcconfig */;
+			baseConfigurationReference = A540A7A383F85EFA2F779AE44D3F4873 /* CleanJSON.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -763,20 +767,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		17DFF4404E4308152773255B25D48ED2 /* Build configuration list for PBXNativeTarget "CleanJSON" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6F84E60D9900737A5A5C9BAE440B5F77 /* Debug */,
-				A021C6C4B1588AF6D0BD26A5BCF5A2FE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				08B0394D5F17A9F046DC0719C25BA452 /* Debug */,
 				E82C56363775B4EF468FF2AD9A2F5414 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3844C940846527CECBC30C7E71EE78DD /* Build configuration list for PBXNativeTarget "CleanJSON" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2159773A841606FCB719BC8BD05BB64A /* Debug */,
+				9A3891C8D7FA237AC7E2ED5A67B318B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
