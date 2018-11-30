@@ -43,9 +43,9 @@ let decoder = CleanJSONDecoder()
 try decoder.decode(Model.self, from: data)
 ```
 
-对于枚举使用不可选类型请遵循 DefaultEnumCodable 协议
+对于枚举使用不可选类型请遵循 DefaultCaseCodable 协议
 ```swift
-enum Enum: Int, DefaultEnumCodable {
+enum Enum: Int, DefaultCaseCodable {
     
     case case1
     case case2

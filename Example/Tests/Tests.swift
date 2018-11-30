@@ -46,6 +46,16 @@ struct Optional: Codable {
     let double: Double?
 }
 
+enum Enum: Int, DefaultCaseCodable {
+    case case1 = 0
+    case case2
+    case case3
+    
+    static var defaultCase: Enum {
+        return .case1
+    }
+}
+
 class CleanJSONTests: XCTestCase {
     
     func testValueNotFound() {
@@ -72,6 +82,7 @@ class CleanJSONTests: XCTestCase {
             let boolValue = try decoder.decode(ValueNotFound<Bool>.self, from: data)
             let arrayValue = try decoder.decode(ValueNotFound<[String]>.self, from: data)
             let objectValue = try decoder.decode(ValueNotFound<Nested>.self, from: data)
+            let enumValue = try decoder.decode(ValueNotFound<Enum>.self, from: data)
             XCTAssertEqual(stringValue.null, "")
             XCTAssertEqual(intValue.null, 0)
             XCTAssertEqual(int8Value.null, 0)
@@ -88,6 +99,7 @@ class CleanJSONTests: XCTestCase {
             XCTAssertEqual(boolValue.null, false)
             XCTAssertEqual(arrayValue.null, [])
             XCTAssertEqual(objectValue.null.string, "")
+            XCTAssertEqual(enumValue.null, .case1)
         } catch {
             XCTAssertNil(error)
         }
