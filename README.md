@@ -43,8 +43,7 @@ let decoder = CleanJSONDecoder()
 try decoder.decode(Model.self, from: data)
 ```
 
-对于*_不可选_*的枚举类型请遵循 CaseDefaultable 协议
-如果解析失败会返回默认 case
+对于不可选的枚举类型请遵循 CaseDefaultable 协议，如果解析失败会返回默认 case
 ```swift
 enum Enum: Int, Codable, CaseDefaultable {
     
