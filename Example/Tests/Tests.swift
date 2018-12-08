@@ -46,13 +46,13 @@ struct Optional: Codable {
     let double: Double?
 }
 
-enum Enum: Int, DefaultCaseCodable {
-    case case1 = 0
+enum Enum: Int, CaseDefaultable, Codable {
+    case case1 = 1
     case case2
     case case3
     
     static var defaultCase: Enum {
-        return .case1
+        return .case2
     }
 }
 
@@ -99,7 +99,7 @@ class CleanJSONTests: XCTestCase {
             XCTAssertEqual(boolValue.null, false)
             XCTAssertEqual(arrayValue.null, [])
             XCTAssertEqual(objectValue.null.string, "")
-            XCTAssertEqual(enumValue.null, .case1)
+            XCTAssertEqual(enumValue.null, .case2)
         } catch {
             XCTAssertNil(error)
         }
