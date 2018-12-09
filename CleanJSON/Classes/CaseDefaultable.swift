@@ -14,7 +14,30 @@ public protocol CaseDefaultable: RawRepresentable {
 public extension CaseDefaultable where Self: Decodable, Self.RawValue: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        let rawValue = try container.decode(RawValue.self)
-        self = Self.init(rawValue: rawValue) ?? Self.defaultCase
+        guard let jsonDecoder = container as? _CleanJSONDecoder else {
+            let rawValue = try container.decode(RawValue.self)
+            self = Self.init(rawValue: rawValue) ?? Self.defaultCase
+            return
+        }
+        self = try jsonDecoder.decodeCase(Self.self)
+    }
+}
+
+fileprivate extension _CleanJSONDecoder {
+    func decodeCase<T>(_ type: T.Type) throws -> T
+        where T: CaseDefaultable,
+        T: Decodable,
+        T.RawValue: Decodable
+    {
+        if decodeNil() {
+            return T.defaultCase
+        }
+        
+        guard self.storage.topContainer is T.RawValue else {
+            return T.defaultCase
+        }
+        
+        let rawValue = try decode(T.RawValue.self)
+        return T.init(rawValue: rawValue) ?? T.defaultCase
     }
 }

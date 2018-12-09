@@ -46,8 +46,12 @@ struct Optional: Codable {
     let double: Double?
 }
 
+struct EnumStruct: Codable {
+    let `enum`: Enum
+}
+
 enum Enum: Int, CaseDefaultable, Codable {
-    case case1 = 1
+    case case1
     case case2
     case case3
     
@@ -188,6 +192,20 @@ class CleanJSONTests: XCTestCase {
             XCTAssertEqual(object.uint, 10)
             XCTAssertEqual(object.float, 4.9)
             XCTAssertNil(object.double)
+        } catch {
+            XCTAssertNil(error)
+        }
+    }
+    
+    func testEnumDefaultCase() {
+        let data = """
+                    {
+                      "enum": 3,
+                    }
+                """.data(using: .utf8)!
+        do {
+            let object = try CleanJSONDecoder().decode(EnumStruct.self, from: data)
+            XCTAssertEqual(object.enum, Enum.defaultCase)
         } catch {
             XCTAssertNil(error)
         }

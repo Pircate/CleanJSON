@@ -31,6 +31,16 @@ struct TestModel<T: Codable>: Codable {
     }
 }
 
+enum Enum: Int, Codable, CaseDefaultable {
+    case case1
+    case case2
+    case case3
+    
+    static var defaultCase: Enum {
+        return .case2
+    }
+}
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -55,7 +65,7 @@ class ViewController: UIViewController {
         do {
             let decoder = CleanJSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            let model = try decoder.decode(TestModel<Bool>.self, from: json)
+            let model = try decoder.decode(TestModel<Enum>.self, from: json)
             debugPrint(model.boolean)
             debugPrint(model.integer)
             debugPrint(model.double)
