@@ -30,6 +30,7 @@ open class CleanJSONDecoder: JSONDecoder {
                         userInfo: userInfo)
     }
     
+    /// The strategy to use for type convertion.
     open var typeConvertionStrategy: TypeConvertionStrategy = .default
     
     // MARK: - Decoding Values

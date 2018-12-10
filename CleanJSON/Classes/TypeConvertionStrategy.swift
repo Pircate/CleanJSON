@@ -54,5 +54,7 @@ extension CleanJSONDecoder {
             }
             return ""
         }
+        
+        public init() {}
     }
 }
