@@ -67,7 +67,7 @@ enum Enum: Int, Codable, CaseDefaultable {
 
 ### Custom type convertion
 
-可以通过 typeConvertionStrategy 自定义类型转换，默认支持[这些类型转换](https://github.com/Pircate/CleanJSON/blob/master/CleanJSON/Classes/TypeConvertionStrategy.swift)
+可以通过 typeConvertionStrategy 自定义类型转换，默认支持[这些](https://github.com/Pircate/CleanJSON/blob/master/CleanJSON/Classes/TypeConvertionStrategy.swift)类型转换
 
 下面代码设定在解析的时候将 Int 转换为 Bool
 
