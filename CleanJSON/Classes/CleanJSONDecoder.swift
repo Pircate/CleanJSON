@@ -31,7 +31,7 @@ open class CleanJSONDecoder: JSONDecoder {
     }
     
     /// The strategy to use for type convertion.
-    open var typeConvertionStrategy: TypeConvertionStrategy = .default
+    open var typeConvertionStrategy: TypeConvertionStrategy = .init()
     
     // MARK: - Decoding Values
     

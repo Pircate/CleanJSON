@@ -160,6 +160,59 @@ class CleanJSONTests: XCTestCase {
         }
     }
     
+    func testCustomTypeConvertion() {
+        let data = """
+                    {
+                      "stringToUInt": "520",
+                      "stringToInt": "1,314",
+                      "stringToFloat": "1.414",
+                      "stringToDouble": "3.141592654",
+                      "boolToString": true,
+                      "doubleToString": 3.14,
+                      "intToString": 10
+                    }
+                """.data(using: .utf8)!
+        
+        do {
+            let decoder = CleanJSONDecoder()
+            decoder.typeConvertionStrategy.convertToString = { decoder in
+                if let intValue = try decoder.decode(Int.self) {
+                    return "$" + String(intValue)
+                } else if let doubleValue = try decoder.decode(Double.self) {
+                    return String(format: "%.f", doubleValue)
+                } else if let boolValue = try decoder.decode(Bool.self) {
+                    return String(boolValue).uppercased()
+                }
+                return ""
+            }
+            decoder.typeConvertionStrategy.convertToInt = { decoder in
+                if let stringValue = try decoder.decode(String.self) {
+                    let formatter = NumberFormatter()
+                    formatter.generatesDecimalNumbers = true
+                    formatter.numberStyle = .decimal
+                    return formatter.number(from: stringValue)?.intValue ?? 0
+                }
+                return 0
+            }
+            decoder.typeConvertionStrategy.convertToDouble = { decoder in
+                if let stringValue = try decoder.decode(String.self) {
+                    return Double(stringValue)?.advanced(by: 1) ?? 0
+                }
+                return 0
+            }
+            let object = try decoder.decode(TypeMismatch.self, from: data)
+            XCTAssertEqual(object.stringToUInt, 520)
+            XCTAssertEqual(object.stringToInt, 1314)
+            XCTAssertEqual(object.stringToFloat, 1.414)
+            XCTAssertEqual(object.stringToDouble, 4.141592654)
+            XCTAssertEqual(object.boolToString, "TRUE")
+            XCTAssertEqual(object.intToString, "$10")
+            XCTAssertEqual(object.doubleToString, "3")
+        } catch {
+            XCTAssertNil(error)
+        }
+    }
+    
     func testNested() {
         let data = """
                     {

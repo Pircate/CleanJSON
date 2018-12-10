@@ -12,8 +12,6 @@ extension CleanJSONDecoder {
     
     public class TypeConvertionStrategy {
         
-        static let `default` = TypeConvertionStrategy()
-        
         public var convertToBool: (CleanDecoder) throws -> Bool = { _ in false }
         
         public var convertToInt: (CleanDecoder) throws -> Int = { decoder in
