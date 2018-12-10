@@ -16,6 +16,7 @@ open class CleanJSONDecoder: JSONDecoder {
         let dataDecodingStrategy: DataDecodingStrategy
         let nonConformingFloatDecodingStrategy: NonConformingFloatDecodingStrategy
         let keyDecodingStrategy: KeyDecodingStrategy
+        let typeConvertionStrategy: TypeConvertionStrategy
         let userInfo: [CodingUserInfoKey : Any]
     }
     
@@ -25,8 +26,11 @@ open class CleanJSONDecoder: JSONDecoder {
                         dataDecodingStrategy: dataDecodingStrategy,
                         nonConformingFloatDecodingStrategy: nonConformingFloatDecodingStrategy,
                         keyDecodingStrategy: keyDecodingStrategy,
+                        typeConvertionStrategy: typeConvertionStrategy,
                         userInfo: userInfo)
     }
+    
+    open var typeConvertionStrategy: TypeConvertionStrategy = .default
     
     // MARK: - Decoding Values
     

@@ -65,6 +65,16 @@ enum Enum: Int, Codable, CaseDefaultable {
 }
 ```
 
+### Custom type convertion
+```swift
+decoder.typeConvertionStrategy.convertToBool = { decoder in
+    if let intValue = try decoder.decode(Int.self) {
+        return intValue != 0
+    }
+    return false
+}
+```
+
 ### For Moya
 
 使用 Moya.Response 自带的 [map](https://github.com/Moya/Moya/blob/master/Sources/Moya/Response.swift) 方法解析，传入 CleanJSONDecoder

@@ -89,7 +89,9 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
         defer { self.decoder.codingPath.removeLast() }
         
         guard let value = try self.decoder.unbox(entry, as: Bool.self) else {
-            return false
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
+            return try decoder.options.typeConvertionStrategy.convertToBool(decoder)
         }
         
         return value
@@ -104,10 +106,9 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
         defer { self.decoder.codingPath.removeLast() }
         
         guard let value = try self.decoder.unbox(entry, as: Int.self) else {
-            if let stringValue = try self.decoder.unbox(entry, as: String.self) {
-                return Int(stringValue) ?? 0
-            }
-            return 0
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
+            return try decoder.options.typeConvertionStrategy.convertToInt(decoder)
         }
         
         return value
@@ -182,10 +183,9 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
         defer { self.decoder.codingPath.removeLast() }
         
         guard let value = try self.decoder.unbox(entry, as: UInt.self) else {
-            if let stringValue = try self.decoder.unbox(entry, as: String.self) {
-                return UInt(stringValue) ?? 0
-            }
-            return 0
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
+            return try decoder.options.typeConvertionStrategy.convertToUInt(decoder)
         }
         
         return value
@@ -260,10 +260,9 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
         defer { self.decoder.codingPath.removeLast() }
         
         guard let value = try self.decoder.unbox(entry, as: Float.self) else {
-            if let stringValue = try self.decoder.unbox(entry, as: String.self) {
-                return Float(stringValue) ?? 0
-            }
-            return 0
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
+            return try decoder.options.typeConvertionStrategy.convertToFloat(decoder)
         }
         
         return value
@@ -278,10 +277,9 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
         defer { self.decoder.codingPath.removeLast() }
         
         guard let value = try self.decoder.unbox(entry, as: Double.self) else {
-            if let stringValue = try self.decoder.unbox(entry, as: String.self) {
-                return Double(stringValue) ?? 0
-            }
-            return 0
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
+            return try decoder.options.typeConvertionStrategy.convertToDouble(decoder)
         }
         
         return value
@@ -296,14 +294,9 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
         defer { self.decoder.codingPath.removeLast() }
         
         guard let value = try self.decoder.unbox(entry, as: String.self) else {
-            if let intValue = try self.decoder.unbox(entry, as: Int.self) {
-                return String(intValue)
-            } else if let doubleValue = try self.decoder.unbox(entry, as: Double.self) {
-                return String(doubleValue)
-            } else if let boolValue = try self.decoder.unbox(entry, as: Bool.self) {
-                return String(boolValue)
-            }
-            return ""
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
+            return try decoder.options.typeConvertionStrategy.convertToString(decoder)
         }
         
         return value

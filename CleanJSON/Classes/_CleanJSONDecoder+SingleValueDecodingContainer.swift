@@ -21,17 +21,22 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     
     public func decode(_ type: Bool.Type) throws -> Bool {
         try expectNonNull(Bool.self)
-        return try self.unbox(self.storage.topContainer, as: Bool.self) ?? false
+        
+        guard let value = try self.unbox(self.storage.topContainer, as: Bool.self) else {
+            return try options.typeConvertionStrategy.convertToBool(self)
+        }
+        
+        return value
     }
     
     public func decode(_ type: Int.Type) throws -> Int {
         try expectNonNull(Int.self)
-        if let value = try self.unbox(self.storage.topContainer, as: Int.self) {
-            return value
-        } else if let stringValue = try self.unbox(self.storage.topContainer, as: String.self) {
-            return Int(stringValue) ?? 0
+        
+        guard let value = try self.unbox(self.storage.topContainer, as: Int.self) else {
+            return try options.typeConvertionStrategy.convertToInt(self)
         }
-        return 0
+        
+        return value
     }
     
     public func decode(_ type: Int8.Type) throws -> Int8 {
@@ -56,12 +61,12 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     
     public func decode(_ type: UInt.Type) throws -> UInt {
         try expectNonNull(UInt.self)
-        if let value = try self.unbox(self.storage.topContainer, as: UInt.self) {
-            return value
-        } else if let stringValue = try self.unbox(self.storage.topContainer, as: String.self) {
-            return UInt(stringValue) ?? 0
+        
+        guard let value = try self.unbox(self.storage.topContainer, as: UInt.self) else {
+            return try options.typeConvertionStrategy.convertToUInt(self)
         }
-        return 0
+    
+        return value
     }
     
     public func decode(_ type: UInt8.Type) throws -> UInt8 {
@@ -86,36 +91,32 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     
     public func decode(_ type: Float.Type) throws -> Float {
         try expectNonNull(Float.self)
-        if let value = try self.unbox(self.storage.topContainer, as: Float.self) {
-            return value
-        } else if let stringValue = try self.unbox(self.storage.topContainer, as: String.self) {
-            return Float(stringValue) ?? 0
+        
+        guard let value = try self.unbox(self.storage.topContainer, as: Float.self) else {
+            return try options.typeConvertionStrategy.convertToFloat(self)
         }
-        return 0
+        
+        return value
     }
     
     public func decode(_ type: Double.Type) throws -> Double {
         try expectNonNull(Double.self)
-        if let value = try self.unbox(self.storage.topContainer, as: Double.self) {
-            return value
-        } else if let stringValue = try self.unbox(self.storage.topContainer, as: String.self) {
-            return Double(stringValue) ?? 0
+        
+        guard let value = try self.unbox(self.storage.topContainer, as: Double.self) else {
+            return try options.typeConvertionStrategy.convertToDouble(self)
         }
-        return 0
+        
+        return value
     }
     
     public func decode(_ type: String.Type) throws -> String {
         try expectNonNull(String.self)
-        if let value = try self.unbox(self.storage.topContainer, as: String.self) {
-            return value
-        } else if let intValue = try self.unbox(self.storage.topContainer, as: Int.self) {
-            return String(intValue)
-        } else if let doubleValue = try self.unbox(self.storage.topContainer, as: Double.self) {
-            return String(doubleValue)
-        } else if let boolValue = try self.unbox(self.storage.topContainer, as: Bool.self) {
-            return String(boolValue)
+        
+        guard let value = try self.unbox(self.storage.topContainer, as: String.self) else {
+            return try options.typeConvertionStrategy.convertToString(self)
         }
-        return ""
+        
+        return value
     }
     
     public func decode<T : Decodable>(_ type: T.Type) throws -> T {
