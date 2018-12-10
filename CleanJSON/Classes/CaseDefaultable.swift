@@ -23,7 +23,7 @@ public extension CaseDefaultable where Self: Decodable, Self.RawValue: Decodable
     }
 }
 
-fileprivate extension _CleanJSONDecoder {
+private extension _CleanJSONDecoder {
     func decodeCase<T>(_ type: T.Type) throws -> T
         where T: CaseDefaultable,
         T: Decodable,
