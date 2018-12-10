@@ -7,7 +7,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/CleanJSON.svg?style=flat)](https://cocoapods.org/pods/CleanJSON)
 
 
-在标准库源码基础上做了改动，以解决 JSONDecoder 各种解析失败的问题，如键值不存在，值为 null，类型不一致。
+继承自 JSONDecoder，在标准库源码基础上做了改动，以解决 JSONDecoder 各种解析失败的问题，如键值不存在，值为 null，类型不一致。
 
 ## Example
 
@@ -24,26 +24,34 @@ CleanJSON is available through [CocoaPods](https://cocoapods.org) or [Carthage](
 it, simply add the following line to your Podfile or Cartfile:
 
 #### Podfile
+
 ```ruby
 pod 'CleanJSON'
 ```
+
 #### Cartfile
+
 ```ruby
 github "Pircate/CleanJSON"
 ```
 
 ## Import
+
 ```swift
 import CleanJSON
 ```
 
 ## Usage
+
+### Normal
+
 ```swift
 let decoder = CleanJSONDecoder()
 try decoder.decode(Model.self, from: data)
 ```
 
 对于不可选的枚举类型请遵循 CaseDefaultable 协议，如果解析失败会返回默认 case
+
 ```swift
 enum Enum: Int, Codable, CaseDefaultable {
     
@@ -55,6 +63,43 @@ enum Enum: Int, Codable, CaseDefaultable {
         return .case1
     }
 }
+```
+
+### For Moya
+
+使用 Moya.Response 自带的 [map](https://github.com/Moya/Moya/blob/master/Sources/Moya/Response.swift) 方法解析，传入 CleanJSONDecoder
+
+```swift
+provider = MoyaProvider<GitHub>()
+provider.request(.zen) { result in
+    switch result {
+    case let .success(response):
+        let decoder = CleanJSONDecoder()
+        let model = response.map(Model.self, using: decoder)
+    case let .failure(error):
+        // this means there was a network failure - either the request
+        // wasn't sent (connectivity), or no response was received (server
+        // timed out).  If the server responds with a 4xx or 5xx error, that
+        // will be sent as a ".success"-ful response.
+    }
+}
+```
+
+### For RxMoya
+
+```swift
+provider = MoyaProvider<GitHub>()
+let decoder = CleanJSONDecoder()
+provider.rx.request(.userProfile("ashfurrow"))
+    .map(Model.self, using: decoder)
+    .subscribe { event in
+        switch event {
+        case let .success(model):
+            // do someting
+        case let .error(error):
+            print(error)
+        }
+    }
 ```
 
 ## Author
