@@ -10,6 +10,8 @@ import Foundation
 
 public protocol CleanDecoder {
     
+    func decodeNull() -> Bool
+    
     func decode(_ type: Bool.Type) throws -> Bool?
     
     func decode(_ type: Int.Type) throws -> Int?
@@ -46,6 +48,10 @@ public protocol CleanDecoder {
 }
 
 extension _CleanJSONDecoder: CleanDecoder {
+    
+    func decodeNull() -> Bool {
+        return storage.topContainer is NSNull
+    }
     
     func decode(_ type: Bool.Type) throws -> Bool? {
         return try unbox(storage.topContainer, as: type)

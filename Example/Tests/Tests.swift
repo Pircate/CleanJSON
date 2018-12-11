@@ -18,6 +18,8 @@ struct KeyNotFound: Codable {
 
 struct TypeMismatch: Codable {
     
+    let null: Bool
+    
     let stringToUInt: UInt
     let stringToInt: Int
     let stringToFloat: Float
@@ -163,9 +165,8 @@ class CleanJSONTests: XCTestCase {
     func testCustomTypeConvertion() {
         let data = """
                     {
-                      "stringToUInt": "520",
+                      "null": null,
                       "stringToInt": "1,314",
-                      "stringToFloat": "1.414",
                       "stringToDouble": "3.141592654",
                       "boolToString": true,
                       "doubleToString": 3.14,
@@ -200,10 +201,15 @@ class CleanJSONTests: XCTestCase {
                 }
                 return 0
             }
+            decoder.typeConvertionStrategy.convertToBool = { decoder in
+                if decoder.decodeNull() {
+                    return true
+                }
+                return false
+            }
             let object = try decoder.decode(TypeMismatch.self, from: data)
-            XCTAssertEqual(object.stringToUInt, 520)
+            XCTAssertEqual(object.null, true)
             XCTAssertEqual(object.stringToInt, 1314)
-            XCTAssertEqual(object.stringToFloat, 1.414)
             XCTAssertEqual(object.stringToDouble, 4.141592654)
             XCTAssertEqual(object.boolToString, "TRUE")
             XCTAssertEqual(object.intToString, "$10")

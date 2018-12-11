@@ -15,34 +15,58 @@ extension CleanJSONDecoder {
         public var convertToBool: (CleanDecoder) throws -> Bool = { _ in false }
         
         public var convertToInt: (CleanDecoder) throws -> Int = { decoder in
+            guard !decoder.decodeNull() else {
+                return 0
+            }
+            
             guard let stringValue = try decoder.decode(String.self) else {
                 return 0
             }
+            
             return Int(stringValue) ?? 0
         }
         
         public var convertToUInt: (CleanDecoder) throws -> UInt = { decoder in
+            guard !decoder.decodeNull() else {
+                return 0
+            }
+            
             guard let stringValue = try decoder.decode(String.self) else {
                 return 0
             }
+            
             return UInt(stringValue) ?? 0
         }
         
         public var convertToFloat: (CleanDecoder) throws -> Float = { decoder in
+            guard !decoder.decodeNull() else {
+                return 0
+            }
+            
             guard let stringValue = try decoder.decode(String.self) else {
                 return 0
             }
+            
             return Float(stringValue) ?? 0
         }
         
         public var convertToDouble: (CleanDecoder) throws -> Double = { decoder in
+            guard !decoder.decodeNull() else {
+                return 0
+            }
+            
             guard let stringValue = try decoder.decode(String.self) else {
                 return 0
             }
+            
             return Double(stringValue) ?? 0
         }
         
         public var convertToString: (CleanDecoder) throws -> String = { decoder in
+            guard !decoder.decodeNull() else {
+                return ""
+            }
+            
             if let intValue = try decoder.decode(Int.self) {
                 return String(intValue)
             } else if let doubleValue = try decoder.decode(Double.self) {
@@ -50,6 +74,7 @@ extension CleanJSONDecoder {
             } else if let boolValue = try decoder.decode(Bool.self) {
                 return String(boolValue)
             }
+            
             return ""
         }
         

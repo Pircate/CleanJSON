@@ -82,7 +82,7 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     
     public func decode(_ type: Bool.Type, forKey key: Key) throws -> Bool {
         guard let entry = self.container[key.stringValue] else {
-            return false
+            return try decoder.options.typeConvertionStrategy.convertToBool(decoder)
         }
         
         self.decoder.codingPath.append(key)
@@ -99,7 +99,7 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     
     public func decode(_ type: Int.Type, forKey key: Key) throws -> Int {
         guard let entry = self.container[key.stringValue] else {
-            return 0
+            return try decoder.options.typeConvertionStrategy.convertToInt(decoder)
         }
         
         self.decoder.codingPath.append(key)
@@ -176,7 +176,7 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     
     public func decode(_ type: UInt.Type, forKey key: Key) throws -> UInt {
         guard let entry = self.container[key.stringValue] else {
-            return 0
+            return try decoder.options.typeConvertionStrategy.convertToUInt(decoder)
         }
         
         self.decoder.codingPath.append(key)
@@ -253,7 +253,7 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     
     public func decode(_ type: Float.Type, forKey key: Key) throws -> Float {
         guard let entry = self.container[key.stringValue] else {
-            return 0
+            return try decoder.options.typeConvertionStrategy.convertToFloat(decoder)
         }
         
         self.decoder.codingPath.append(key)
@@ -270,7 +270,7 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     
     public func decode(_ type: Double.Type, forKey key: Key) throws -> Double {
         guard let entry = self.container[key.stringValue] else {
-            return 0
+            return try decoder.options.typeConvertionStrategy.convertToDouble(decoder)
         }
         
         self.decoder.codingPath.append(key)
@@ -287,7 +287,7 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     
     public func decode(_ type: String.Type, forKey key: Key) throws -> String {
         guard let entry = self.container[key.stringValue] else {
-            return ""
+            return try decoder.options.typeConvertionStrategy.convertToString(decoder)
         }
         
         self.decoder.codingPath.append(key)
