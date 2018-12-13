@@ -71,13 +71,13 @@ enum Enum: Int, Codable, CaseDefaultable {
 
 ### Custom type convertion
 
-可以通过 valueNotFoundDecodingStrategy 在值为 null 或类型不匹配的时候自定义解码，默认策略请看[这里](https://github.com/Pircate/CleanJSON/blob/master/CleanJSON/Classes/TypeConvertor.swift)
+可以通过 valueNotFoundDecodingStrategy 在值为 null 或类型不匹配的时候自定义解码，默认策略请看[这里](https://github.com/Pircate/CleanJSON/blob/master/CleanJSON/Classes/Adaptor.swift)
 
 下面代码设定在解析的时候将 JSON 的 Int 类型 转换为 swift 的 Bool 类型
 
 ```swift
-var convertor = CleanJSONDecoder.TypeConvertor()
-convertor.convertToBool = { decoder in
+var adaptor = CleanJSONDecoder.Adaptor()
+adaptor.decodeBool = { decoder in
     // 值为 null
     if decoder.decodeNull() {
         return false
@@ -90,7 +90,7 @@ convertor.convertToBool = { decoder in
     
     return false
 }
-decoder.valueNotFoundDecodingStrategy = .custom(convertor)
+decoder.valueNotFoundDecodingStrategy = .custom(adaptor)
 ```
 
 ### For Moya

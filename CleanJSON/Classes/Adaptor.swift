@@ -1,5 +1,5 @@
 // 
-//  TypeConvertor.swift
+//  Adaptor.swift
 //  CleanJSON
 //
 //  Created by Pircate(gao497868860@gmail.com) on 2018/12/13
@@ -8,11 +8,11 @@
 
 extension CleanJSONDecoder {
     
-    public struct TypeConvertor {
+    public struct Adaptor {
         
-        public var convertToBool: (CleanDecoder) throws -> Bool = { _ in false }
+        public var decodeBool: (CleanDecoder) throws -> Bool = { _ in false }
         
-        public var convertToInt: (CleanDecoder) throws -> Int = { decoder in
+        public var decodeInt: (CleanDecoder) throws -> Int = { decoder in
             guard !decoder.decodeNull() else {
                 return 0
             }
@@ -24,7 +24,7 @@ extension CleanJSONDecoder {
             return Int(stringValue) ?? 0
         }
         
-        public var convertToUInt: (CleanDecoder) throws -> UInt = { decoder in
+        public var decodeUInt: (CleanDecoder) throws -> UInt = { decoder in
             guard !decoder.decodeNull() else {
                 return 0
             }
@@ -36,7 +36,7 @@ extension CleanJSONDecoder {
             return UInt(stringValue) ?? 0
         }
         
-        public var convertToFloat: (CleanDecoder) throws -> Float = { decoder in
+        public var decodeFloat: (CleanDecoder) throws -> Float = { decoder in
             guard !decoder.decodeNull() else {
                 return 0
             }
@@ -48,7 +48,7 @@ extension CleanJSONDecoder {
             return Float(stringValue) ?? 0
         }
         
-        public var convertToDouble: (CleanDecoder) throws -> Double = { decoder in
+        public var decodeDouble: (CleanDecoder) throws -> Double = { decoder in
             guard !decoder.decodeNull() else {
                 return 0
             }
@@ -60,7 +60,7 @@ extension CleanJSONDecoder {
             return Double(stringValue) ?? 0
         }
         
-        public var convertToString: (CleanDecoder) throws -> String = { decoder in
+        public var decodeString: (CleanDecoder) throws -> String = { decoder in
             guard !decoder.decodeNull() else {
                 return ""
             }
@@ -78,18 +78,18 @@ extension CleanJSONDecoder {
         
         public init() {}
         
-        public init(convertToBool: @escaping (CleanDecoder) -> Bool,
-                    convertToInt: @escaping (CleanDecoder) -> Int,
-                    convertToUInt: @escaping (CleanDecoder) -> UInt,
-                    convertToFloat: @escaping (CleanDecoder) -> Float,
-                    convertToDouble: @escaping (CleanDecoder) -> Double,
-                    convertToString: @escaping (CleanDecoder) -> String) {
-            self.convertToBool = convertToBool
-            self.convertToInt = convertToInt
-            self.convertToUInt = convertToUInt
-            self.convertToFloat = convertToFloat
-            self.convertToDouble = convertToDouble
-            self.convertToString = convertToString
+        public init(decodeBool: @escaping (CleanDecoder) -> Bool,
+                    decodeInt: @escaping (CleanDecoder) -> Int,
+                    decodeUInt: @escaping (CleanDecoder) -> UInt,
+                    decodeFloat: @escaping (CleanDecoder) -> Float,
+                    decodeDouble: @escaping (CleanDecoder) -> Double,
+                    decodeString: @escaping (CleanDecoder) -> String) {
+            self.decodeBool = decodeBool
+            self.decodeInt = decodeInt
+            self.decodeUInt = decodeUInt
+            self.decodeFloat = decodeFloat
+            self.decodeDouble = decodeDouble
+            self.decodeString = decodeString
         }
     }
 }

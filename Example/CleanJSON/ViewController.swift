@@ -65,14 +65,14 @@ class ViewController: UIViewController {
         do {
             let decoder = CleanJSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            var convertor = CleanJSONDecoder.TypeConvertor()
-            convertor.convertToBool = { decoder in
+            var adaptor = CleanJSONDecoder.Adaptor()
+            adaptor.decodeBool = { decoder in
                 if let intValue = try decoder.decode(Int.self) {
                     return intValue != 0
                 }
                 return false
             }
-            decoder.valueNotFoundDecodingStrategy = .custom(convertor)
+            decoder.valueNotFoundDecodingStrategy = .custom(adaptor)
             let model = try decoder.decode(TestModel<Enum>.self, from: json)
             debugPrint(model.boolean)
             debugPrint(model.integer)
