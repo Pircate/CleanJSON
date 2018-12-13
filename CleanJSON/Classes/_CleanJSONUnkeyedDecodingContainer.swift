@@ -306,9 +306,35 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                                                                     debugDescription: "Cannot get nested keyed container -- unkeyed container is at end."))
         }
         
-        let dictionary = self.container[self.currentIndex] as? [String : Any] ?? [:]
+        let value = self.container[self.currentIndex]
+        guard !(value is NSNull) else {
+            switch decoder.options.nestedContainerDecodingStrategy.valueNotFound {
+            case .throw:
+                throw DecodingError.Nested.valueNotFound(
+                    KeyedDecodingContainer<NestedKey>.self,
+                    codingPath: codingPath,
+                    debugDescription: "Cannot get keyed decoding container -- found null value instead.")
+            case .useEmptyContainer:
+                self.currentIndex += 1
+                return nestedContainer()
+            }
+        }
+        
+        guard let dictionary = value as? [String : Any] else {
+            switch decoder.options.nestedContainerDecodingStrategy.typeMismatch {
+            case .throw:
+                throw DecodingError._typeMismatch(at: self.codingPath, expectation: [String : Any].self, reality: value)
+            case .useEmptyContainer:
+                self.currentIndex += 1
+                return nestedContainer()
+            }
+        }
         
         self.currentIndex += 1
+        return nestedContainer(wrapping: dictionary)
+    }
+    
+    private func nestedContainer<NestedKey>(wrapping dictionary: [String: Any] = [:]) -> KeyedDecodingContainer<NestedKey> {
         let container = _CleanJSONKeyedDecodingContainer<NestedKey>(referencing: self.decoder, wrapping: dictionary)
         return KeyedDecodingContainer(container)
     }
@@ -323,7 +349,30 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                                                                     debugDescription: "Cannot get nested keyed container -- unkeyed container is at end."))
         }
         
-        let array = self.container[self.currentIndex] as? [Any] ?? []
+        let value = self.container[self.currentIndex]
+        guard !(value is NSNull) else {
+            switch decoder.options.nestedContainerDecodingStrategy.valueNotFound {
+            case .throw:
+                throw DecodingError.Nested.valueNotFound(
+                    UnkeyedDecodingContainer.self,
+                    codingPath: codingPath,
+                    debugDescription: "Cannot get keyed decoding container -- found null value instead.")
+            case .useEmptyContainer:
+                self.currentIndex += 1
+                return _CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
+            }
+        }
+        
+        guard let array = value as? [Any] else {
+            switch decoder.options.nestedContainerDecodingStrategy.typeMismatch {
+            case .throw:
+                throw DecodingError._typeMismatch(at: self.codingPath, expectation: [Any].self, reality: value)
+            case .useEmptyContainer:
+                self.currentIndex += 1
+                return _CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
+            }
+        }
+        
         self.currentIndex += 1
         return _CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: array)
     }

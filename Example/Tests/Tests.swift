@@ -176,7 +176,8 @@ class CleanJSONTests: XCTestCase {
         
         do {
             let decoder = CleanJSONDecoder()
-            decoder.typeConvertionStrategy.convertToString = { decoder in
+            var convertor = CleanJSONDecoder.TypeConvertor()
+            convertor.convertToString = { decoder in
                 if let intValue = try decoder.decode(Int.self) {
                     return "$" + String(intValue)
                 } else if let doubleValue = try decoder.decode(Double.self) {
@@ -186,7 +187,7 @@ class CleanJSONTests: XCTestCase {
                 }
                 return ""
             }
-            decoder.typeConvertionStrategy.convertToInt = { decoder in
+            convertor.convertToInt = { decoder in
                 if let stringValue = try decoder.decode(String.self) {
                     let formatter = NumberFormatter()
                     formatter.generatesDecimalNumbers = true
@@ -195,18 +196,20 @@ class CleanJSONTests: XCTestCase {
                 }
                 return 0
             }
-            decoder.typeConvertionStrategy.convertToDouble = { decoder in
+            convertor.convertToDouble = { decoder in
                 if let stringValue = try decoder.decode(String.self) {
                     return Double(stringValue)?.advanced(by: 1) ?? 0
                 }
                 return 0
             }
-            decoder.typeConvertionStrategy.convertToBool = { decoder in
+            convertor.convertToBool = { decoder in
                 if decoder.decodeNull() {
                     return true
                 }
                 return false
             }
+            decoder.keyNotFoundDecodingStrategy = .useDefaultValue
+            decoder.valueNotFoundDecodingStrategy = .custom(convertor)
             let object = try decoder.decode(TypeMismatch.self, from: data)
             XCTAssertEqual(object.null, true)
             XCTAssertEqual(object.stringToInt, 1314)

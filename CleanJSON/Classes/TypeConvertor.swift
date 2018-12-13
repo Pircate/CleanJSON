@@ -1,16 +1,14 @@
 // 
-//  TypeConvertionStrategy.swift
+//  TypeConvertor.swift
 //  CleanJSON
 //
-//  Created by Pircate(gao497868860@gmail.com) on 2018/12/10
+//  Created by Pircate(gao497868860@gmail.com) on 2018/12/13
 //  Copyright © 2018 Pircate. All rights reserved.
 //
 
-import Foundation
-
 extension CleanJSONDecoder {
     
-    public class TypeConvertionStrategy {
+    public struct TypeConvertor {
         
         public var convertToBool: (CleanDecoder) throws -> Bool = { _ in false }
         
@@ -79,5 +77,19 @@ extension CleanJSONDecoder {
         }
         
         public init() {}
+        
+        public init(convertToBool: @escaping (CleanDecoder) -> Bool,
+                    convertToInt: @escaping (CleanDecoder) -> Int,
+                    convertToUInt: @escaping (CleanDecoder) -> UInt,
+                    convertToFloat: @escaping (CleanDecoder) -> Float,
+                    convertToDouble: @escaping (CleanDecoder) -> Double,
+                    convertToString: @escaping (CleanDecoder) -> String) {
+            self.convertToBool = convertToBool
+            self.convertToInt = convertToInt
+            self.convertToUInt = convertToUInt
+            self.convertToFloat = convertToFloat
+            self.convertToDouble = convertToDouble
+            self.convertToString = convertToString
+        }
     }
 }

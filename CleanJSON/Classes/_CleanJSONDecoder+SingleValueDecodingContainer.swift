@@ -22,8 +22,15 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     public func decode(_ type: Bool.Type) throws -> Bool {
         try expectNonNull(Bool.self)
         
-        guard let value = try self.unbox(self.storage.topContainer, as: Bool.self) else {
-            return try options.typeConvertionStrategy.convertToBool(self)
+        guard let value = try self.unbox(storage.topContainer, as: Bool.self) else {
+            switch options.valueNotFoundDecodingStrategy {
+            case .throw:
+                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+            case .useDefaultValue:
+                return false
+            case .custom(let convertor):
+                return try convertor.convertToBool(self)
+            }
         }
         
         return value
@@ -33,7 +40,14 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
         try expectNonNull(Int.self)
         
         guard let value = try self.unbox(self.storage.topContainer, as: Int.self) else {
-            return try options.typeConvertionStrategy.convertToInt(self)
+            switch options.valueNotFoundDecodingStrategy {
+            case .throw:
+                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+            case .useDefaultValue:
+                return 0
+            case .custom(let convertor):
+                return try convertor.convertToInt(self)
+            }
         }
         
         return value
@@ -63,7 +77,14 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
         try expectNonNull(UInt.self)
         
         guard let value = try self.unbox(self.storage.topContainer, as: UInt.self) else {
-            return try options.typeConvertionStrategy.convertToUInt(self)
+            switch options.valueNotFoundDecodingStrategy {
+            case .throw:
+                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+            case .useDefaultValue:
+                return 0
+            case .custom(let convertor):
+                return try convertor.convertToUInt(self)
+            }
         }
     
         return value
@@ -93,7 +114,14 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
         try expectNonNull(Float.self)
         
         guard let value = try self.unbox(self.storage.topContainer, as: Float.self) else {
-            return try options.typeConvertionStrategy.convertToFloat(self)
+            switch options.valueNotFoundDecodingStrategy {
+            case .throw:
+                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+            case .useDefaultValue:
+                return 0
+            case .custom(let convertor):
+                return try convertor.convertToFloat(self)
+            }
         }
         
         return value
@@ -103,7 +131,14 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
         try expectNonNull(Double.self)
         
         guard let value = try self.unbox(self.storage.topContainer, as: Double.self) else {
-            return try options.typeConvertionStrategy.convertToDouble(self)
+            switch options.valueNotFoundDecodingStrategy {
+            case .throw:
+                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+            case .useDefaultValue:
+                return 0
+            case .custom(let convertor):
+                return try convertor.convertToDouble(self)
+            }
         }
         
         return value
@@ -113,7 +148,14 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
         try expectNonNull(String.self)
         
         guard let value = try self.unbox(self.storage.topContainer, as: String.self) else {
-            return try options.typeConvertionStrategy.convertToString(self)
+            switch options.valueNotFoundDecodingStrategy {
+            case .throw:
+                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+            case .useDefaultValue:
+                return ""
+            case .custom(let convertor):
+                return try convertor.convertToString(self)
+            }
         }
         
         return value

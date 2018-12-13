@@ -16,7 +16,9 @@ open class CleanJSONDecoder: JSONDecoder {
         let dataDecodingStrategy: DataDecodingStrategy
         let nonConformingFloatDecodingStrategy: NonConformingFloatDecodingStrategy
         let keyDecodingStrategy: KeyDecodingStrategy
-        let typeConvertionStrategy: TypeConvertionStrategy
+        let keyNotFoundDecodingStrategy: KeyNotFoundDecodingStrategy
+        let valueNotFoundDecodingStrategy: ValueNotFoundDecodingStrategy
+        let nestedContainerDecodingStrategy: NestedContainerDecodingStrategy
         let userInfo: [CodingUserInfoKey : Any]
     }
     
@@ -26,12 +28,20 @@ open class CleanJSONDecoder: JSONDecoder {
                         dataDecodingStrategy: dataDecodingStrategy,
                         nonConformingFloatDecodingStrategy: nonConformingFloatDecodingStrategy,
                         keyDecodingStrategy: keyDecodingStrategy,
-                        typeConvertionStrategy: typeConvertionStrategy,
+                        keyNotFoundDecodingStrategy: keyNotFoundDecodingStrategy,
+                        valueNotFoundDecodingStrategy: valueNotFoundDecodingStrategy,
+                        nestedContainerDecodingStrategy: nestedContainerDecodingStrategy,
                         userInfo: userInfo)
     }
     
-    /// The strategy to use for type convertion.
-    open var typeConvertionStrategy: TypeConvertionStrategy = .init()
+    /// The strategy to use for decoding when key not found. Defaults to `.useDefaultValue`.
+    open var keyNotFoundDecodingStrategy: KeyNotFoundDecodingStrategy = .useDefaultValue
+    
+    /// The strategy to use for decoding when value not found. Defaults to `.custom`.
+    open var valueNotFoundDecodingStrategy: ValueNotFoundDecodingStrategy = .custom(.init())
+    
+    /// The strategy to use for decoding nested container.
+    open var nestedContainerDecodingStrategy: NestedContainerDecodingStrategy = .init()
     
     // MARK: - Decoding Values
     
