@@ -58,34 +58,68 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     
     public mutating func decode(_ type: Bool.Type) throws -> Bool {
         guard !self.isAtEnd else {
-            return false
+            return try decode(isAtEnd: true)
         }
         
         self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: Bool.self) else {
-            return false
+            return try decode()
         }
         
         self.currentIndex += 1
         return decoded
     }
     
+    private mutating func decode(isAtEnd: Bool = false) throws -> Bool {
+        switch decoder.options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Unkeyed.valueNotFound(
+                Bool.self,
+                codingPath: decoder.codingPath,
+                currentIndex: currentIndex,
+                isAtEnd: isAtEnd)
+        case .useDefaultValue:
+            self.currentIndex += 1
+            return false
+        case .custom(let adaptor):
+            self.currentIndex += 1
+            return try adaptor.decodeBool(decoder)
+        }
+    }
+    
     public mutating func decode(_ type: Int.Type) throws -> Int {
         guard !self.isAtEnd else {
-            return 0
+            return try decode(isAtEnd: true)
         }
         
         self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: Int.self) else {
-            return 0
+            return try decode()
         }
         
         self.currentIndex += 1
         return decoded
+    }
+    
+    private mutating func decode(isAtEnd: Bool = false) throws -> Int {
+        switch decoder.options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Unkeyed.valueNotFound(
+                Int.self,
+                codingPath: decoder.codingPath,
+                currentIndex: currentIndex,
+                isAtEnd: isAtEnd)
+        case .useDefaultValue:
+            self.currentIndex += 1
+            return 0
+        case .custom(let adaptor):
+            self.currentIndex += 1
+            return try adaptor.decodeInt(decoder)
+        }
     }
     
     public mutating func decode(_ type: Int8.Type) throws -> Int8 {
@@ -154,18 +188,35 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     
     public mutating func decode(_ type: UInt.Type) throws -> UInt {
         guard !self.isAtEnd else {
-            return 0
+            return try decode(isAtEnd: true)
         }
         
         self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: UInt.self) else {
-            return 0
+            return try decode()
         }
         
         self.currentIndex += 1
         return decoded
+    }
+    
+    private mutating func decode(isAtEnd: Bool = false) throws -> UInt {
+        switch decoder.options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Unkeyed.valueNotFound(
+                UInt.self,
+                codingPath: decoder.codingPath,
+                currentIndex: currentIndex,
+                isAtEnd: isAtEnd)
+        case .useDefaultValue:
+            self.currentIndex += 1
+            return 0
+        case .custom(let adaptor):
+            self.currentIndex += 1
+            return try adaptor.decodeUInt(decoder)
+        }
     }
     
     public mutating func decode(_ type: UInt8.Type) throws -> UInt8 {
@@ -234,34 +285,68 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     
     public mutating func decode(_ type: Float.Type) throws -> Float {
         guard !self.isAtEnd else {
-            return 0
+            return try decode(isAtEnd: true)
         }
         
         self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: Float.self) else {
-            return 0
+            return try decode()
         }
         
         self.currentIndex += 1
         return decoded
     }
     
+    private mutating func decode(isAtEnd: Bool = false) throws -> Float {
+        switch decoder.options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Unkeyed.valueNotFound(
+                Float.self,
+                codingPath: decoder.codingPath,
+                currentIndex: currentIndex,
+                isAtEnd: isAtEnd)
+        case .useDefaultValue:
+            self.currentIndex += 1
+            return 0
+        case .custom(let adaptor):
+            self.currentIndex += 1
+            return try adaptor.decodeFloat(decoder)
+        }
+    }
+    
     public mutating func decode(_ type: Double.Type) throws -> Double {
         guard !self.isAtEnd else {
-            return 0
+            return try decode(isAtEnd: true)
         }
         
         self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: Double.self) else {
-            return 0
+            return try decode()
         }
         
         self.currentIndex += 1
         return decoded
+    }
+    
+    private mutating func decode(isAtEnd: Bool = false) throws -> Double {
+        switch decoder.options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Unkeyed.valueNotFound(
+                Double.self,
+                codingPath: decoder.codingPath,
+                currentIndex: currentIndex,
+                isAtEnd: isAtEnd)
+        case .useDefaultValue:
+            self.currentIndex += 1
+            return 0
+        case .custom(let adaptor):
+            self.currentIndex += 1
+            return try adaptor.decodeDouble(decoder)
+        }
     }
     
     public mutating func decode(_ type: String.Type) throws -> String {
@@ -278,6 +363,23 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         
         self.currentIndex += 1
         return decoded
+    }
+    
+    private mutating func decode(isAtEnd: Bool = false) throws -> String {
+        switch decoder.options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Unkeyed.valueNotFound(
+                String.self,
+                codingPath: decoder.codingPath,
+                currentIndex: currentIndex,
+                isAtEnd: isAtEnd)
+        case .useDefaultValue:
+            self.currentIndex += 1
+            return ""
+        case .custom(let adaptor):
+            self.currentIndex += 1
+            return try adaptor.decodeString(decoder)
+        }
     }
     
     public mutating func decode<T : Decodable>(_ type: T.Type) throws -> T {

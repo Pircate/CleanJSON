@@ -8,7 +8,7 @@
 
 import Foundation
 
-class _CleanJSONDecoder: Decoder {
+class _CleanJSONDecoder: CleanDecoder {
     
     /// The decoder's storage.
     var storage: _CleanJSONDecodingStorage

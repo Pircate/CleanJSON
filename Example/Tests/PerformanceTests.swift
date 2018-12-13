@@ -16,9 +16,17 @@ public struct Performance<T: Codable>: Codable {
     let coordinates: [Double]
     
     public struct Runway: Codable {
-        let direction: String
+        enum Surface: String, Codable, CaseDefaultable {
+            case rigid, flexible, gravel, sealed, unpaved, other
+            
+            static var defaultCase: Performance<T>.Runway.Surface {
+                return .flexible
+            }
+        }
+        
+        let direction: T
         let distance: Int
-        let surface: T
+        let surface: Surface
     }
     
     let runways: [Runway]

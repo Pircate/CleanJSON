@@ -6,13 +6,15 @@
 //  Copyright © 2018 Pircate. All rights reserved.
 //
 
+public typealias AdaptorType<T> = (CleanDecoder) throws -> T
+
 extension CleanJSONDecoder {
     
     public struct Adaptor {
         
-        public var decodeBool: (CleanDecoder) throws -> Bool = { _ in false }
+        public var decodeBool: AdaptorType<Bool> = { _ in false }
         
-        public var decodeInt: (CleanDecoder) throws -> Int = { decoder in
+        public var decodeInt: AdaptorType<Int> = { decoder in
             guard !decoder.decodeNull() else {
                 return 0
             }
@@ -24,7 +26,7 @@ extension CleanJSONDecoder {
             return Int(stringValue) ?? 0
         }
         
-        public var decodeUInt: (CleanDecoder) throws -> UInt = { decoder in
+        public var decodeUInt: AdaptorType<UInt> = { decoder in
             guard !decoder.decodeNull() else {
                 return 0
             }
@@ -36,7 +38,7 @@ extension CleanJSONDecoder {
             return UInt(stringValue) ?? 0
         }
         
-        public var decodeFloat: (CleanDecoder) throws -> Float = { decoder in
+        public var decodeFloat: AdaptorType<Float> = { decoder in
             guard !decoder.decodeNull() else {
                 return 0
             }
@@ -48,7 +50,7 @@ extension CleanJSONDecoder {
             return Float(stringValue) ?? 0
         }
         
-        public var decodeDouble: (CleanDecoder) throws -> Double = { decoder in
+        public var decodeDouble: AdaptorType<Double> = { decoder in
             guard !decoder.decodeNull() else {
                 return 0
             }
@@ -60,7 +62,7 @@ extension CleanJSONDecoder {
             return Double(stringValue) ?? 0
         }
         
-        public var decodeString: (CleanDecoder) throws -> String = { decoder in
+        public var decodeString: AdaptorType<String> = { decoder in
             guard !decoder.decodeNull() else {
                 return ""
             }
@@ -77,19 +79,5 @@ extension CleanJSONDecoder {
         }
         
         public init() {}
-        
-        public init(decodeBool: @escaping (CleanDecoder) -> Bool,
-                    decodeInt: @escaping (CleanDecoder) -> Int,
-                    decodeUInt: @escaping (CleanDecoder) -> UInt,
-                    decodeFloat: @escaping (CleanDecoder) -> Float,
-                    decodeDouble: @escaping (CleanDecoder) -> Double,
-                    decodeString: @escaping (CleanDecoder) -> String) {
-            self.decodeBool = decodeBool
-            self.decodeInt = decodeInt
-            self.decodeUInt = decodeUInt
-            self.decodeFloat = decodeFloat
-            self.decodeDouble = decodeDouble
-            self.decodeString = decodeString
-        }
     }
 }

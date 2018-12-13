@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol CleanDecoder {
+public protocol CleanDecoder: Decoder {
     
     func decodeNull() -> Bool
     
@@ -47,7 +47,8 @@ public protocol CleanDecoder {
     func decode(_ type: Decimal.Type) throws -> Decimal?
 }
 
-extension _CleanJSONDecoder: CleanDecoder {
+// MARK: CleanDecoder Methods
+extension _CleanJSONDecoder {
     
     func decodeNull() -> Bool {
         return storage.topContainer is NSNull
