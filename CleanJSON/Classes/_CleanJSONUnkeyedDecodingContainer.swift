@@ -82,7 +82,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                 isAtEnd: isAtEnd)
         case .useDefaultValue:
             self.currentIndex += 1
-            return false
+            return Bool.defaultValue
         case .custom(let adaptor):
             self.currentIndex += 1
             return try adaptor.decodeBool(decoder)
@@ -115,7 +115,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                 isAtEnd: isAtEnd)
         case .useDefaultValue:
             self.currentIndex += 1
-            return 0
+            return Int.defaultValue
         case .custom(let adaptor):
             self.currentIndex += 1
             return try adaptor.decodeInt(decoder)
@@ -212,7 +212,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                 isAtEnd: isAtEnd)
         case .useDefaultValue:
             self.currentIndex += 1
-            return 0
+            return UInt.defaultValue
         case .custom(let adaptor):
             self.currentIndex += 1
             return try adaptor.decodeUInt(decoder)
@@ -309,7 +309,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                 isAtEnd: isAtEnd)
         case .useDefaultValue:
             self.currentIndex += 1
-            return 0
+            return Float.defaultValue
         case .custom(let adaptor):
             self.currentIndex += 1
             return try adaptor.decodeFloat(decoder)
@@ -342,7 +342,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                 isAtEnd: isAtEnd)
         case .useDefaultValue:
             self.currentIndex += 1
-            return 0
+            return Double.defaultValue
         case .custom(let adaptor):
             self.currentIndex += 1
             return try adaptor.decodeDouble(decoder)
@@ -351,14 +351,14 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     
     public mutating func decode(_ type: String.Type) throws -> String {
         guard !self.isAtEnd else {
-            return ""
+            return try decode(isAtEnd: true)
         }
         
         self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: String.self) else {
-            return ""
+            return try decode()
         }
         
         self.currentIndex += 1
@@ -375,7 +375,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                 isAtEnd: isAtEnd)
         case .useDefaultValue:
             self.currentIndex += 1
-            return ""
+            return String.defaultValue
         case .custom(let adaptor):
             self.currentIndex += 1
             return try adaptor.decodeString(decoder)

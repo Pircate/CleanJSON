@@ -12,59 +12,59 @@ extension CleanJSONDecoder {
     
     public struct Adaptor {
         
-        public var decodeBool: AdaptorType<Bool> = { _ in false }
+        public var decodeBool: AdaptorType<Bool> = { _ in Bool.defaultValue }
         
         public var decodeInt: AdaptorType<Int> = { decoder in
             guard !decoder.decodeNull() else {
-                return 0
+                return Int.defaultValue
             }
             
             guard let stringValue = try decoder.decode(String.self) else {
-                return 0
+                return Int.defaultValue
             }
             
-            return Int(stringValue) ?? 0
+            return Int(stringValue) ?? Int.defaultValue
         }
         
         public var decodeUInt: AdaptorType<UInt> = { decoder in
             guard !decoder.decodeNull() else {
-                return 0
+                return UInt.defaultValue
             }
             
             guard let stringValue = try decoder.decode(String.self) else {
-                return 0
+                return UInt.defaultValue
             }
             
-            return UInt(stringValue) ?? 0
+            return UInt(stringValue) ?? UInt.defaultValue
         }
         
         public var decodeFloat: AdaptorType<Float> = { decoder in
             guard !decoder.decodeNull() else {
-                return 0
+                return Float.defaultValue
             }
             
             guard let stringValue = try decoder.decode(String.self) else {
-                return 0
+                return Float.defaultValue
             }
             
-            return Float(stringValue) ?? 0
+            return Float(stringValue) ?? Float.defaultValue
         }
         
         public var decodeDouble: AdaptorType<Double> = { decoder in
             guard !decoder.decodeNull() else {
-                return 0
+                return Double.defaultValue
             }
             
             guard let stringValue = try decoder.decode(String.self) else {
-                return 0
+                return Double.defaultValue
             }
             
-            return Double(stringValue) ?? 0
+            return Double(stringValue) ?? Double.defaultValue
         }
         
         public var decodeString: AdaptorType<String> = { decoder in
             guard !decoder.decodeNull() else {
-                return ""
+                return String.defaultValue
             }
             
             if let intValue = try decoder.decode(Int.self) {
@@ -75,7 +75,7 @@ extension CleanJSONDecoder {
                 return String(boolValue)
             }
             
-            return ""
+            return String.defaultValue
         }
         
         public init() {}
