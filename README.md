@@ -19,8 +19,8 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
-* iOS 9.0+
-* Swift 4
+* iOS 9.0
+* Swift 4.2
 
 ## Installation
 
@@ -69,7 +69,7 @@ enum Enum: Int, Codable, CaseDefaultable {
 }
 ```
 
-### Custom type convertion
+### Customize decoding strategy
 
 可以通过 valueNotFoundDecodingStrategy 在值为 null 或类型不匹配的时候自定义解码，默认策略请看[这里](https://github.com/Pircate/CleanJSON/blob/master/CleanJSON/Classes/Adaptor.swift)
 
@@ -83,8 +83,8 @@ adaptor.decodeBool = { decoder in
         return false
     }
     
-    if let intValue = try decoder.decode(Int.self) {
-        // 类型不匹配
+    if let intValue = try decoder.decodeIfPresent(Int.self) {
+        // 类型不匹配，期望 Bool 类型，实际是 Int 类型
         return intValue != 0
     }
     
