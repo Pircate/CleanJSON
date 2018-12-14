@@ -19,7 +19,7 @@ extension CleanJSONDecoder {
                 return Int.defaultValue
             }
             
-            guard let stringValue = try decoder.decode(String.self) else {
+            guard let stringValue = try decoder.decodeIfPresent(String.self) else {
                 return Int.defaultValue
             }
             
@@ -31,7 +31,7 @@ extension CleanJSONDecoder {
                 return UInt.defaultValue
             }
             
-            guard let stringValue = try decoder.decode(String.self) else {
+            guard let stringValue = try decoder.decodeIfPresent(String.self) else {
                 return UInt.defaultValue
             }
             
@@ -43,7 +43,7 @@ extension CleanJSONDecoder {
                 return Float.defaultValue
             }
             
-            guard let stringValue = try decoder.decode(String.self) else {
+            guard let stringValue = try decoder.decodeIfPresent(String.self) else {
                 return Float.defaultValue
             }
             
@@ -55,7 +55,7 @@ extension CleanJSONDecoder {
                 return Double.defaultValue
             }
             
-            guard let stringValue = try decoder.decode(String.self) else {
+            guard let stringValue = try decoder.decodeIfPresent(String.self) else {
                 return Double.defaultValue
             }
             
@@ -67,11 +67,11 @@ extension CleanJSONDecoder {
                 return String.defaultValue
             }
             
-            if let intValue = try decoder.decode(Int.self) {
+            if let intValue = try decoder.decodeIfPresent(Int.self) {
                 return String(intValue)
-            } else if let doubleValue = try decoder.decode(Double.self) {
+            } else if let doubleValue = try decoder.decodeIfPresent(Double.self) {
                 return String(doubleValue)
-            } else if let boolValue = try decoder.decode(Bool.self) {
+            } else if let boolValue = try decoder.decodeIfPresent(Bool.self) {
                 return String(boolValue)
             }
             

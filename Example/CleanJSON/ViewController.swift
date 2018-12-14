@@ -67,7 +67,7 @@ class ViewController: UIViewController {
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             var adaptor = CleanJSONDecoder.Adaptor()
             adaptor.decodeBool = { decoder in
-                if let intValue = try decoder.decode(Int.self) {
+                if let intValue = try decoder.decodeIfPresent(Int.self) {
                     return intValue != 0
                 }
                 return false

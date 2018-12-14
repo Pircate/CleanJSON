@@ -178,17 +178,17 @@ class CleanJSONTests: XCTestCase {
             let decoder = CleanJSONDecoder()
             var adaptor = CleanJSONDecoder.Adaptor()
             adaptor.decodeString = { decoder in
-                if let intValue = try decoder.decode(Int.self) {
+                if let intValue = try decoder.decodeIfPresent(Int.self) {
                     return "$" + String(intValue)
-                } else if let doubleValue = try decoder.decode(Double.self) {
+                } else if let doubleValue = try decoder.decodeIfPresent(Double.self) {
                     return String(format: "%.f", doubleValue)
-                } else if let boolValue = try decoder.decode(Bool.self) {
+                } else if let boolValue = try decoder.decodeIfPresent(Bool.self) {
                     return String(boolValue).uppercased()
                 }
                 return ""
             }
             adaptor.decodeInt = { decoder in
-                if let stringValue = try decoder.decode(String.self) {
+                if let stringValue = try decoder.decodeIfPresent(String.self) {
                     let formatter = NumberFormatter()
                     formatter.generatesDecimalNumbers = true
                     formatter.numberStyle = .decimal
@@ -197,7 +197,7 @@ class CleanJSONTests: XCTestCase {
                 return 0
             }
             adaptor.decodeDouble = { decoder in
-                if let stringValue = try decoder.decode(String.self) {
+                if let stringValue = try decoder.decodeIfPresent(String.self) {
                     return Double(stringValue)?.advanced(by: 1) ?? 0
                 }
                 return 0
