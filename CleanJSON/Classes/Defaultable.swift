@@ -22,8 +22,56 @@ extension Int: Defaultable {
     }
 }
 
+extension Int8: Defaultable {
+    static var defaultValue: Int8 {
+        return 0
+    }
+}
+
+extension Int16: Defaultable {
+    static var defaultValue: Int16 {
+        return 0
+    }
+}
+
+extension Int32: Defaultable {
+    static var defaultValue: Int32 {
+        return 0
+    }
+}
+
+extension Int64: Defaultable {
+    static var defaultValue: Int64 {
+        return 0
+    }
+}
+
 extension UInt: Defaultable {
     static var defaultValue: UInt {
+        return 0
+    }
+}
+
+extension UInt8: Defaultable {
+    static var defaultValue: UInt8 {
+        return 0
+    }
+}
+
+extension UInt16: Defaultable {
+    static var defaultValue: UInt16 {
+        return 0
+    }
+}
+
+extension UInt32: Defaultable {
+    static var defaultValue: UInt32 {
+        return 0
+    }
+}
+
+extension UInt64: Defaultable {
+    static var defaultValue: UInt64 {
         return 0
     }
 }

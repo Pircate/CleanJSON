@@ -140,14 +140,14 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     
     public func decode(_ type: Int8.Type, forKey key: Key) throws -> Int8 {
         guard let entry = self.container[key.stringValue] else {
-            return 0
+            return Int8.defaultValue
         }
         
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
         guard let value = try self.decoder.unbox(entry, as: Int8.self) else {
-            return 0
+            return Int8.defaultValue
         }
         
         return value
@@ -155,14 +155,14 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     
     public func decode(_ type: Int16.Type, forKey key: Key) throws -> Int16 {
         guard let entry = self.container[key.stringValue] else {
-            return 0
+            return Int16.defaultValue
         }
         
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
         guard let value = try self.decoder.unbox(entry, as: Int16.self) else {
-            return 0
+            return Int16.defaultValue
         }
         
         return value
@@ -170,14 +170,14 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     
     public func decode(_ type: Int32.Type, forKey key: Key) throws -> Int32 {
         guard let entry = self.container[key.stringValue] else {
-            return 0
+            return Int32.defaultValue
         }
         
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
         guard let value = try self.decoder.unbox(entry, as: Int32.self) else {
-            return 0
+            return Int32.defaultValue
         }
         
         return value
@@ -185,14 +185,14 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     
     public func decode(_ type: Int64.Type, forKey key: Key) throws -> Int64 {
         guard let entry = self.container[key.stringValue] else {
-            return 0
+            return Int64.defaultValue
         }
         
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
         guard let value = try self.decoder.unbox(entry, as: Int64.self) else {
-            return 0
+            return Int64.defaultValue
         }
         
         return value
@@ -229,14 +229,14 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     
     public func decode(_ type: UInt8.Type, forKey key: Key) throws -> UInt8 {
         guard let entry = self.container[key.stringValue] else {
-            return 0
+            return UInt8.defaultValue
         }
         
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
         guard let value = try self.decoder.unbox(entry, as: UInt8.self) else {
-            return 0
+            return UInt8.defaultValue
         }
         
         return value
@@ -244,14 +244,14 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     
     public func decode(_ type: UInt16.Type, forKey key: Key) throws -> UInt16 {
         guard let entry = self.container[key.stringValue] else {
-            return 0
+            return UInt16.defaultValue
         }
         
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
         guard let value = try self.decoder.unbox(entry, as: UInt16.self) else {
-            return 0
+            return UInt16.defaultValue
         }
         
         return value
@@ -259,14 +259,14 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     
     public func decode(_ type: UInt32.Type, forKey key: Key) throws -> UInt32 {
         guard let entry = self.container[key.stringValue] else {
-            return 0
+            return UInt32.defaultValue
         }
         
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
         guard let value = try self.decoder.unbox(entry, as: UInt32.self) else {
-            return 0
+            return UInt32.defaultValue
         }
         
         return value
@@ -274,14 +274,14 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     
     public func decode(_ type: UInt64.Type, forKey key: Key) throws -> UInt64 {
         guard let entry = self.container[key.stringValue] else {
-            return 0
+            return UInt64.defaultValue
         }
         
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
         guard let value = try self.decoder.unbox(entry, as: UInt64.self) else {
-            return 0
+            return UInt64.defaultValue
         }
         
         return value
@@ -501,9 +501,9 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     }
 }
 
-extension CleanJSONDecoder.KeyDecodingStrategy {
+private extension CleanJSONDecoder.KeyDecodingStrategy {
     
-    fileprivate static func _convertFromSnakeCase(_ stringKey: String) -> String {
+    static func _convertFromSnakeCase(_ stringKey: String) -> String {
         guard !stringKey.isEmpty else { return stringKey }
         
         // Find the first non-underscore character
