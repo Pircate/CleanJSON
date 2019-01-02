@@ -20,7 +20,7 @@ public extension CaseDefaultable where Self: Decodable, Self.RawValue: Decodable
             return
         }
         
-        guard !_decoder.decodeNull() else {
+        guard !_decoder.decodeNull(), !_decoder.codingPath.isEmpty else {
             self = Self.defaultCase
             return
         }

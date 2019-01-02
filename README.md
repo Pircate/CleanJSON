@@ -47,8 +47,6 @@ import CleanJSON
 
 ## Usage
 
-### Normal
-
 ```swift
 let decoder = CleanJSONDecoder()
 try decoder.decode(Model.self, from: data)

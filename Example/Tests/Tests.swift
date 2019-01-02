@@ -14,6 +14,7 @@ struct KeyNotFound: Codable {
     let double: Double
     let array: [String]
     let object: Nested
+    let `enum`: Enum
 }
 
 struct TypeMismatch: Codable {
@@ -129,6 +130,7 @@ class CleanJSONTests: XCTestCase {
             XCTAssertEqual(object.double, 0)
             XCTAssertEqual(object.array, [])
             XCTAssertEqual(object.object.string, "")
+            XCTAssertEqual(object.enum, Enum.defaultCase)
         } catch {
             XCTAssertNil(error)
         }
@@ -268,6 +270,15 @@ class CleanJSONTests: XCTestCase {
         do {
             let object = try CleanJSONDecoder().decode(EnumStruct.self, from: data)
             XCTAssertEqual(object.enum, Enum.defaultCase)
+        } catch {
+            XCTAssertNil(error)
+        }
+    }
+    
+    func testToJSON() {
+        let object = KeyNotFound(string: "string", boolean: true, int: -10, uint: 10, float: 3.14, double: 3.141592654, array: ["1", "2", "3"], object: Nested(string: "string"), enum: .case3)
+        do {
+            _ = try object.toJSONString()
         } catch {
             XCTAssertNil(error)
         }
