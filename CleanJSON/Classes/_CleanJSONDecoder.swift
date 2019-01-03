@@ -37,13 +37,61 @@ class _CleanJSONDecoder: CleanDecoder {
     // MARK: - Decoder Methods
     
     public func container<Key>(keyedBy type: Key.Type) throws -> KeyedDecodingContainer<Key> {
-        let topContainer = self.storage.topContainer as? [String : Any] ?? [:]
+        guard !(self.storage.topContainer is NSNull) else {
+            switch options.nestedContainerDecodingStrategy.valueNotFound {
+            case .throw:
+                throw DecodingError.Nested.valueNotFound(
+                    KeyedDecodingContainer<Key>.self,
+                    codingPath: codingPath,
+                    debugDescription: "Cannot get keyed decoding container -- found null value instead.")
+            default:
+                let container = _CleanJSONKeyedDecodingContainer<Key>(referencing: self, wrapping: [:])
+                return KeyedDecodingContainer(container)
+            }
+        }
+        
+        guard let topContainer = self.storage.topContainer as? [String : Any] else {
+            switch options.nestedContainerDecodingStrategy.typeMismatch {
+            case .throw:
+                throw DecodingError._typeMismatch(
+                    at: codingPath,
+                    expectation: [String : Any].self,
+                    reality: storage.topContainer)
+            default:
+                let container = _CleanJSONKeyedDecodingContainer<Key>(referencing: self, wrapping: [:])
+                return KeyedDecodingContainer(container)
+            }
+        }
+        
         let container = _CleanJSONKeyedDecodingContainer<Key>(referencing: self, wrapping: topContainer)
         return KeyedDecodingContainer(container)
     }
     
     public func unkeyedContainer() throws -> UnkeyedDecodingContainer {
-        let topContainer = self.storage.topContainer as? [Any] ?? []
+        guard !(self.storage.topContainer is NSNull) else {
+            switch options.nestedContainerDecodingStrategy.valueNotFound {
+            case .throw:
+                throw DecodingError.Nested.valueNotFound(
+                    UnkeyedDecodingContainer.self,
+                    codingPath: codingPath,
+                    debugDescription: "Cannot get unkeyed decoding container -- found null value instead.")
+            default:
+                return _CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
+            }
+        }
+        
+        guard let topContainer = self.storage.topContainer as? [Any] else {
+            switch options.nestedContainerDecodingStrategy.typeMismatch {
+            case .throw:
+                throw DecodingError._typeMismatch(
+                    at: codingPath,
+                    expectation: [Any].self,
+                    reality: storage.topContainer)
+            default:
+                return _CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
+            }
+        }
+        
         return _CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: topContainer)
     }
     

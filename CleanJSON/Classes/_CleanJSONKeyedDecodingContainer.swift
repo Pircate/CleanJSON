@@ -55,23 +55,6 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
         return self.container[key.stringValue] != nil
     }
     
-    private func _errorDescription(of key: CodingKey) -> String {
-//        switch decoder.options.keyDecodingStrategy {
-//        case .convertFromSnakeCase:
-//            // In this case we can attempt to recover the original value by reversing the transform
-//            let original = key.stringValue
-//            let converted = JSONEncoder.KeyEncodingStrategy._convertToSnakeCase(original)
-//            if converted == original {
-//                return "\(key) (\"\(original)\")"
-//            } else {
-//                return "\(key) (\"\(original)\"), converted to \(converted)"
-//            }
-//        default:
-            // Otherwise, just report the converted string
-            return "\(key) (\"\(key.stringValue)\")"
-//        }
-    }
-    
     public func decodeNil(forKey key: Key) throws -> Bool {
         guard let entry = self.container[key.stringValue] else {
             throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
