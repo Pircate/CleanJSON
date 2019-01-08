@@ -51,6 +51,9 @@ struct Optional: Codable {
 
 struct EnumStruct: Codable {
     let `enum`: Enum
+    let enum1: Enum
+    let enum2: Enum
+    let enum3: Enum
 }
 
 enum Enum: Int, CaseDefaultable, Codable {
@@ -261,15 +264,21 @@ class CleanJSONTests: XCTestCase {
         }
     }
     
-    func testEnumDefaultCase() {
+    func testDecodeEnum() {
         let data = """
                     {
                       "enum": 3,
+                      "enum1": false,
+                      "enum2": 0,
+                      "enum3": 2.0
                     }
                 """.data(using: .utf8)!
         do {
             let object = try CleanJSONDecoder().decode(EnumStruct.self, from: data)
             XCTAssertEqual(object.enum, Enum.defaultCase)
+            XCTAssertEqual(object.enum1, Enum.defaultCase)
+            XCTAssertEqual(object.enum2, .case1)
+            XCTAssertEqual(object.enum3, .case3)
         } catch {
             XCTAssertNil(error)
         }
