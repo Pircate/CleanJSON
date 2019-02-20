@@ -10,7 +10,7 @@
 继承自 JSONDecoder，在标准库源码基础上做了改动，以解决 JSONDecoder 各种解析失败的问题，如键值不存在，值为 null，类型不一致。
 
 ```
-属性可以全部使用不可选类型
+只需将 JSONDecoder 替换成 CleanJSONDecoder，可以全部使用不可选类型。
 ```
 
 ## Example
