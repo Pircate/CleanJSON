@@ -77,12 +77,11 @@ enum Enum: Int, Codable, CaseDefaultable {
 
 可以通过 `valueNotFoundDecodingStrategy` 在值为 null 或类型不匹配的时候自定义解码，默认策略请看[这里](https://github.com/Pircate/CleanJSON/blob/master/CleanJSON/Classes/Adapter.swift)
 
-下面代码设定在解析的时候将 JSON 的 Int 类型转换为 swift 的 Bool 类型
+由于 Swift 布尔类型不是非 0 即 true，所以默认没有提供类型转换。如果想实现 Int 转 Bool 可以自定义解码。
 
 ```swift
 var adapter = CleanJSONDecoder.Adapter()
-// 由于 Swift 布尔类型不是非 0 即 true，所以默认没有提供类型转换。
-// 如果想实现 Int 转 Bool 可以自定义解码。
+
 adapter.decodeBool = { decoder in
     // 值为 null
     if decoder.decodeNull() {
@@ -96,6 +95,7 @@ adapter.decodeBool = { decoder in
     
     return false
 }
+
 decoder.valueNotFoundDecodingStrategy = .custom(adapter)
 ```
 
