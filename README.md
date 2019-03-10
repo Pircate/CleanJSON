@@ -10,7 +10,7 @@
 继承自 JSONDecoder，在标准库源码基础上做了改动，以解决 JSONDecoder 各种解析失败的问题，如键值不存在，值为 null，类型不一致。
 
 ```
-只需将 JSONDecoder 替换成 CleanJSONDecoder，可以全部使用不可选类型。
+只需将 JSONDecoder 替换成 CleanJSONDecoder，属性可以全部使用不可选类型。
 ```
 
 ## Example
@@ -47,12 +47,18 @@ import CleanJSON
 
 ## Usage
 
+### Normal
+
 ```swift
 let decoder = CleanJSONDecoder()
 try decoder.decode(Model.self, from: data)
 ```
 
+### Enum
+
 对于不可选的枚举类型请遵循 `CaseDefaultable` 协议，如果解析失败会返回默认 case
+
+Note: 枚举使用强类型解析，关联类型和数据类型不一致不会进行类型转换，会解析为默认 case
 
 ```swift
 enum Enum: Int, Codable, CaseDefaultable {
@@ -74,8 +80,10 @@ enum Enum: Int, Codable, CaseDefaultable {
 下面代码设定在解析的时候将 JSON 的 Int 类型转换为 swift 的 Bool 类型
 
 ```swift
-var adaptor = CleanJSONDecoder.Adaptor()
-adaptor.decodeBool = { decoder in
+var adapter = CleanJSONDecoder.Adapter()
+// 由于 Swift 布尔类型不是非 0 即 true，所以默认没有提供类型转换。
+// 如果想实现 Int 转 Bool 可以自定义解码。
+adapter.decodeBool = { decoder in
     // 值为 null
     if decoder.decodeNull() {
         return false
@@ -88,7 +96,7 @@ adaptor.decodeBool = { decoder in
     
     return false
 }
-decoder.valueNotFoundDecodingStrategy = .custom(adaptor)
+decoder.valueNotFoundDecodingStrategy = .custom(adapter)
 ```
 
 ### For Moya
@@ -115,6 +123,7 @@ provider.request(.zen) { result in
 
 ```swift
 provider = MoyaProvider<GitHub>()
+
 let decoder = CleanJSONDecoder()
 provider.rx.request(.userProfile("ashfurrow"))
     .map(Model.self, using: decoder)
