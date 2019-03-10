@@ -181,7 +181,7 @@ class CleanJSONTests: XCTestCase {
         
         do {
             let decoder = CleanJSONDecoder()
-            var adaptor = CleanJSONDecoder.Adaptor()
+            var adaptor = CleanJSONDecoder.Adapter()
             adaptor.decodeString = { decoder in
                 if let intValue = try decoder.decodeIfPresent(Int.self) {
                     return "$" + String(intValue)

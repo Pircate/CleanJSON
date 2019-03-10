@@ -38,7 +38,7 @@ extension _CleanJSONDecoder {
         guard let number = value as? NSNumber,
             number !== kCFBooleanTrue,
             number !== kCFBooleanFalse else {
-            return nil
+                return nil
         }
         
         let int = number.intValue
@@ -55,7 +55,7 @@ extension _CleanJSONDecoder {
         guard let number = value as? NSNumber,
             number !== kCFBooleanTrue,
             number !== kCFBooleanFalse else {
-            return nil
+                return nil
         }
         
         let int8 = number.int8Value
@@ -72,7 +72,7 @@ extension _CleanJSONDecoder {
         guard let number = value as? NSNumber,
             number !== kCFBooleanTrue,
             number !== kCFBooleanFalse else {
-            return nil
+                return nil
         }
         
         let int16 = number.int16Value
@@ -89,7 +89,7 @@ extension _CleanJSONDecoder {
         guard let number = value as? NSNumber,
             number !== kCFBooleanTrue,
             number !== kCFBooleanFalse else {
-            return nil
+                return nil
         }
         
         let int32 = number.int32Value
@@ -106,7 +106,7 @@ extension _CleanJSONDecoder {
         guard let number = value as? NSNumber,
             number !== kCFBooleanTrue,
             number !== kCFBooleanFalse else {
-            return nil
+                return nil
         }
         
         let int64 = number.int64Value
@@ -123,7 +123,7 @@ extension _CleanJSONDecoder {
         guard let number = value as? NSNumber,
             number !== kCFBooleanTrue,
             number !== kCFBooleanFalse else {
-            return nil
+                return nil
         }
         
         let uint = number.uintValue
@@ -140,7 +140,7 @@ extension _CleanJSONDecoder {
         guard let number = value as? NSNumber,
             number !== kCFBooleanTrue,
             number !== kCFBooleanFalse else {
-            return nil
+                return nil
         }
         
         let uint8 = number.uint8Value
@@ -157,7 +157,7 @@ extension _CleanJSONDecoder {
         guard let number = value as? NSNumber,
             number !== kCFBooleanTrue,
             number !== kCFBooleanFalse else {
-            return nil
+                return nil
         }
         
         let uint16 = number.uint16Value
@@ -174,7 +174,7 @@ extension _CleanJSONDecoder {
         guard let number = value as? NSNumber,
             number !== kCFBooleanTrue,
             number !== kCFBooleanFalse else {
-            return nil
+                return nil
         }
         
         let uint32 = number.uint32Value
@@ -191,7 +191,7 @@ extension _CleanJSONDecoder {
         guard let number = value as? NSNumber,
             number !== kCFBooleanTrue,
             number !== kCFBooleanFalse else {
-            return nil
+                return nil
         }
         
         let uint64 = number.uint64Value

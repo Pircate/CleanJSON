@@ -1,23 +1,21 @@
 // 
-//  Adaptor.swift
+//  Adapter.swift
 //  CleanJSON
 //
 //  Created by Pircate(gao497868860@gmail.com) on 2018/12/13
 //  Copyright © 2018 Pircate. All rights reserved.
 //
 
-public typealias AdaptorType<T> = (CleanDecoder) throws -> T
+public typealias AdapterType<T> = (CleanDecoder) throws -> T
 
 extension CleanJSONDecoder {
     
-    public struct Adaptor {
+    public struct Adapter {
         
-        public var decodeBool: AdaptorType<Bool> = { _ in Bool.defaultValue }
+        public var decodeBool: AdapterType<Bool> = { _ in Bool.defaultValue }
         
-        public var decodeInt: AdaptorType<Int> = { decoder in
-            guard !decoder.decodeNull() else {
-                return Int.defaultValue
-            }
+        public var decodeInt: AdapterType<Int> = { decoder in
+            guard !decoder.decodeNull() else { return Int.defaultValue }
             
             guard let stringValue = try decoder.decodeIfPresent(String.self) else {
                 return Int.defaultValue
@@ -26,10 +24,8 @@ extension CleanJSONDecoder {
             return Int(stringValue) ?? Int.defaultValue
         }
         
-        public var decodeUInt: AdaptorType<UInt> = { decoder in
-            guard !decoder.decodeNull() else {
-                return UInt.defaultValue
-            }
+        public var decodeUInt: AdapterType<UInt> = { decoder in
+            guard !decoder.decodeNull() else { return UInt.defaultValue }
             
             guard let stringValue = try decoder.decodeIfPresent(String.self) else {
                 return UInt.defaultValue
@@ -38,10 +34,8 @@ extension CleanJSONDecoder {
             return UInt(stringValue) ?? UInt.defaultValue
         }
         
-        public var decodeFloat: AdaptorType<Float> = { decoder in
-            guard !decoder.decodeNull() else {
-                return Float.defaultValue
-            }
+        public var decodeFloat: AdapterType<Float> = { decoder in
+            guard !decoder.decodeNull() else { return Float.defaultValue }
             
             guard let stringValue = try decoder.decodeIfPresent(String.self) else {
                 return Float.defaultValue
@@ -50,10 +44,8 @@ extension CleanJSONDecoder {
             return Float(stringValue) ?? Float.defaultValue
         }
         
-        public var decodeDouble: AdaptorType<Double> = { decoder in
-            guard !decoder.decodeNull() else {
-                return Double.defaultValue
-            }
+        public var decodeDouble: AdapterType<Double> = { decoder in
+            guard !decoder.decodeNull() else { return Double.defaultValue }
             
             guard let stringValue = try decoder.decodeIfPresent(String.self) else {
                 return Double.defaultValue
@@ -62,10 +54,8 @@ extension CleanJSONDecoder {
             return Double(stringValue) ?? Double.defaultValue
         }
         
-        public var decodeString: AdaptorType<String> = { decoder in
-            guard !decoder.decodeNull() else {
-                return String.defaultValue
-            }
+        public var decodeString: AdapterType<String> = { decoder in
+            guard !decoder.decodeNull() else { return String.defaultValue }
             
             if let intValue = try decoder.decodeIfPresent(Int.self) {
                 return String(intValue)

@@ -65,14 +65,17 @@ class ViewController: UIViewController {
         do {
             let decoder = CleanJSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            var adaptor = CleanJSONDecoder.Adaptor()
-            adaptor.decodeBool = { decoder in
-                if let intValue = try decoder.decodeIfPresent(Int.self) {
-                    return intValue != 0
-                }
-                return false
+            
+            var adapter = CleanJSONDecoder.Adapter()
+            // 由于 Swift 布尔类型不是非 0 即 true，所以默认没有提供类型转换。
+            // 如果想实现 Int 转 Bool 可以自定义解码。
+            adapter.decodeBool = { decoder in
+                guard let intValue = try decoder.decodeIfPresent(Int.self) else { return false }
+                
+                return intValue != 0
             }
-            decoder.valueNotFoundDecodingStrategy = .custom(adaptor)
+            decoder.valueNotFoundDecodingStrategy = .custom(adapter)
+            
             let model = try decoder.decode(TestModel<Enum>.self, from: json)
             debugPrint(model.boolean)
             debugPrint(model.integer)

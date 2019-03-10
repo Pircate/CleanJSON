@@ -72,7 +72,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
                 return try adaptor.decodeUInt(self)
             }
         }
-    
+        
         return value
     }
     

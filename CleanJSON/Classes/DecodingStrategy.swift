@@ -16,7 +16,7 @@ extension CleanJSONDecoder {
     public enum ValueNotFoundDecodingStrategy {
         case `throw`
         case useDefaultValue
-        case custom(Adaptor)
+        case custom(Adapter)
     }
 }
 

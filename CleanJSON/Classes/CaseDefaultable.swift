@@ -36,7 +36,7 @@ private extension _CleanJSONDecoder {
         guard !decodeNil(), !codingPath.isEmpty, storage.topContainer is T.RawValue else {
             return T.defaultCase
         }
-    
+        
         if let number = storage.topContainer as? NSNumber,
             (number === kCFBooleanTrue || number === kCFBooleanFalse) {
             guard let rawValue = number.boolValue as? T.RawValue else {
@@ -45,7 +45,7 @@ private extension _CleanJSONDecoder {
             
             return T.init(rawValue: rawValue) ?? T.defaultCase
         }
-    
+        
         let rawValue = try decode(T.RawValue.self)
         return T.init(rawValue: rawValue) ?? T.defaultCase
     }
