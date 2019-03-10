@@ -22,8 +22,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
                 throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
             case .useDefaultValue:
                 return Bool.defaultValue
-            case .custom(let adaptor):
-                return try adaptor.decodeBool(self)
+            case .custom(let adapter):
+                return try adapter.decodeBool(self)
             }
         }
         
@@ -37,8 +37,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
                 throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
             case .useDefaultValue:
                 return Int.defaultValue
-            case .custom(let adaptor):
-                return try adaptor.decodeInt(self)
+            case .custom(let adapter):
+                return try adapter.decodeInt(self)
             }
         }
         
@@ -68,8 +68,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
                 throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
             case .useDefaultValue:
                 return UInt.defaultValue
-            case .custom(let adaptor):
-                return try adaptor.decodeUInt(self)
+            case .custom(let adapter):
+                return try adapter.decodeUInt(self)
             }
         }
         
@@ -99,8 +99,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
                 throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
             case .useDefaultValue:
                 return Float.defaultValue
-            case .custom(let adaptor):
-                return try adaptor.decodeFloat(self)
+            case .custom(let adapter):
+                return try adapter.decodeFloat(self)
             }
         }
         
@@ -114,8 +114,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
                 throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
             case .useDefaultValue:
                 return Double.defaultValue
-            case .custom(let adaptor):
-                return try adaptor.decodeDouble(self)
+            case .custom(let adapter):
+                return try adapter.decodeDouble(self)
             }
         }
         
@@ -129,8 +129,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
                 throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
             case .useDefaultValue:
                 return String.defaultValue
-            case .custom(let adaptor):
-                return try adaptor.decodeString(self)
+            case .custom(let adapter):
+                return try adapter.decodeString(self)
             }
         }
         
