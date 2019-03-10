@@ -11,7 +11,7 @@
 #
 
 # Uncomment the line if you want fastlane to automatically update itself
-update_fastlane
+# update_fastlane
 
 default_platform(:ios)
 
@@ -39,7 +39,7 @@ platform :ios do
     	path: "CleanJSON.podspec", 
     	version_number: target_version)
     git_add(path: "./CleanJSON.podspec")
-    git_commit(path: "./CleanJSON.podspec", message: "release #{target_version} version")
+    git_commit(path: ["./CleanJSON.podspec", "./fastlane"], message: "release #{target_version} version")
     add_git_tag tag: target_version
     push_to_git_remote
     pod_push
