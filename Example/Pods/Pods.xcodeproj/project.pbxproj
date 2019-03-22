@@ -14,7 +14,7 @@
 		42389FC1F0527E201F2CC58D3A642647 /* Pods-CleanJSON_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CDA409B717A2136A4A7841C66FC9D689 /* Pods-CleanJSON_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		469825D26B2ECA4E934B94957C082F18 /* DecodingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C8F36856336A0603C453DC8C9C7453 /* DecodingStrategy.swift */; };
 		50D8F1DD4CCCA6689798BDBD7B3356AA /* DecodingError+CleanJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5FC254D6441EA3ECB329E96A474297 /* DecodingError+CleanJSON.swift */; };
-		6320D5A3B6BA0728B53BAEE782C66100 /* Adapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10DA69F16570CF818D26AFA6DC6C247 /* Adapter.swift */; };
+		6320D5A3B6BA0728B53BAEE782C66100 /* JSONAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10DA69F16570CF818D26AFA6DC6C247 /* JSONAdapter.swift */; };
 		74E6CE53922B7CB65BA46835D35B2EF8 /* ToJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6655D5135B01C4526975CC59CFB99AB7 /* ToJSON.swift */; };
 		85B8F485B2C443C90C634100E84A82E9 /* _CleanJSONDecoder+SingleValueDecodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8677C8FC92491B76D72503B2ED47DDAB /* _CleanJSONDecoder+SingleValueDecodingContainer.swift */; };
 		8892C40AFE818BDE845B81AAF2525EB4 /* CaseDefaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F623A3FF343E898CC630598BA29F7E /* CaseDefaultable.swift */; };
@@ -81,7 +81,7 @@
 		A5540F0E4ADFB24EF2DDDCB49B29CC30 /* _CleanJSONUnkeyedDecodingContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = _CleanJSONUnkeyedDecodingContainer.swift; path = CleanJSON/Classes/_CleanJSONUnkeyedDecodingContainer.swift; sourceTree = "<group>"; };
 		A6F623A3FF343E898CC630598BA29F7E /* CaseDefaultable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CaseDefaultable.swift; path = CleanJSON/Classes/CaseDefaultable.swift; sourceTree = "<group>"; };
 		AB59D7539BB3E92A8E9CEAAD2E25585B /* Pods_CleanJSON_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CleanJSON_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B10DA69F16570CF818D26AFA6DC6C247 /* Adapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Adapter.swift; path = CleanJSON/Classes/Adapter.swift; sourceTree = "<group>"; };
+		B10DA69F16570CF818D26AFA6DC6C247 /* JSONAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSONAdapter.swift; path = CleanJSON/Classes/JSONAdapter.swift; sourceTree = "<group>"; };
 		B36AB396275697EEE1A5B13BA8A38FE3 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BA059A81C56D59D1BCE169EF9B1939FF /* CleanJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CleanJSON-dummy.m"; sourceTree = "<group>"; };
 		BB8E8CB46483CD686207B347E5527128 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -223,7 +223,7 @@
 				6DA381CB047546B8B70FEA4C1FB224A8 /* _CleanJSONKey.swift */,
 				0C578034D65192C57FC40058EEF67C6E /* _CleanJSONKeyedDecodingContainer.swift */,
 				A5540F0E4ADFB24EF2DDDCB49B29CC30 /* _CleanJSONUnkeyedDecodingContainer.swift */,
-				B10DA69F16570CF818D26AFA6DC6C247 /* Adapter.swift */,
+				B10DA69F16570CF818D26AFA6DC6C247 /* JSONAdapter.swift */,
 				A6F623A3FF343E898CC630598BA29F7E /* CaseDefaultable.swift */,
 				BC039542F0EEB31C836E3F9BCAD5B08F /* CleanDecoder.swift */,
 				9198E666CD8EEA639146F96021A55D4A /* CleanJSONDecoder.swift */,
@@ -421,7 +421,7 @@
 				067AFFD875B48F136C3DC0D1A64DD163 /* _CleanJSONKey.swift in Sources */,
 				AE7BC7373C39179650D15AE13E669FE2 /* _CleanJSONKeyedDecodingContainer.swift in Sources */,
 				A2C7454417032BCF030065D425407D9E /* _CleanJSONUnkeyedDecodingContainer.swift in Sources */,
-				6320D5A3B6BA0728B53BAEE782C66100 /* Adapter.swift in Sources */,
+				6320D5A3B6BA0728B53BAEE782C66100 /* JSONAdapter.swift in Sources */,
 				8892C40AFE818BDE845B81AAF2525EB4 /* CaseDefaultable.swift in Sources */,
 				F6B9982A0B57DBB1BF80838933E43EC2 /* CleanDecoder.swift in Sources */,
 				D2545B309DA37B5C365B27B1AE38323E /* CleanJSON-dummy.m in Sources */,

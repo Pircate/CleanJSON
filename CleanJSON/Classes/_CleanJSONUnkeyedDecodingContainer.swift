@@ -2,7 +2,7 @@
 //  _CleanJSONUnkeyedDecodingContainer.swift
 //  CleanJSON
 //
-//  Created by Pircate(gao497868860@gmail.com) on 2018/10/11
+//  Created by Pircate(swifter.dev@gmail.com) on 2018/10/11
 //  Copyright © 2018 Pircate. All rights reserved.
 //
 
@@ -85,7 +85,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return Bool.defaultValue
         case .custom(let adapter):
             self.currentIndex += 1
-            return try adapter.decodeBool(decoder)
+            return try adapter.adapt(decoder)
         }
     }
     
@@ -118,7 +118,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return Int.defaultValue
         case .custom(let adapter):
             self.currentIndex += 1
-            return try adapter.decodeInt(decoder)
+            return try adapter.adapt(decoder)
         }
     }
     
@@ -215,7 +215,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return UInt.defaultValue
         case .custom(let adapter):
             self.currentIndex += 1
-            return try adapter.decodeUInt(decoder)
+            return try adapter.adapt(decoder)
         }
     }
     
@@ -312,7 +312,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return Float.defaultValue
         case .custom(let adapter):
             self.currentIndex += 1
-            return try adapter.decodeFloat(decoder)
+            return try adapter.adapt(decoder)
         }
     }
     
@@ -345,7 +345,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return Double.defaultValue
         case .custom(let adapter):
             self.currentIndex += 1
-            return try adapter.decodeDouble(decoder)
+            return try adapter.adapt(decoder)
         }
     }
     
@@ -378,7 +378,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return String.defaultValue
         case .custom(let adapter):
             self.currentIndex += 1
-            return try adapter.decodeString(decoder)
+            return try adapter.adapt(decoder)
         }
     }
     

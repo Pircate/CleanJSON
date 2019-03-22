@@ -2,7 +2,7 @@
 //  CaseDefaultable.swift
 //  CleanJSON
 //
-//  Created by Pircate(gao497868860@gmail.com) on 2018/11/30
+//  Created by Pircate(swifter.dev@gmail.com) on 2018/11/30
 //  Copyright © 2018 Pircate. All rights reserved.
 //
 //  Reference: https://github.com/line/line-sdk-ios-swift/blob/master/LineSDK/LineSDK/Networking/Model/CustomizeCoding/CodingExtension.swift

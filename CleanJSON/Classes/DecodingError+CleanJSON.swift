@@ -2,7 +2,7 @@
 //  DecodingError+CleanJSON.swift
 //  CleanJSON
 //
-//  Created by Pircate(gao497868860@gmail.com) on 2018/10/11
+//  Created by Pircate(swifter.dev@gmail.com) on 2018/10/11
 //  Copyright © 2018 Pircate. All rights reserved.
 //
 

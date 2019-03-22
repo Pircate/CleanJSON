@@ -2,7 +2,7 @@
 //  DecodingStrategy.swift
 //  CleanJSON
 //
-//  Created by Pircate(gao497868860@gmail.com) on 2018/12/10
+//  Created by Pircate(swifter.dev@gmail.com) on 2018/12/10
 //  Copyright © 2018 Pircate. All rights reserved.
 //
 
@@ -16,7 +16,7 @@ extension CleanJSONDecoder {
     public enum ValueNotFoundDecodingStrategy {
         case `throw`
         case useDefaultValue
-        case custom(Adapter)
+        case custom(JSONAdapter)
     }
 }
 

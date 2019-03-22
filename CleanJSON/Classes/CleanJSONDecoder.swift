@@ -2,7 +2,7 @@
 //  CleanJSONDecoder.swift
 //  CleanJSON
 //
-//  Created by Pircate(gao497868860@gmail.com) on 2018/10/10
+//  Created by Pircate(swifter.dev@gmail.com) on 2018/10/10
 //  Copyright © 2018 Pircate. All rights reserved.
 //
 
@@ -38,7 +38,7 @@ open class CleanJSONDecoder: JSONDecoder {
     open var keyNotFoundDecodingStrategy: KeyNotFoundDecodingStrategy = .useDefaultValue
     
     /// The strategy to use for decoding when value not found. Defaults to `.custom`.
-    open var valueNotFoundDecodingStrategy: ValueNotFoundDecodingStrategy = .custom(.init())
+    open var valueNotFoundDecodingStrategy: ValueNotFoundDecodingStrategy = .custom(Adapter())
     
     /// The strategy to use for decoding nested container.
     open var nestedContainerDecodingStrategy: NestedContainerDecodingStrategy = .init()

@@ -167,6 +167,41 @@ class CleanJSONTests: XCTestCase {
         }
     }
     
+    struct CustomAdapter: JSONAdapter {
+        
+        func adapt(_ decoder: CleanDecoder) throws -> Bool {
+            return decoder.decodeNull()
+        }
+        
+        func adapt(_ decoder: CleanDecoder) throws -> Int {
+            if let stringValue = try decoder.decodeIfPresent(String.self) {
+                let formatter = NumberFormatter()
+                formatter.generatesDecimalNumbers = true
+                formatter.numberStyle = .decimal
+                return formatter.number(from: stringValue)?.intValue ?? 0
+            }
+            return 0
+        }
+        
+        func adapt(_ decoder: CleanDecoder) throws -> Double {
+            if let stringValue = try decoder.decodeIfPresent(String.self) {
+                return Double(stringValue)?.advanced(by: 1) ?? 0
+            }
+            return 0
+        }
+        
+        func adapt(_ decoder: CleanDecoder) throws -> String {
+            if let intValue = try decoder.decodeIfPresent(Int.self) {
+                return "$" + String(intValue)
+            } else if let doubleValue = try decoder.decodeIfPresent(Double.self) {
+                return String(format: "%.f", doubleValue)
+            } else if let boolValue = try decoder.decodeIfPresent(Bool.self) {
+                return String(boolValue).uppercased()
+            }
+            return ""
+        }
+    }
+    
     func testCustomTypeConvertion() {
         let data = """
                     {
@@ -181,40 +216,8 @@ class CleanJSONTests: XCTestCase {
         
         do {
             let decoder = CleanJSONDecoder()
-            var adapter = CleanJSONDecoder.Adapter()
-            adapter.decodeString = { decoder in
-                if let intValue = try decoder.decodeIfPresent(Int.self) {
-                    return "$" + String(intValue)
-                } else if let doubleValue = try decoder.decodeIfPresent(Double.self) {
-                    return String(format: "%.f", doubleValue)
-                } else if let boolValue = try decoder.decodeIfPresent(Bool.self) {
-                    return String(boolValue).uppercased()
-                }
-                return ""
-            }
-            adapter.decodeInt = { decoder in
-                if let stringValue = try decoder.decodeIfPresent(String.self) {
-                    let formatter = NumberFormatter()
-                    formatter.generatesDecimalNumbers = true
-                    formatter.numberStyle = .decimal
-                    return formatter.number(from: stringValue)?.intValue ?? 0
-                }
-                return 0
-            }
-            adapter.decodeDouble = { decoder in
-                if let stringValue = try decoder.decodeIfPresent(String.self) {
-                    return Double(stringValue)?.advanced(by: 1) ?? 0
-                }
-                return 0
-            }
-            adapter.decodeBool = { decoder in
-                if decoder.decodeNull() {
-                    return true
-                }
-                return false
-            }
             decoder.keyNotFoundDecodingStrategy = .useDefaultValue
-            decoder.valueNotFoundDecodingStrategy = .custom(adapter)
+            decoder.valueNotFoundDecodingStrategy = .custom(CustomAdapter())
             let object = try decoder.decode(TypeMismatch.self, from: data)
             XCTAssertEqual(object.null, true)
             XCTAssertEqual(object.stringToInt, 1314)

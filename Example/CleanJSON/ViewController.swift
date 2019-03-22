@@ -41,6 +41,17 @@ enum Enum: Int, Codable, CaseDefaultable {
     }
 }
 
+struct CustomAdapter: JSONAdapter {
+    
+    // 由于 Swift 布尔类型不是非 0 即 true，所以默认没有提供类型转换。
+    // 如果想实现 Int 转 Bool 可以自定义解码。
+    func adapt(_ decoder: CleanDecoder) throws -> Bool {
+        guard let intValue = try decoder.decodeIfPresent(Int.self) else { return false }
+        
+        return intValue != 0
+    }
+}
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -65,16 +76,7 @@ class ViewController: UIViewController {
         do {
             let decoder = CleanJSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            
-            var adapter = CleanJSONDecoder.Adapter()
-            // 由于 Swift 布尔类型不是非 0 即 true，所以默认没有提供类型转换。
-            // 如果想实现 Int 转 Bool 可以自定义解码。
-            adapter.decodeBool = { decoder in
-                guard let intValue = try decoder.decodeIfPresent(Int.self) else { return false }
-                
-                return intValue != 0
-            }
-            decoder.valueNotFoundDecodingStrategy = .custom(adapter)
+            decoder.valueNotFoundDecodingStrategy = .custom(CustomAdapter())
             
             let model = try decoder.decode(TestModel<Enum>.self, from: json)
             debugPrint(model.boolean)

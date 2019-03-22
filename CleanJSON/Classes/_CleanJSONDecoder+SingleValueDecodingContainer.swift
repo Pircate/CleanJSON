@@ -2,7 +2,7 @@
 //  _CleanJSONDecoder+SingleValueDecodingContainer.swift
 //  CleanJSON
 //
-//  Created by Pircate(gao497868860@gmail.com) on 2018/10/11
+//  Created by Pircate(swifter.dev@gmail.com) on 2018/10/11
 //  Copyright © 2018 Pircate. All rights reserved.
 //
 
@@ -23,7 +23,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             case .useDefaultValue:
                 return Bool.defaultValue
             case .custom(let adapter):
-                return try adapter.decodeBool(self)
+                return try adapter.adapt(self)
             }
         }
         
@@ -38,7 +38,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             case .useDefaultValue:
                 return Int.defaultValue
             case .custom(let adapter):
-                return try adapter.decodeInt(self)
+                return try adapter.adapt(self)
             }
         }
         
@@ -69,7 +69,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             case .useDefaultValue:
                 return UInt.defaultValue
             case .custom(let adapter):
-                return try adapter.decodeUInt(self)
+                return try adapter.adapt(self)
             }
         }
         
@@ -100,7 +100,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             case .useDefaultValue:
                 return Float.defaultValue
             case .custom(let adapter):
-                return try adapter.decodeFloat(self)
+                return try adapter.adapt(self)
             }
         }
         
@@ -115,7 +115,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             case .useDefaultValue:
                 return Double.defaultValue
             case .custom(let adapter):
-                return try adapter.decodeDouble(self)
+                return try adapter.adapt(self)
             }
         }
         
@@ -130,7 +130,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             case .useDefaultValue:
                 return String.defaultValue
             case .custom(let adapter):
-                return try adapter.decodeString(self)
+                return try adapter.adapt(self)
             }
         }
         

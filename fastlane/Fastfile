@@ -30,6 +30,7 @@ platform :ios do
   lane :release do |options|
     target_version = options[:version]
     raise "The version is missed." if target_version.nil?
+
     scan(
     	workspace: "Example/CleanJSON.xcworkspace", 
     	scheme: "CleanJSON_Tests", 
@@ -38,10 +39,15 @@ platform :ios do
     version_bump_podspec(
     	path: "CleanJSON.podspec", 
     	version_number: target_version)
-    git_add(path: "./CleanJSON.podspec")
-    git_commit(path: ["./CleanJSON.podspec", "./fastlane"], message: "release #{target_version} version")
+
+    git_add(path: ["./CleanJSON.podspec", "./fastlane"])
+    git_commit(
+      path: ["./CleanJSON.podspec", "./fastlane"], 
+      message: "release #{target_version} version")
+    
     add_git_tag tag: target_version
     push_to_git_remote
+
     pod_push
   end
 

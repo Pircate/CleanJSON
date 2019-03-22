@@ -2,7 +2,7 @@
 //  _CleanJSONKeyedDecodingContainer.swift
 //  CleanJSON
 //
-//  Created by Pircate(gao497868860@gmail.com) on 2018/10/10
+//  Created by Pircate(swifter.dev@gmail.com) on 2018/10/10
 //  Copyright © 2018 Pircate. All rights reserved.
 //
 
@@ -85,7 +85,7 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
             case .custom(let adapter):
                 decoder.storage.push(container: entry)
                 defer { decoder.storage.popContainer() }
-                return try adapter.decodeBool(decoder)
+                return try adapter.adapt(decoder)
             }
         }
         
@@ -114,7 +114,7 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
             case .custom(let adapter):
                 decoder.storage.push(container: entry)
                 defer { decoder.storage.popContainer() }
-                return try adapter.decodeInt(decoder)
+                return try adapter.adapt(decoder)
             }
         }
         
@@ -203,7 +203,7 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
             case .custom(let adapter):
                 decoder.storage.push(container: entry)
                 defer { decoder.storage.popContainer() }
-                return try adapter.decodeUInt(decoder)
+                return try adapter.adapt(decoder)
             }
         }
         
@@ -292,7 +292,7 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
             case .custom(let adapter):
                 decoder.storage.push(container: entry)
                 defer { decoder.storage.popContainer() }
-                return try adapter.decodeFloat(decoder)
+                return try adapter.adapt(decoder)
             }
         }
         
@@ -321,7 +321,7 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
             case .custom(let adapter):
                 decoder.storage.push(container: entry)
                 defer { decoder.storage.popContainer() }
-                return try adapter.decodeDouble(decoder)
+                return try adapter.adapt(decoder)
             }
         }
         
@@ -350,7 +350,7 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
             case .custom(let adapter):
                 decoder.storage.push(container: entry)
                 defer { decoder.storage.popContainer() }
-                return try adapter.decodeString(decoder)
+                return try adapter.adapt(decoder)
             }
         }
         
