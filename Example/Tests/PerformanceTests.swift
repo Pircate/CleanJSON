@@ -2,7 +2,7 @@
 //  PerformanceTests.swift
 //  CleanJSON_Tests
 //
-//  Created by Pircate(gao497868860@gmail.com) on 2018/10/12
+//  Created by Pircate(swifter.dev@gmail.com) on 2018/10/12
 //  Copyright © 2018 CocoaPods. All rights reserved.
 //
 

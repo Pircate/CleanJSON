@@ -2,7 +2,7 @@
 //  NestedContainerTests.swift
 //  CleanJSON_Tests
 //
-//  Created by Pircate(gao497868860@gmail.com) on 2019/2/26
+//  Created by Pircate(swifter.dev@gmail.com) on 2019/2/26
 //  Copyright © 2019 CocoaPods. All rights reserved.
 //
 
