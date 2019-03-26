@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1000"
+   LastUpgradeVersion = "1020"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -39,7 +39,7 @@
          </BuildableReference>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "54F1159475D673B1B986441282F0B379"
+            BlueprintIdentifier = "300904838EEDDC3BB8242817D8F97CB6"
             BuildableName = "CleanJSON.framework"
             BlueprintName = "CleanJSON"
             ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -98,6 +98,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "607FACE41AFB9204008FA782"
+            BuildableName = "CleanJSON_Tests.xctest"
+            BlueprintName = "CleanJSON_Tests"
+            ReferencedContainer = "container:CleanJSON.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
