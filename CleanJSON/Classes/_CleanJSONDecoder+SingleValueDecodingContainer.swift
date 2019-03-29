@@ -16,125 +16,185 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     }
     
     public func decode(_ type: Bool.Type) throws -> Bool {
-        guard let value = try self.unbox(storage.topContainer, as: Bool.self) else {
-            switch options.valueNotFoundDecodingStrategy {
-            case .throw:
-                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
-            case .useDefaultValue:
-                return Bool.defaultValue
-            case .custom(let adapter):
-                return try adapter.adapt(self)
-            }
-        }
+        if let value = try self.unbox(storage.topContainer, as: Bool.self) { return value }
         
-        return value
+        switch options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+        case .useDefaultValue:
+            return Bool.defaultValue
+        case .custom(let adapter):
+            return try adapter.adapt(self)
+        }
     }
     
     public func decode(_ type: Int.Type) throws -> Int {
-        guard let value = try self.unbox(self.storage.topContainer, as: Int.self) else {
-            switch options.valueNotFoundDecodingStrategy {
-            case .throw:
-                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
-            case .useDefaultValue:
-                return Int.defaultValue
-            case .custom(let adapter):
-                return try adapter.adapt(self)
-            }
-        }
+        if let value = try self.unbox(self.storage.topContainer, as: Int.self) { return value }
         
-        return value
+        switch options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+        case .useDefaultValue:
+            return Int.defaultValue
+        case .custom(let adapter):
+            return try adapter.adapt(self)
+        }
     }
     
     public func decode(_ type: Int8.Type) throws -> Int8 {
-        return try self.unbox(self.storage.topContainer, as: Int8.self) ?? Int8.defaultValue
+        if let value = try self.unbox(self.storage.topContainer, as: Int8.self) { return value }
+        
+        switch options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+        case .useDefaultValue:
+            return Int8.defaultValue
+        case .custom(let adapter):
+            return try adapter.adapt(self)
+        }
     }
     
     public func decode(_ type: Int16.Type) throws -> Int16 {
-        return try self.unbox(self.storage.topContainer, as: Int16.self) ?? Int16.defaultValue
+        if let value = try self.unbox(self.storage.topContainer, as: Int16.self) { return value }
+        
+        switch options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+        case .useDefaultValue:
+            return Int16.defaultValue
+        case .custom(let adapter):
+            return try adapter.adapt(self)
+        }
     }
     
     public func decode(_ type: Int32.Type) throws -> Int32 {
-        return try self.unbox(self.storage.topContainer, as: Int32.self) ?? Int32.defaultValue
+        if let value = try self.unbox(self.storage.topContainer, as: Int32.self) { return value }
+        
+        switch options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+        case .useDefaultValue:
+            return Int32.defaultValue
+        case .custom(let adapter):
+            return try adapter.adapt(self)
+        }
     }
     
     public func decode(_ type: Int64.Type) throws -> Int64 {
-        return try self.unbox(self.storage.topContainer, as: Int64.self) ?? Int64.defaultValue
+        if let value = try self.unbox(self.storage.topContainer, as: Int64.self) { return value }
+        
+        switch options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+        case .useDefaultValue:
+            return Int64.defaultValue
+        case .custom(let adapter):
+            return try adapter.adapt(self)
+        }
     }
     
     public func decode(_ type: UInt.Type) throws -> UInt {
-        guard let value = try self.unbox(self.storage.topContainer, as: UInt.self) else {
-            switch options.valueNotFoundDecodingStrategy {
-            case .throw:
-                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
-            case .useDefaultValue:
-                return UInt.defaultValue
-            case .custom(let adapter):
-                return try adapter.adapt(self)
-            }
-        }
+        if let value = try self.unbox(self.storage.topContainer, as: UInt.self) { return value }
         
-        return value
+        switch options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+        case .useDefaultValue:
+            return UInt.defaultValue
+        case .custom(let adapter):
+            return try adapter.adapt(self)
+        }
     }
     
     public func decode(_ type: UInt8.Type) throws -> UInt8 {
-        return try self.unbox(self.storage.topContainer, as: UInt8.self) ?? UInt8.defaultValue
+        if let value = try self.unbox(self.storage.topContainer, as: UInt8.self) { return value }
+        
+        switch options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+        case .useDefaultValue:
+            return UInt8.defaultValue
+        case .custom(let adapter):
+            return try adapter.adapt(self)
+        }
     }
     
     public func decode(_ type: UInt16.Type) throws -> UInt16 {
-        return try self.unbox(self.storage.topContainer, as: UInt16.self) ?? UInt16.defaultValue
+        if let value = try self.unbox(self.storage.topContainer, as: UInt16.self) { return value }
+        
+        switch options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+        case .useDefaultValue:
+            return UInt16.defaultValue
+        case .custom(let adapter):
+            return try adapter.adapt(self)
+        }
     }
     
     public func decode(_ type: UInt32.Type) throws -> UInt32 {
-        return try self.unbox(self.storage.topContainer, as: UInt32.self) ?? UInt32.defaultValue
+        if let value = try self.unbox(self.storage.topContainer, as: UInt32.self) { return value }
+        
+        switch options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+        case .useDefaultValue:
+            return UInt32.defaultValue
+        case .custom(let adapter):
+            return try adapter.adapt(self)
+        }
     }
     
     public func decode(_ type: UInt64.Type) throws -> UInt64 {
-        return try self.unbox(self.storage.topContainer, as: UInt64.self) ?? UInt64.defaultValue
+        if let value = try self.unbox(self.storage.topContainer, as: UInt64.self) { return value }
+        
+        switch options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+        case .useDefaultValue:
+            return UInt64.defaultValue
+        case .custom(let adapter):
+            return try adapter.adapt(self)
+        }
     }
     
     public func decode(_ type: Float.Type) throws -> Float {
-        guard let value = try self.unbox(self.storage.topContainer, as: Float.self) else {
-            switch options.valueNotFoundDecodingStrategy {
-            case .throw:
-                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
-            case .useDefaultValue:
-                return Float.defaultValue
-            case .custom(let adapter):
-                return try adapter.adapt(self)
-            }
-        }
+        if let value = try self.unbox(self.storage.topContainer, as: Float.self) { return value }
         
-        return value
+        switch options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+        case .useDefaultValue:
+            return Float.defaultValue
+        case .custom(let adapter):
+            return try adapter.adapt(self)
+        }
     }
     
     public func decode(_ type: Double.Type) throws -> Double {
-        guard let value = try self.unbox(self.storage.topContainer, as: Double.self) else {
-            switch options.valueNotFoundDecodingStrategy {
-            case .throw:
-                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
-            case .useDefaultValue:
-                return Double.defaultValue
-            case .custom(let adapter):
-                return try adapter.adapt(self)
-            }
-        }
+        if let value = try self.unbox(self.storage.topContainer, as: Double.self) { return value }
         
-        return value
+        switch options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+        case .useDefaultValue:
+            return Double.defaultValue
+        case .custom(let adapter):
+            return try adapter.adapt(self)
+        }
     }
     
     public func decode(_ type: String.Type) throws -> String {
-        guard let value = try self.unbox(self.storage.topContainer, as: String.self) else {
-            switch options.valueNotFoundDecodingStrategy {
-            case .throw:
-                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
-            case .useDefaultValue:
-                return String.defaultValue
-            case .custom(let adapter):
-                return try adapter.adapt(self)
-            }
-        }
+        if let value = try self.unbox(self.storage.topContainer, as: String.self) { return value }
         
-        return value
+        switch options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+        case .useDefaultValue:
+            return String.defaultValue
+        case .custom(let adapter):
+            return try adapter.adapt(self)
+        }
     }
     
     public func decode<T : Decodable>(_ type: T.Type) throws -> T {

@@ -12,7 +12,23 @@ public protocol JSONAdapter {
     
     func adapt(_ decoder: CleanDecoder) throws -> Int
     
+    func adapt(_ decoder: CleanDecoder) throws -> Int8
+    
+    func adapt(_ decoder: CleanDecoder) throws -> Int16
+    
+    func adapt(_ decoder: CleanDecoder) throws -> Int32
+    
+    func adapt(_ decoder: CleanDecoder) throws -> Int64
+    
     func adapt(_ decoder: CleanDecoder) throws -> UInt
+    
+    func adapt(_ decoder: CleanDecoder) throws -> UInt8
+    
+    func adapt(_ decoder: CleanDecoder) throws -> UInt16
+    
+    func adapt(_ decoder: CleanDecoder) throws -> UInt32
+    
+    func adapt(_ decoder: CleanDecoder) throws -> UInt64
     
     func adapt(_ decoder: CleanDecoder) throws -> Float
     
@@ -37,6 +53,22 @@ public extension JSONAdapter {
         return Int(stringValue) ?? Int.defaultValue
     }
     
+    func adapt(_ decoder: CleanDecoder) throws -> Int8 {
+        return Int8.defaultValue
+    }
+    
+    func adapt(_ decoder: CleanDecoder) throws -> Int16 {
+        return Int16.defaultValue
+    }
+    
+    func adapt(_ decoder: CleanDecoder) throws -> Int32 {
+        return Int32.defaultValue
+    }
+    
+    func adapt(_ decoder: CleanDecoder) throws -> Int64 {
+        return Int64.defaultValue
+    }
+    
     func adapt(_ decoder: CleanDecoder) throws -> UInt {
         guard !decoder.decodeNull() else { return UInt.defaultValue }
         
@@ -45,6 +77,22 @@ public extension JSONAdapter {
         }
         
         return UInt(stringValue) ?? UInt.defaultValue
+    }
+    
+    func adapt(_ decoder: CleanDecoder) throws -> UInt8 {
+        return UInt8.defaultValue
+    }
+    
+    func adapt(_ decoder: CleanDecoder) throws -> UInt16 {
+        return UInt16.defaultValue
+    }
+    
+    func adapt(_ decoder: CleanDecoder) throws -> UInt32 {
+        return UInt32.defaultValue
+    }
+    
+    func adapt(_ decoder: CleanDecoder) throws -> UInt64 {
+        return UInt64.defaultValue
     }
     
     func adapt(_ decoder: CleanDecoder) throws -> Float {
