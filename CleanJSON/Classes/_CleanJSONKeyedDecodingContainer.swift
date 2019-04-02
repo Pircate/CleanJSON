@@ -597,3 +597,70 @@ extension _CleanJSONDecoder {
         throw DecodingError.dataCorrupted(context)
     }
 }
+
+extension _CleanJSONKeyedDecodingContainer {
+    
+    func decodeIfPresent(_ type: Bool.Type, forKey key: K) throws -> Bool? {
+        if try decodeNil(type, forKey: key) { return nil }
+        
+        decoder.storage.push(container: container[key.stringValue] as Any)
+        defer { decoder.storage.popContainer() }
+        return try decoder.decode(type)
+    }
+    
+    func decodeIfPresent(_ type: Int.Type, forKey key: K) throws -> Int? {
+        if try decodeNil(type, forKey: key) { return nil }
+        
+        decoder.storage.push(container: container[key.stringValue] as Any)
+        defer { decoder.storage.popContainer() }
+        return try decoder.decode(type)
+    }
+    
+    func decodeIfPresent(_ type: UInt.Type, forKey key: K) throws -> UInt? {
+        if try decodeNil(type, forKey: key) { return nil }
+        
+        decoder.storage.push(container: container[key.stringValue] as Any)
+        defer { decoder.storage.popContainer() }
+        return try decoder.decode(type)
+    }
+    
+    func decodeIfPresent(_ type: Float.Type, forKey key: K) throws -> Float? {
+        if try decodeNil(type, forKey: key) { return nil }
+        
+        decoder.storage.push(container: container[key.stringValue] as Any)
+        defer { decoder.storage.popContainer() }
+        return try decoder.decode(type)
+    }
+    
+    func decodeIfPresent(_ type: Double.Type, forKey key: K) throws -> Double? {
+        if try decodeNil(type, forKey: key) { return nil }
+        
+        decoder.storage.push(container: container[key.stringValue] as Any)
+        defer { decoder.storage.popContainer() }
+        return try decoder.decode(type)
+    }
+
+    func decodeIfPresent(_ type: String.Type, forKey key: K) throws -> String? {
+        if try decodeNil(type, forKey: key) { return nil }
+        
+        decoder.storage.push(container: container[key.stringValue] as Any)
+        defer { decoder.storage.popContainer() }
+        return try decoder.decode(type)
+    }
+    
+    func decodeIfPresent<T>(_ type: T.Type, forKey key: K) throws -> T? where T : Decodable {
+        if try decodeNil(type, forKey: key) { return nil }
+        
+        decoder.storage.push(container: container[key.stringValue] as Any)
+        defer { decoder.storage.popContainer() }
+        return try decoder.decode(type)
+    }
+    
+    private func decodeNil<T>(_ type: T.Type, forKey key: K) throws -> Bool {
+        guard contains(key) else { return true }
+        
+        if try decodeNil(forKey: key) { return true }
+        
+        return false
+    }
+}
