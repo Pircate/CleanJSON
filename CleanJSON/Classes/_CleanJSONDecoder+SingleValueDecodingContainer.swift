@@ -199,9 +199,9 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     
     public func decode<T : Decodable>(_ type: T.Type) throws -> T {
         if type == Date.self || type == NSDate.self {
-            return try decodeIfTypeIsDate()
+            return try decode(as: Date.self) as! T
         } else if type == Decimal.self || type == NSDecimalNumber.self {
-            return try decodeIfTypeIsDecimal()
+            return try decode(as: Decimal.self) as! T
         }
         
         if let value = try unbox(storage.topContainer, as: type) { return value }
@@ -214,32 +214,30 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
         }
     }
     
-    private func decodeIfTypeIsDate<T: Decodable>() throws -> T {
-        guard let date = try unbox(storage.topContainer, as: Date.self) as? T else {
+    private func decode(as type: Date.Type) throws -> Date {
+        guard let date = try unbox(storage.topContainer, as: type) else {
             switch options.valueNotFoundDecodingStrategy {
             case .throw:
-                throw DecodingError.Keyed.valueNotFound(Date.self, codingPath: codingPath)
+                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
             case .useDefaultValue:
-                return Date.defaultValue as! T
+                return Date.defaultValue
             case .custom(let adapter):
-                let date: Date = try adapter.adapt(self)
-                return date as! T
+                return try adapter.adapt(self)
             }
         }
         
         return date
     }
     
-    private func decodeIfTypeIsDecimal<T: Decodable>() throws -> T {
-        guard let decimal = try unbox(storage.topContainer, as: Decimal.self) as? T else {
+    private func decode(as type: Decimal.Type) throws -> Decimal {
+        guard let decimal = try unbox(storage.topContainer, as: type) else {
             switch options.valueNotFoundDecodingStrategy {
             case .throw:
-                throw DecodingError.Keyed.valueNotFound(Decimal.self, codingPath: codingPath)
+                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
             case .useDefaultValue:
-                return Decimal.defaultValue as! T
+                return Decimal.defaultValue
             case .custom(let adapter):
-                let decimal: Decimal = try adapter.adapt(self)
-                return decimal as! T
+                return try adapter.adapt(self)
             }
         }
         
