@@ -19,6 +19,8 @@ struct TestModel<T: Codable>: Codable {
     let keyNotFound: T
     let snakeCase: String
     let optional: String?
+    let date: Date
+    let decimal: Decimal
     
     struct Nested: Codable {
         let a: String
@@ -50,6 +52,11 @@ struct CustomAdapter: JSONAdapter {
         
         return intValue != 0
     }
+    
+    // 日期为 null 或者类型不匹配时使用当前时间
+    func adapt(_ decoder: CleanDecoder) throws -> Date {
+        return Date()
+    }
 }
 
 class ViewController: UIViewController {
@@ -65,6 +72,7 @@ class ViewController: UIViewController {
                  "string": "string",
                  "array": [1, 2.1, "3", true],
                  "snake_case": "convertFromSnakeCase",
+                 "date": "date",
                  "nested": {
                      "a": "alpha",
                      "b": 1,
@@ -77,6 +85,7 @@ class ViewController: UIViewController {
             let decoder = CleanJSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             decoder.valueNotFoundDecodingStrategy = .custom(CustomAdapter())
+            decoder.dateDecodingStrategy = .secondsSince1970
             
             let model = try decoder.decode(TestModel<Enum>.self, from: json)
             debugPrint(model.boolean)
@@ -90,6 +99,8 @@ class ViewController: UIViewController {
             debugPrint(model.keyNotFound)
             debugPrint(model.snakeCase)
             debugPrint(model.optional ?? "nil")
+            debugPrint(model.date)
+            debugPrint(model.decimal)
         } catch {
             debugPrint(error)
         }

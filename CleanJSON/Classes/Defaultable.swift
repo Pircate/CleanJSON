@@ -93,3 +93,15 @@ extension String: Defaultable {
         return ""
     }
 }
+
+extension Date: Defaultable {
+    static var defaultValue: Date {
+        return Date(timeIntervalSinceReferenceDate: 0)
+    }
+}
+
+extension Decimal: Defaultable {
+    static var defaultValue: Decimal {
+        return Decimal(0)
+    }
+}

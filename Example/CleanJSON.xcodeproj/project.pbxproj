@@ -23,6 +23,8 @@
 		6C810BAB2170D60E00C2D942 /* airports1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6C810BA62170D60E00C2D942 /* airports1.json */; };
 		6C810BAC2170D60E00C2D942 /* airports10000.json in Resources */ = {isa = PBXBuildFile; fileRef = 6C810BA72170D60E00C2D942 /* airports10000.json */; };
 		6C810BAD2170D60E00C2D942 /* airports1000.json in Resources */ = {isa = PBXBuildFile; fileRef = 6C810BA82170D60E00C2D942 /* airports1000.json */; };
+		6CE9EB5A225346660054AABF /* DecodeDateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE9EB59225346660054AABF /* DecodeDateTests.swift */; };
+		6CE9EB5C225349910054AABF /* DecodeDecimalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE9EB5B225349910054AABF /* DecodeDecimalTests.swift */; };
 		CAA2881B3842BA456BA8F619 /* Pods_CleanJSON_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C4F440509FFE06EFB4585A /* Pods_CleanJSON_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +67,8 @@
 		6C810BA62170D60E00C2D942 /* airports1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1.json; sourceTree = "<group>"; };
 		6C810BA72170D60E00C2D942 /* airports10000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10000.json; sourceTree = "<group>"; };
 		6C810BA82170D60E00C2D942 /* airports1000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1000.json; sourceTree = "<group>"; };
+		6CE9EB59225346660054AABF /* DecodeDateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeDateTests.swift; sourceTree = "<group>"; };
+		6CE9EB5B225349910054AABF /* DecodeDecimalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeDecimalTests.swift; sourceTree = "<group>"; };
 		D26FF17EF1A0E99CEC06736F /* Pods-CleanJSON_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanJSON_Example.debug.xcconfig"; path = "Target Support Files/Pods-CleanJSON_Example/Pods-CleanJSON_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		D6AA27D7ED5CE1FBF13C4931 /* Pods-CleanJSON_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanJSON_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleanJSON_Tests/Pods-CleanJSON_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		D7401AF4E81AB65E4EE0AFFF /* Pods-CleanJSON_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanJSON_Tests.debug.xcconfig"; path = "Target Support Files/Pods-CleanJSON_Tests/Pods-CleanJSON_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -163,6 +167,8 @@
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 				607FACEB1AFB9204008FA782 /* Tests.swift */,
 				6C0DD92E2244C84500CED4F4 /* JSONAdapterTests.swift */,
+				6CE9EB59225346660054AABF /* DecodeDateTests.swift */,
+				6CE9EB5B225349910054AABF /* DecodeDecimalTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -379,11 +385,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CE9EB5C225349910054AABF /* DecodeDecimalTests.swift in Sources */,
 				6C810BA32170D56B00C2D942 /* PerformanceTests.swift in Sources */,
 				6C7C0AD92225765D009D9E1D /* NestedContainerTests.swift in Sources */,
 				6C7C0ADB22257CB0009D9E1D /* NestedUnkeyedContainerTests.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
 				6C0DD92F2244C84500CED4F4 /* JSONAdapterTests.swift in Sources */,
+				6CE9EB5A225346660054AABF /* DecodeDateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

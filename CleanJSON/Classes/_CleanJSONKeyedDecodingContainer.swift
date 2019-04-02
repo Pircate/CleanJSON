@@ -41,6 +41,8 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
             self.container = Dictionary(container.map {
                 key, value in (converter(decoder.codingPath + [_CleanJSONKey(stringValue: key, intValue: nil)]).stringValue, value)
             }, uniquingKeysWith: { (first, _) in first })
+        @unknown default:
+            self.container = container
         }
         self.codingPath = decoder.codingPath
     }
@@ -399,35 +401,13 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
         return value
     }
     
-    private func decodeUseDefaultValue<T : Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
-        if let objectValue = try? CleanJSONDecoder().decode(type, from: "{}".data(using: .utf8)!) {
-            return objectValue
-        } else if let arrayValue = try? CleanJSONDecoder().decode(type, from: "[]".data(using: .utf8)!) {
-            return arrayValue
-        } else if let stringValue = try decode(String.self, forKey: key) as? T {
-            return stringValue
-        } else if let boolValue = try decode(Bool.self, forKey: key) as? T {
-            return boolValue
-        } else if let intValue = try decode(Int.self, forKey: key) as? T {
-            return intValue
-        } else if let uintValue = try decode(UInt.self, forKey: key) as? T {
-            return uintValue
-        } else if let doubleValue = try decode(Double.self, forKey: key) as? T {
-            return doubleValue
-        } else if let floatValue = try decode(Float.self, forKey: key) as? T {
-            return floatValue
-        }
-        let context = DecodingError.Context(codingPath: [key], debugDescription: "Key: <\(key.stringValue)> cannot be decoded")
-        throw DecodingError.dataCorrupted(context)
-    }
-    
     public func decode<T : Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
         guard let entry = container[key.stringValue] else {
             switch decoder.options.keyNotFoundDecodingStrategy {
             case .throw:
                 throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
             case .useDefaultValue:
-                return try decodeUseDefaultValue(type, forKey: key)
+                return try decoder.decodeUsingDefaultValue()
             }
         }
         
@@ -438,8 +418,12 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
             switch decoder.options.valueNotFoundDecodingStrategy {
             case .throw:
                 throw DecodingError.Keyed.valueNotFound(type, codingPath: decoder.codingPath)
-            case .useDefaultValue, .custom:
-                return try decodeUseDefaultValue(type, forKey: key)
+            case .useDefaultValue:
+                return try decoder.decodeUsingDefaultValue()
+            case .custom:
+                decoder.storage.push(container: entry)
+                defer { decoder.storage.popContainer() }
+                return try decoder.decode(type)
             }
         }
         
@@ -583,5 +567,33 @@ private extension _CleanJSONKeyedDecodingContainer {
         case .useDefaultValue:
             return T.defaultValue
         }
+    }
+}
+
+extension _CleanJSONDecoder {
+    
+    func decodeUsingDefaultValue<T: Decodable>() throws -> T {
+        if let array = [] as? T {
+            return array
+        } else if let string = String.defaultValue as? T {
+            return string
+        } else if let bool = Bool.defaultValue as? T {
+            return bool
+        } else if let int = Int.defaultValue as? T {
+            return int
+        }else if let double = Double.defaultValue as? T {
+            return double
+        } else if let date = Date.defaultValue as? T {
+            return date
+        } else if let decimal = Decimal.defaultValue as? T {
+            return decimal
+        } else if let object = try? unbox("{}", as: T.self) {
+            return object
+        }
+        
+        let context = DecodingError.Context(
+            codingPath: codingPath,
+            debugDescription: "Key: <\(codingPath)> cannot be decoded")
+        throw DecodingError.dataCorrupted(context)
     }
 }

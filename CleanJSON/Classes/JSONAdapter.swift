@@ -35,6 +35,10 @@ public protocol JSONAdapter {
     func adapt(_ decoder: CleanDecoder) throws -> Double
     
     func adapt(_ decoder: CleanDecoder) throws -> String
+    
+    func adapt(_ decoder: CleanDecoder) throws -> Date
+    
+    func adapt(_ decoder: CleanDecoder) throws -> Decimal
 }
 
 public extension JSONAdapter {
@@ -127,6 +131,14 @@ public extension JSONAdapter {
         }
         
         return String.defaultValue
+    }
+    
+    func adapt(_ decoder: CleanDecoder) throws -> Date {
+        return Date.defaultValue
+    }
+    
+    func adapt(_ decoder: CleanDecoder) throws -> Decimal {
+        return Decimal.defaultValue
     }
 }
 

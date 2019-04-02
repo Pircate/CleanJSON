@@ -12,11 +12,11 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     // MARK: SingleValueDecodingContainer Methods
     
     public func decodeNil() -> Bool {
-        return self.storage.topContainer is NSNull
+        return storage.topContainer is NSNull
     }
     
     public func decode(_ type: Bool.Type) throws -> Bool {
-        if let value = try self.unbox(storage.topContainer, as: Bool.self) { return value }
+        if let value = try unbox(storage.topContainer, as: Bool.self) { return value }
         
         switch options.valueNotFoundDecodingStrategy {
         case .throw:
@@ -29,7 +29,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     }
     
     public func decode(_ type: Int.Type) throws -> Int {
-        if let value = try self.unbox(self.storage.topContainer, as: Int.self) { return value }
+        if let value = try unbox(storage.topContainer, as: Int.self) { return value }
         
         switch options.valueNotFoundDecodingStrategy {
         case .throw:
@@ -42,7 +42,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     }
     
     public func decode(_ type: Int8.Type) throws -> Int8 {
-        if let value = try self.unbox(self.storage.topContainer, as: Int8.self) { return value }
+        if let value = try unbox(storage.topContainer, as: Int8.self) { return value }
         
         switch options.valueNotFoundDecodingStrategy {
         case .throw:
@@ -55,7 +55,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     }
     
     public func decode(_ type: Int16.Type) throws -> Int16 {
-        if let value = try self.unbox(self.storage.topContainer, as: Int16.self) { return value }
+        if let value = try unbox(storage.topContainer, as: Int16.self) { return value }
         
         switch options.valueNotFoundDecodingStrategy {
         case .throw:
@@ -68,7 +68,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     }
     
     public func decode(_ type: Int32.Type) throws -> Int32 {
-        if let value = try self.unbox(self.storage.topContainer, as: Int32.self) { return value }
+        if let value = try unbox(storage.topContainer, as: Int32.self) { return value }
         
         switch options.valueNotFoundDecodingStrategy {
         case .throw:
@@ -81,7 +81,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     }
     
     public func decode(_ type: Int64.Type) throws -> Int64 {
-        if let value = try self.unbox(self.storage.topContainer, as: Int64.self) { return value }
+        if let value = try unbox(storage.topContainer, as: Int64.self) { return value }
         
         switch options.valueNotFoundDecodingStrategy {
         case .throw:
@@ -94,7 +94,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     }
     
     public func decode(_ type: UInt.Type) throws -> UInt {
-        if let value = try self.unbox(self.storage.topContainer, as: UInt.self) { return value }
+        if let value = try unbox(storage.topContainer, as: UInt.self) { return value }
         
         switch options.valueNotFoundDecodingStrategy {
         case .throw:
@@ -107,7 +107,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     }
     
     public func decode(_ type: UInt8.Type) throws -> UInt8 {
-        if let value = try self.unbox(self.storage.topContainer, as: UInt8.self) { return value }
+        if let value = try unbox(storage.topContainer, as: UInt8.self) { return value }
         
         switch options.valueNotFoundDecodingStrategy {
         case .throw:
@@ -120,7 +120,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     }
     
     public func decode(_ type: UInt16.Type) throws -> UInt16 {
-        if let value = try self.unbox(self.storage.topContainer, as: UInt16.self) { return value }
+        if let value = try unbox(storage.topContainer, as: UInt16.self) { return value }
         
         switch options.valueNotFoundDecodingStrategy {
         case .throw:
@@ -133,7 +133,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     }
     
     public func decode(_ type: UInt32.Type) throws -> UInt32 {
-        if let value = try self.unbox(self.storage.topContainer, as: UInt32.self) { return value }
+        if let value = try unbox(storage.topContainer, as: UInt32.self) { return value }
         
         switch options.valueNotFoundDecodingStrategy {
         case .throw:
@@ -146,7 +146,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     }
     
     public func decode(_ type: UInt64.Type) throws -> UInt64 {
-        if let value = try self.unbox(self.storage.topContainer, as: UInt64.self) { return value }
+        if let value = try unbox(storage.topContainer, as: UInt64.self) { return value }
         
         switch options.valueNotFoundDecodingStrategy {
         case .throw:
@@ -159,7 +159,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     }
     
     public func decode(_ type: Float.Type) throws -> Float {
-        if let value = try self.unbox(self.storage.topContainer, as: Float.self) { return value }
+        if let value = try unbox(storage.topContainer, as: Float.self) { return value }
         
         switch options.valueNotFoundDecodingStrategy {
         case .throw:
@@ -172,7 +172,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     }
     
     public func decode(_ type: Double.Type) throws -> Double {
-        if let value = try self.unbox(self.storage.topContainer, as: Double.self) { return value }
+        if let value = try unbox(storage.topContainer, as: Double.self) { return value }
         
         switch options.valueNotFoundDecodingStrategy {
         case .throw:
@@ -185,7 +185,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     }
     
     public func decode(_ type: String.Type) throws -> String {
-        if let value = try self.unbox(self.storage.topContainer, as: String.self) { return value }
+        if let value = try unbox(storage.topContainer, as: String.self) { return value }
         
         switch options.valueNotFoundDecodingStrategy {
         case .throw:
@@ -198,6 +198,51 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     }
     
     public func decode<T : Decodable>(_ type: T.Type) throws -> T {
-        return try self.unbox(self.storage.topContainer, as: type)!
+        if type == Date.self || type == NSDate.self {
+            return try decodeIfTypeIsDate()
+        } else if type == Decimal.self || type == NSDecimalNumber.self {
+            return try decodeIfTypeIsDecimal()
+        }
+        
+        if let value = try unbox(storage.topContainer, as: type) { return value }
+        
+        switch options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+        case .useDefaultValue, .custom:
+            return try decodeUsingDefaultValue()
+        }
+    }
+    
+    private func decodeIfTypeIsDate<T: Decodable>() throws -> T {
+        guard let date = try unbox(storage.topContainer, as: Date.self) as? T else {
+            switch options.valueNotFoundDecodingStrategy {
+            case .throw:
+                throw DecodingError.Keyed.valueNotFound(Date.self, codingPath: codingPath)
+            case .useDefaultValue:
+                return Date.defaultValue as! T
+            case .custom(let adapter):
+                let date: Date = try adapter.adapt(self)
+                return date as! T
+            }
+        }
+        
+        return date
+    }
+    
+    private func decodeIfTypeIsDecimal<T: Decodable>() throws -> T {
+        guard let decimal = try unbox(storage.topContainer, as: Decimal.self) as? T else {
+            switch options.valueNotFoundDecodingStrategy {
+            case .throw:
+                throw DecodingError.Keyed.valueNotFound(Decimal.self, codingPath: codingPath)
+            case .useDefaultValue:
+                return Decimal.defaultValue as! T
+            case .custom(let adapter):
+                let decimal: Decimal = try adapter.adapt(self)
+                return decimal as! T
+            }
+        }
+        
+        return decimal
     }
 }

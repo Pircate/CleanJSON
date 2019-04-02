@@ -5,7 +5,7 @@ struct ValueNotFound<T: Codable>: Codable {
     let null: T
 }
 
-struct KeyNotFound: Codable {
+struct KeyNotFound<T: Codable>: Codable {
     let string: String
     let boolean: Bool
     let int: Int
@@ -15,6 +15,7 @@ struct KeyNotFound: Codable {
     let array: [String]
     let object: Nested
     let `enum`: Enum
+    let any: T
 }
 
 struct TypeMismatch: Codable {
@@ -93,6 +94,9 @@ class CleanJSONTests: XCTestCase {
             let arrayValue = try decoder.decode(ValueNotFound<[String]>.self, from: data)
             let objectValue = try decoder.decode(ValueNotFound<Nested>.self, from: data)
             let enumValue = try decoder.decode(ValueNotFound<Enum>.self, from: data)
+            let dateValue = try decoder.decode(ValueNotFound<Date>.self, from: data)
+            let decimalValue = try decoder.decode(ValueNotFound<Decimal>.self, from: data)
+            
             XCTAssertEqual(stringValue.null, "")
             XCTAssertEqual(intValue.null, 0)
             XCTAssertEqual(int8Value.null, 0)
@@ -110,6 +114,8 @@ class CleanJSONTests: XCTestCase {
             XCTAssertEqual(arrayValue.null, [])
             XCTAssertEqual(objectValue.null.string, "")
             XCTAssertEqual(enumValue.null, .case2)
+            XCTAssertEqual(dateValue.null, Date(timeIntervalSinceReferenceDate: 0))
+            XCTAssertEqual(decimalValue.null, Decimal(0))
         } catch {
             XCTAssertNil(error)
         }
@@ -124,7 +130,7 @@ class CleanJSONTests: XCTestCase {
     func testKeyNotFound() {
         let data = "{}".data(using: .utf8)!
         do {
-            let object = try CleanJSONDecoder().decode(KeyNotFound.self, from: data)
+            let object = try CleanJSONDecoder().decode(KeyNotFound<String>.self, from: data)
             XCTAssertEqual(object.string, "")
             XCTAssertEqual(object.boolean, false)
             XCTAssertEqual(object.int, 0)
@@ -134,6 +140,24 @@ class CleanJSONTests: XCTestCase {
             XCTAssertEqual(object.array, [])
             XCTAssertEqual(object.object.string, "")
             XCTAssertEqual(object.enum, Enum.defaultCase)
+            XCTAssertEqual(object.any, "")
+            
+            XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<Bool>.self, from: data).any, false)
+            XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<Int>.self, from: data).any, 0)
+            XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<Int8>.self, from: data).any, 0)
+            XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<Int16>.self, from: data).any, 0)
+            XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<Int32>.self, from: data).any, 0)
+            XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<Int64>.self, from: data).any, 0)
+            XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<UInt>.self, from: data).any, 0)
+            XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<UInt8>.self, from: data).any, 0)
+            XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<UInt16>.self, from: data).any, 0)
+            XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<UInt32>.self, from: data).any, 0)
+            XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<UInt64>.self, from: data).any, 0)
+            XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<Double>.self, from: data).any, 0)
+            XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<[String]>.self, from: data).any, [])
+            XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<Enum>.self, from: data).any, Enum.defaultCase)
+            XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<Date>.self, from: data).any, Date(timeIntervalSinceReferenceDate: 0))
+            XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<Decimal>.self, from: data).any, Decimal(0))
         } catch {
             XCTAssertNil(error)
         }
@@ -225,7 +249,18 @@ class CleanJSONTests: XCTestCase {
     }
     
     func testToJSON() {
-        let object = KeyNotFound(string: "string", boolean: true, int: -10, uint: 10, float: 3.14, double: 3.141592654, array: ["1", "2", "3"], object: Nested(string: "string"), enum: .case3)
+        let object = KeyNotFound<String>(
+            string: "string",
+            boolean: true,
+            int: -10,
+            uint: 10,
+            float: 3.14,
+            double: 3.141592654,
+            array: ["1", "2", "3"],
+            object: Nested(string: "string"),
+            enum: .case3,
+            any: "any")
+        
         do {
             _ = try object.toJSONString()
         } catch {
