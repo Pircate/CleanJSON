@@ -597,3 +597,104 @@ extension _CleanJSONDecoder {
         throw DecodingError.dataCorrupted(context)
     }
 }
+
+extension _CleanJSONKeyedDecodingContainer {
+    
+    func decodeIfPresent(_ type: Bool.Type, forKey key: K) throws -> Bool? {
+        if try keyOrValueNotFount(forKey: key) { return nil }
+        
+        return try decoder.unbox(container[key.stringValue] as Any, as: type)
+    }
+    
+    func decodeIfPresent(_ type: Int.Type, forKey key: K) throws -> Int? {
+        if try keyOrValueNotFount(forKey: key) { return nil }
+        
+        return try decoder.unbox(container[key.stringValue] as Any, as: type)
+    }
+    
+    func decodeIfPresent(_ type: Int8.Type, forKey key: K) throws -> Int8? {
+        if try keyOrValueNotFount(forKey: key) { return nil }
+        
+        return try decoder.unbox(container[key.stringValue] as Any, as: type)
+    }
+    
+    func decodeIfPresent(_ type: Int16.Type, forKey key: K) throws -> Int16? {
+        if try keyOrValueNotFount(forKey: key) { return nil }
+        
+        return try decoder.unbox(container[key.stringValue] as Any, as: type)
+    }
+    
+    func decodeIfPresent(_ type: Int32.Type, forKey key: K) throws -> Int32? {
+        if try keyOrValueNotFount(forKey: key) { return nil }
+        
+        return try decoder.unbox(container[key.stringValue] as Any, as: type)
+    }
+    
+    func decodeIfPresent(_ type: Int64.Type, forKey key: K) throws -> Int64? {
+        if try keyOrValueNotFount(forKey: key) { return nil }
+        
+        return try decoder.unbox(container[key.stringValue] as Any, as: type)
+    }
+    
+    func decodeIfPresent(_ type: UInt.Type, forKey key: K) throws -> UInt? {
+        if try keyOrValueNotFount(forKey: key) { return nil }
+        
+        return try decoder.unbox(container[key.stringValue] as Any, as: type)
+    }
+    
+    func decodeIfPresent(_ type: UInt8.Type, forKey key: K) throws -> UInt8? {
+        if try keyOrValueNotFount(forKey: key) { return nil }
+        
+        return try decoder.unbox(container[key.stringValue] as Any, as: type)
+    }
+    
+    func decodeIfPresent(_ type: UInt16.Type, forKey key: K) throws -> UInt16? {
+        if try keyOrValueNotFount(forKey: key) { return nil }
+        
+        return try decoder.unbox(container[key.stringValue] as Any, as: type)
+    }
+    
+    func decodeIfPresent(_ type: UInt32.Type, forKey key: K) throws -> UInt32? {
+        if try keyOrValueNotFount(forKey: key) { return nil }
+        
+        return try decoder.unbox(container[key.stringValue] as Any, as: type)
+    }
+    
+    func decodeIfPresent(_ type: UInt64.Type, forKey key: K) throws -> UInt64? {
+        if try keyOrValueNotFount(forKey: key) { return nil }
+        
+        return try decoder.unbox(container[key.stringValue] as Any, as: type)
+    }
+    
+    func decodeIfPresent(_ type: Float.Type, forKey key: K) throws -> Float? {
+        if try keyOrValueNotFount(forKey: key) { return nil }
+        
+        return try decoder.unbox(container[key.stringValue] as Any, as: type)
+    }
+    
+    func decodeIfPresent(_ type: Double.Type, forKey key: K) throws -> Double? {
+        if try keyOrValueNotFount(forKey: key) { return nil }
+        
+        return try decoder.unbox(container[key.stringValue] as Any, as: type)
+    }
+
+    func decodeIfPresent(_ type: String.Type, forKey key: K) throws -> String? {
+        if try keyOrValueNotFount(forKey: key) { return nil }
+        
+        return try decoder.unbox(container[key.stringValue] as Any, as: type)
+    }
+    
+    func decodeIfPresent<T>(_ type: T.Type, forKey key: K) throws -> T? where T : Decodable {
+        if try keyOrValueNotFount(forKey: key) { return nil }
+        
+        return try decoder.unbox(container[key.stringValue] as Any, as: type)
+    }
+    
+    private func keyOrValueNotFount(forKey key: K) throws -> Bool {
+        guard contains(key) else { return true }
+        
+        if try decodeNil(forKey: key) { return true }
+        
+        return false
+    }
+}

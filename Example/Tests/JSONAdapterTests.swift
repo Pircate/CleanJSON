@@ -66,7 +66,7 @@ class JSONAdapterTests: XCTestCase {
             XCTAssertEqual(object.null, true)
             XCTAssertEqual(object.stringToInt, 1314)
             XCTAssertEqual(object.stringToDouble, 4.141592654)
-            XCTAssertEqual(object.boolToString, "TRUE")
+            XCTAssertNil(object.boolToString)
             XCTAssertEqual(object.intToString, "$10")
             XCTAssertEqual(object.doubleToString, "3")
         } catch {
