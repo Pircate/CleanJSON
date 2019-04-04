@@ -12,7 +12,7 @@ import CleanJSON
 struct CustomAdapter: JSONAdapter {
     
     func adapt(_ decoder: CleanDecoder) throws -> Bool {
-        return decoder.decodeNull()
+        return decoder.decodeNil()
     }
     
     func adapt(_ decoder: CleanDecoder) throws -> Int {

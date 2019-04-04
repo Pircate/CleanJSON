@@ -82,7 +82,7 @@ struct CustomAdapter: JSONAdapter {
     // 如果想实现 Int 转 Bool 可以自定义解码。
     func adapt(_ decoder: CleanDecoder) throws -> Bool {
         // 值为 null
-        if decoder.decodeNull() {
+        if decoder.decodeNil() {
             return false
         }
         

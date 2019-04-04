@@ -53,7 +53,9 @@ class PerformanceTests: XCTestCase {
             do {
                 let objects = try CleanJSONDecoder().decode([Performance<String>].self, from: data)
                 XCTAssertEqual(objects.count, count)
-            } catch {}
+            } catch {
+                XCTAssertNotNil(error)
+            }
         }
     }
 }

@@ -48,7 +48,7 @@ public extension JSONAdapter {
     }
     
     func adapt(_ decoder: CleanDecoder) throws -> Int {
-        guard !decoder.decodeNull() else { return Int.defaultValue }
+        guard !decoder.decodeNil() else { return Int.defaultValue }
         
         guard let stringValue = try decoder.decodeIfPresent(String.self) else {
             return Int.defaultValue
@@ -74,7 +74,7 @@ public extension JSONAdapter {
     }
     
     func adapt(_ decoder: CleanDecoder) throws -> UInt {
-        guard !decoder.decodeNull() else { return UInt.defaultValue }
+        guard !decoder.decodeNil() else { return UInt.defaultValue }
         
         guard let stringValue = try decoder.decodeIfPresent(String.self) else {
             return UInt.defaultValue
@@ -100,7 +100,7 @@ public extension JSONAdapter {
     }
     
     func adapt(_ decoder: CleanDecoder) throws -> Float {
-        guard !decoder.decodeNull() else { return Float.defaultValue }
+        guard !decoder.decodeNil() else { return Float.defaultValue }
         
         guard let stringValue = try decoder.decodeIfPresent(String.self) else {
             return Float.defaultValue
@@ -110,7 +110,7 @@ public extension JSONAdapter {
     }
     
     func adapt(_ decoder: CleanDecoder) throws -> Double {
-        guard !decoder.decodeNull() else { return Double.defaultValue }
+        guard !decoder.decodeNil() else { return Double.defaultValue }
         
         guard let stringValue = try decoder.decodeIfPresent(String.self) else {
             return Double.defaultValue
@@ -120,7 +120,7 @@ public extension JSONAdapter {
     }
     
     func adapt(_ decoder: CleanDecoder) throws -> String {
-        guard !decoder.decodeNull() else { return String.defaultValue }
+        guard !decoder.decodeNil() else { return String.defaultValue }
         
         if let intValue = try decoder.decodeIfPresent(Int.self) {
             return String(intValue)
