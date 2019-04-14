@@ -43,10 +43,12 @@ public protocol JSONAdapter {
 
 public extension JSONAdapter {
     
+    @inline(__always)
     func adapt(_ decoder: CleanDecoder) throws -> Bool {
         return Bool.defaultValue
     }
     
+    @inline(__always)
     func adapt(_ decoder: CleanDecoder) throws -> Int {
         guard !decoder.decodeNil() else { return Int.defaultValue }
         
@@ -57,22 +59,27 @@ public extension JSONAdapter {
         return Int(stringValue) ?? Int.defaultValue
     }
     
+    @inline(__always)
     func adapt(_ decoder: CleanDecoder) throws -> Int8 {
         return Int8.defaultValue
     }
     
+    @inline(__always)
     func adapt(_ decoder: CleanDecoder) throws -> Int16 {
         return Int16.defaultValue
     }
     
+    @inline(__always)
     func adapt(_ decoder: CleanDecoder) throws -> Int32 {
         return Int32.defaultValue
     }
     
+    @inline(__always)
     func adapt(_ decoder: CleanDecoder) throws -> Int64 {
         return Int64.defaultValue
     }
     
+    @inline(__always)
     func adapt(_ decoder: CleanDecoder) throws -> UInt {
         guard !decoder.decodeNil() else { return UInt.defaultValue }
         
@@ -83,22 +90,27 @@ public extension JSONAdapter {
         return UInt(stringValue) ?? UInt.defaultValue
     }
     
+    @inline(__always)
     func adapt(_ decoder: CleanDecoder) throws -> UInt8 {
         return UInt8.defaultValue
     }
     
+    @inline(__always)
     func adapt(_ decoder: CleanDecoder) throws -> UInt16 {
         return UInt16.defaultValue
     }
     
+    @inline(__always)
     func adapt(_ decoder: CleanDecoder) throws -> UInt32 {
         return UInt32.defaultValue
     }
     
+    @inline(__always)
     func adapt(_ decoder: CleanDecoder) throws -> UInt64 {
         return UInt64.defaultValue
     }
     
+    @inline(__always)
     func adapt(_ decoder: CleanDecoder) throws -> Float {
         guard !decoder.decodeNil() else { return Float.defaultValue }
         
@@ -109,6 +121,7 @@ public extension JSONAdapter {
         return Float(stringValue) ?? Float.defaultValue
     }
     
+    @inline(__always)
     func adapt(_ decoder: CleanDecoder) throws -> Double {
         guard !decoder.decodeNil() else { return Double.defaultValue }
         
@@ -119,6 +132,7 @@ public extension JSONAdapter {
         return Double(stringValue) ?? Double.defaultValue
     }
     
+    @inline(__always)
     func adapt(_ decoder: CleanDecoder) throws -> String {
         guard !decoder.decodeNil() else { return String.defaultValue }
         
@@ -133,10 +147,12 @@ public extension JSONAdapter {
         return String.defaultValue
     }
     
+    @inline(__always)
     func adapt(_ decoder: CleanDecoder) throws -> Date {
         return Date.defaultValue
     }
     
+    @inline(__always)
     func adapt(_ decoder: CleanDecoder) throws -> Decimal {
         return Decimal.defaultValue
     }
