@@ -588,7 +588,11 @@ extension _CleanJSONDecoder {
         } else if let decimal = Decimal.defaultValue as? T {
             return decimal
         } else if let object = try? unbox("{}", as: T.self) {
+            #if swift(<5)
+            if let obj = object { return obj }
+            #else
             return object
+            #endif
         }
         
         let context = DecodingError.Context(
