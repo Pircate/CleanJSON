@@ -2,7 +2,7 @@
 # * https://www.objc.io/issues/6-build-tools/travis-ci/
 # * https://github.com/supermarin/xcpretty#usage
 
-osx_image: xcode10
+osx_image: xcode10.2
 language: swift
 cache: cocoapods
 podfile: Example/Podfile
@@ -11,4 +11,4 @@ before_install:
 - pod install --project-directory=Example
 script:
 - xcodebuild test -workspace Example/CleanJSON.xcworkspace -scheme CleanJSON_Tests -destination 'platform=iOS Simulator,name=iPhone SE'
-- pod lib lint --no-clean
+- pod lib lint --allow-warnings
