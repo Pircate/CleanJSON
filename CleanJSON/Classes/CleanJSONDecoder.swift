@@ -19,6 +19,7 @@ open class CleanJSONDecoder: JSONDecoder {
         let keyNotFoundDecodingStrategy: KeyNotFoundDecodingStrategy
         let valueNotFoundDecodingStrategy: ValueNotFoundDecodingStrategy
         let nestedContainerDecodingStrategy: NestedContainerDecodingStrategy
+        let jsonStringDecodingStrategy: JSONStringDecodingStrategy
         let userInfo: [CodingUserInfoKey : Any]
     }
     
@@ -31,6 +32,7 @@ open class CleanJSONDecoder: JSONDecoder {
                         keyNotFoundDecodingStrategy: keyNotFoundDecodingStrategy,
                         valueNotFoundDecodingStrategy: valueNotFoundDecodingStrategy,
                         nestedContainerDecodingStrategy: nestedContainerDecodingStrategy,
+                        jsonStringDecodingStrategy: jsonStringDecodingStrategy,
                         userInfo: userInfo)
     }
     
@@ -42,6 +44,9 @@ open class CleanJSONDecoder: JSONDecoder {
     
     /// The strategy to use for decoding nested container.
     open var nestedContainerDecodingStrategy: NestedContainerDecodingStrategy = .init()
+    
+    /// The strategy to use for decoding JSON string.
+    open var jsonStringDecodingStrategy: JSONStringDecodingStrategy = .containsKeys([])
     
     // MARK: - Decoding Values
     

@@ -64,7 +64,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let json = """
+        let json = #"""
              {
                  "boolean": true,
                  "integer": 1,
@@ -73,19 +73,20 @@ class ViewController: UIViewController {
                  "array": [1, 2.1, "3", true],
                  "snake_case": "convertFromSnakeCase",
                  "date": "date",
-                 "nested": {
-                     "a": "alpha",
-                     "b": 1,
-                     "c": "charlie"
-                 }
+                 "nested": "{\"a\": \"alpha\", \"b\": 1, \"c\": 2}"
              }
-        """.data(using: .utf8)!
+        """#.data(using: .utf8)!
         
         do {
             let decoder = CleanJSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            decoder.valueNotFoundDecodingStrategy = .custom(CustomAdapter())
             decoder.dateDecodingStrategy = .secondsSince1970
+            
+            // 值为 null 或类型不匹配时解码策略
+            decoder.valueNotFoundDecodingStrategy = .custom(CustomAdapter())
+            
+            // JSON 字符串转对象解码策略
+            decoder.jsonStringDecodingStrategy = .all
             
             let model = try decoder.decode(TestModel<Enum>.self, from: json)
             debugPrint(model.boolean)
@@ -106,4 +107,3 @@ class ViewController: UIViewController {
         }
     }
 }
-

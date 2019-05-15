@@ -18,6 +18,11 @@ extension CleanJSONDecoder {
         case useDefaultValue
         case custom(JSONAdapter)
     }
+    
+    public enum JSONStringDecodingStrategy {
+        case containsKeys([CodingKey])
+        case all
+    }
 }
 
 extension CleanJSONDecoder {
