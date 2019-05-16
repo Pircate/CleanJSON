@@ -223,7 +223,7 @@ private extension _CleanJSONDecoder {
             case .throw:
                 throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
             case .useDefaultValue:
-                return Date.defaultValue
+                return Date.defaultValue(for: options.dateDecodingStrategy)
             case .custom(let adapter):
                 return try adapter.adapt(self)
             }

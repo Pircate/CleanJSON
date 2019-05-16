@@ -79,4 +79,25 @@ class DecodeDateTests: XCTestCase {
             XCTAssertNil(error)
         }
     }
+    
+    func testDecodeDateNull() {
+        let data = """
+                {
+                  "date": null,
+                }
+                """.data(using: .utf8)!
+        do {
+            // Since1970
+            let decoder = CleanJSONDecoder()
+            decoder.dateDecodingStrategy = .millisecondsSince1970
+            let model = try decoder.decode(DateModel.self, from: data)
+            XCTAssertEqual(model.date, Date(timeIntervalSince1970: 0))
+            
+            // SinceReferenceDate
+            let model1 = try CleanJSONDecoder().decode(DateModel.self, from: data)
+            XCTAssertEqual(model1.date, Date(timeIntervalSinceReferenceDate: 0))
+        } catch {
+            XCTAssertNil(error)
+        }
+    }
 }

@@ -607,7 +607,7 @@ extension _CleanJSONDecoder {
             return int
         }else if let double = Double.defaultValue as? T {
             return double
-        } else if let date = Date.defaultValue as? T {
+        } else if let date = Date.defaultValue(for: options.dateDecodingStrategy) as? T {
             return date
         } else if let decimal = Decimal.defaultValue as? T {
             return decimal
@@ -730,6 +730,8 @@ extension _CleanJSONKeyedDecodingContainer {
 private extension String {
     
     func decode<T: Decodable>(to type: T.Type, options: CleanJSONDecoder._Options) -> T? {
+        guard hasPrefix("{") || hasPrefix("[") else { return nil }
+        
         guard let data = data(using: .utf8),
             let topLevel = try? JSONSerialization.jsonObject(with: data) else { return nil }
         
