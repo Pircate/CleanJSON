@@ -363,17 +363,9 @@ extension _CleanJSONDecoder {
             return try Data(from: self)
             
         case .base64:
-            guard let string = value as? String else {
-                throw DecodingError._typeMismatch(
-                    at: self.codingPath,
-                    expectation: type, reality: value)
-            }
+            guard let string = value as? String else { return nil }
             
-            guard let data = Data(base64Encoded: string) else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(
-                    codingPath: self.codingPath,
-                    debugDescription: "Encountered Data is not valid Base64."))
-            }
+            guard let data = Data(base64Encoded: string) else { return nil }
             
             return data
             

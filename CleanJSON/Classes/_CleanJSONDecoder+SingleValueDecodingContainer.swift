@@ -200,6 +200,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
     public func decode<T : Decodable>(_ type: T.Type) throws -> T {
         if type == Date.self || type == NSDate.self {
             return try decode(as: Date.self) as! T
+        } else if type == Data.self || type == NSData.self {
+            return try decode(as: Data.self) as! T
         } else if type == Decimal.self || type == NSDecimalNumber.self {
             return try decode(as: Decimal.self) as! T
         }
@@ -230,6 +232,21 @@ private extension _CleanJSONDecoder {
         }
         
         return date
+    }
+    
+    func decode(as type: Data.Type) throws -> Data {
+        guard let data = try unbox(storage.topContainer, as: type) else {
+            switch options.valueNotFoundDecodingStrategy {
+            case .throw:
+                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
+            case .useDefaultValue:
+                return Data.defaultValue
+            case .custom(let adapter):
+                return try adapter.adapt(self)
+            }
+        }
+        
+        return data
     }
     
     func decode(as type: Decimal.Type) throws -> Decimal {

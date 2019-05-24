@@ -38,6 +38,8 @@ public protocol JSONAdapter {
     
     func adapt(_ decoder: CleanDecoder) throws -> Date
     
+    func adapt(_ decoder: CleanDecoder) throws -> Data
+    
     func adapt(_ decoder: CleanDecoder) throws -> Decimal
 }
 
@@ -152,6 +154,11 @@ public extension JSONAdapter {
         guard let decoder = decoder as? _CleanJSONDecoder else { return Date.defaultValue }
         
         return Date.defaultValue(for: decoder.options.dateDecodingStrategy)
+    }
+    
+    @inline(__always)
+    func adapt(_ decoder: CleanDecoder) throws -> Data {
+        return Data.defaultValue
     }
     
     @inline(__always)

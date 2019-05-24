@@ -9,10 +9,21 @@ struct KeyNotFound<T: Codable>: Codable {
     let string: String
     let boolean: Bool
     let int: Int
+    let int8: Int8
+    let int16: Int16
+    let int32: Int32
+    let int64: Int64
     let uint: UInt
+    let uint8: UInt8
+    let uint16: UInt16
+    let uint32: UInt32
+    let uint64: UInt64
     let float: Float
     let double: Double
     let array: [String]
+    let date: Date
+    let decimal: Decimal
+    let data: Data
     let object: Nested
     let `enum`: Enum
     let any: T
@@ -96,6 +107,7 @@ class CleanJSONTests: XCTestCase {
             let enumValue = try decoder.decode(ValueNotFound<Enum>.self, from: data)
             let dateValue = try decoder.decode(ValueNotFound<Date>.self, from: data)
             let decimalValue = try decoder.decode(ValueNotFound<Decimal>.self, from: data)
+            let dataValue = try decoder.decode(ValueNotFound<Data>.self, from: data)
             
             XCTAssertEqual(stringValue.null, "")
             XCTAssertEqual(intValue.null, 0)
@@ -116,6 +128,7 @@ class CleanJSONTests: XCTestCase {
             XCTAssertEqual(enumValue.null, .case2)
             XCTAssertEqual(dateValue.null, Date(timeIntervalSinceReferenceDate: 0))
             XCTAssertEqual(decimalValue.null, Decimal(0))
+            XCTAssertEqual(dataValue.null, Data())
         } catch {
             XCTAssertNil(error)
         }
@@ -134,10 +147,21 @@ class CleanJSONTests: XCTestCase {
             XCTAssertEqual(object.string, "")
             XCTAssertEqual(object.boolean, false)
             XCTAssertEqual(object.int, 0)
+            XCTAssertEqual(object.int8, 0)
+            XCTAssertEqual(object.int16, 0)
+            XCTAssertEqual(object.int32, 0)
+            XCTAssertEqual(object.int64, 0)
             XCTAssertEqual(object.uint, 0)
+            XCTAssertEqual(object.uint8, 0)
+            XCTAssertEqual(object.uint16, 0)
+            XCTAssertEqual(object.uint32, 0)
+            XCTAssertEqual(object.uint64, 0)
             XCTAssertEqual(object.float, 0)
             XCTAssertEqual(object.double, 0)
             XCTAssertEqual(object.array, [])
+            XCTAssertEqual(object.date, Date(timeIntervalSinceReferenceDate: 0))
+            XCTAssertEqual(object.decimal, Decimal(0))
+            XCTAssertEqual(object.data, Data())
             XCTAssertEqual(object.object.string, "")
             XCTAssertEqual(object.enum, Enum.defaultCase)
             XCTAssertEqual(object.any, "")
@@ -253,16 +277,27 @@ class CleanJSONTests: XCTestCase {
             string: "string",
             boolean: true,
             int: -10,
+            int8: -8,
+            int16: -16,
+            int32: -32,
+            int64: -64,
             uint: 10,
+            uint8: 8,
+            uint16: 16,
+            uint32: 32,
+            uint64: 64,
             float: 3.14,
             double: 3.141592654,
             array: ["1", "2", "3"],
+            date: Date(timeIntervalSinceReferenceDate: 0),
+            decimal: Decimal(0),
+            data: Data(),
             object: Nested(string: "string"),
             enum: .case3,
             any: "any")
         
         do {
-            _ = try object.toJSONString()
+            debugPrint(try object.toJSONString() ?? "")
         } catch {
             XCTAssertNil(error)
         }

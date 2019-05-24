@@ -609,9 +609,11 @@ extension _CleanJSONDecoder {
             return double
         } else if let date = Date.defaultValue(for: options.dateDecodingStrategy) as? T {
             return date
+        } else if let data = Data.defaultValue as? T {
+            return data
         } else if let decimal = Decimal.defaultValue as? T {
             return decimal
-        } else if let object = try? unbox("{}", as: T.self) {
+        } else if let object = try? unbox([:], as: T.self) {
             #if swift(<5)
             if let obj = object { return obj }
             #else
@@ -721,9 +723,7 @@ extension _CleanJSONKeyedDecodingContainer {
     private func keyOrValueNotFount(forKey key: K) throws -> Bool {
         guard contains(key) else { return true }
         
-        if try decodeNil(forKey: key) { return true }
-        
-        return false
+        return try decodeNil(forKey: key)
     }
 }
 

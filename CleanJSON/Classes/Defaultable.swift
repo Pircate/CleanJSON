@@ -109,6 +109,12 @@ extension Date: Defaultable {
     }
 }
 
+extension Data: Defaultable {
+    static var defaultValue: Data {
+        return Data()
+    }
+}
+
 extension Decimal: Defaultable {
     static var defaultValue: Decimal {
         return Decimal(0)
