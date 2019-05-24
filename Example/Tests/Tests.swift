@@ -27,6 +27,7 @@ struct KeyNotFound<T: Codable>: Codable {
     let object: Nested
     let `enum`: Enum
     let any: T
+    let dict: [String: T]
 }
 
 struct TypeMismatch: Codable {
@@ -108,6 +109,7 @@ class CleanJSONTests: XCTestCase {
             let dateValue = try decoder.decode(ValueNotFound<Date>.self, from: data)
             let decimalValue = try decoder.decode(ValueNotFound<Decimal>.self, from: data)
             let dataValue = try decoder.decode(ValueNotFound<Data>.self, from: data)
+            let dictValue = try decoder.decode(ValueNotFound<[String: String]>.self, from: data)
             
             XCTAssertEqual(stringValue.null, "")
             XCTAssertEqual(intValue.null, 0)
@@ -129,6 +131,7 @@ class CleanJSONTests: XCTestCase {
             XCTAssertEqual(dateValue.null, Date(timeIntervalSinceReferenceDate: 0))
             XCTAssertEqual(decimalValue.null, Decimal(0))
             XCTAssertEqual(dataValue.null, Data())
+            XCTAssertEqual(dictValue.null, [:])
         } catch {
             XCTAssertNil(error)
         }
@@ -165,6 +168,7 @@ class CleanJSONTests: XCTestCase {
             XCTAssertEqual(object.object.string, "")
             XCTAssertEqual(object.enum, Enum.defaultCase)
             XCTAssertEqual(object.any, "")
+            XCTAssertEqual(object.dict, [:])
             
             XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<Bool>.self, from: data).any, false)
             XCTAssertEqual(try CleanJSONDecoder().decode(KeyNotFound<Int>.self, from: data).any, 0)
@@ -294,7 +298,8 @@ class CleanJSONTests: XCTestCase {
             data: Data(),
             object: Nested(string: "string"),
             enum: .case3,
-            any: "any")
+            any: "any",
+            dict: ["key": "value"])
         
         do {
             debugPrint(try object.toJSONString() ?? "")

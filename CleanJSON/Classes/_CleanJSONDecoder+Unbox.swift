@@ -396,13 +396,9 @@ extension _CleanJSONDecoder {
     func unbox<T>(_ value: Any, as type: _JSONStringDictionaryDecodableMarker.Type) throws -> T? {
         guard !(value is NSNull) else { return nil }
         
+        guard let dict = value as? NSDictionary else { return nil }
+        
         var result = [String : Any]()
-        guard let dict = value as? NSDictionary else {
-            throw DecodingError._typeMismatch(
-                at: self.codingPath,
-                expectation: type,
-                reality: value)
-        }
         let elementType = type.elementType
         for (key, value) in dict {
             let key = key as! String

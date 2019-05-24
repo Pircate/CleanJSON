@@ -21,6 +21,8 @@ struct TestModel<T: Codable>: Codable {
     let optional: String?
     let date: Date
     let decimal: Decimal
+    let data: Data
+    let dict: [String: T]
     
     struct Nested: Codable {
         let a: String
@@ -73,7 +75,9 @@ class ViewController: UIViewController {
                  "array": [1, 2.1, "3", true],
                  "snake_case": "convertFromSnakeCase",
                  "date": "date",
-                 "nested": "{\"a\": \"alpha\", \"b\": 1, \"c\": 2}"
+                 "nested": "{\"a\": \"alpha\", \"b\": 1, \"c\": 2}",
+                 "data": "",
+                 "dict": {"hello": 2}
              }
         """#.data(using: .utf8)!
         
@@ -102,6 +106,8 @@ class ViewController: UIViewController {
             debugPrint(model.optional ?? "nil")
             debugPrint(model.date)
             debugPrint(model.decimal)
+            debugPrint(model.data)
+            debugPrint(model.dict)
         } catch {
             debugPrint(error)
         }
