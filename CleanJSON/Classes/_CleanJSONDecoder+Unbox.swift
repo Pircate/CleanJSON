@@ -375,6 +375,12 @@ extension _CleanJSONDecoder {
         }
     }
     
+    func unbox(_ value: Any, as type: URL.Type) throws -> URL? {
+        guard let string = try unbox(value, as: String.self) else { return nil }
+        
+        return URL(string: string)
+    }
+    
     func unbox(_ value: Any, as type: Decimal.Type) throws -> Decimal? {
         guard !(value is NSNull) else { return nil }
         
@@ -416,16 +422,7 @@ extension _CleanJSONDecoder {
         } else if type == Data.self || type == NSData.self {
             return try self.unbox(value, as: Data.self)
         } else if type == URL.self || type == NSURL.self {
-            guard let urlString = try self.unbox(value, as: String.self) else {
-                return nil
-            }
-            
-            guard let url = URL(string: urlString) else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(
-                    codingPath: self.codingPath,
-                    debugDescription: "Invalid URL string."))
-            }
-            return url
+            return try unbox(value, as: URL.self)
         } else if type == Decimal.self || type == NSDecimalNumber.self {
             return try self.unbox(value, as: Decimal.self)
         } else if let stringKeyedDictType = type as? _JSONStringDictionaryDecodableMarker.Type {

@@ -407,6 +407,8 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
             case .throw:
                 throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
             case .useDefaultValue:
+                decoder.codingPath.append(key)
+                defer { decoder.codingPath.removeLast() }
                 return try decoder.decodeUsingDefaultValue()
             }
         }
@@ -623,7 +625,7 @@ extension _CleanJSONDecoder {
         
         let context = DecodingError.Context(
             codingPath: codingPath,
-            debugDescription: "Key: <\(codingPath)> cannot be decoded")
+            debugDescription: "Key: <\(codingPath)> cannot be decoded as default value.")
         throw DecodingError.dataCorrupted(context)
     }
 }
@@ -847,6 +849,8 @@ extension _CleanJSONKeyedDecodingContainer {
             return try decodeIfPresent(entry, as: Date.self, forKey: key) as? T
         } else if type == Data.self || type == NSData.self {
             return try decodeIfPresent(entry, as: Data.self, forKey: key) as? T
+        } else if type == URL.self || type == NSURL.self {
+            return try decodeIfPresent(entry, as: URL.self, forKey: key) as? T
         } else if type == Decimal.self || type == NSDecimalNumber.self {
             return try decodeIfPresent(entry, as: Decimal.self, forKey: key) as? T
         }
@@ -872,6 +876,19 @@ private extension _CleanJSONKeyedDecodingContainer {
     
     func decodeIfPresent(_ value: Any, as type: Data.Type, forKey key: K) throws -> Data? {
         if let data = try decoder.unbox(value, as: type) { return data }
+        
+        switch decoder.options.valueNotFoundDecodingStrategy {
+        case .throw:
+            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
+        case .useDefaultValue:
+            return nil
+        case .custom(let adapter):
+            return try adapter.adaptIfPresent(decoder)
+        }
+    }
+    
+    func decodeIfPresent(_ value: Any, as type: URL.Type, forKey key: K) throws -> URL? {
+        if let url = try decoder.unbox(value, as: type) { return url }
         
         switch decoder.options.valueNotFoundDecodingStrategy {
         case .throw:

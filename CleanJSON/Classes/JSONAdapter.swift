@@ -74,6 +74,8 @@ public protocol JSONAdapter {
     
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> Data?
     
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> URL?
+    
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> Decimal?
 }
 
@@ -264,6 +266,10 @@ public extension JSONAdapter {
     }
     
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> Data? {
+        return nil
+    }
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> URL? {
         return nil
     }
     

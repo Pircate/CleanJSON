@@ -93,6 +93,11 @@ struct CustomAdapter: JSONAdapter {
         
         return false
     }
+    
+    // 可选的 URL 类型解析失败的时候返回一个默认 url
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> URL? {
+        return URL(string: "https://google.com")
+    }
 }
 
 decoder.valueNotFoundDecodingStrategy = .custom(CustomAdapter())

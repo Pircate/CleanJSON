@@ -22,6 +22,7 @@ struct TestModel<T: Codable>: Codable {
     let date: Date
     let decimal: Decimal
     let data: Data
+    let url: URL?
     let dict: [String: T]
     
     struct Nested: Codable {
@@ -59,6 +60,11 @@ struct CustomAdapter: JSONAdapter {
     func adapt(_ decoder: CleanDecoder) throws -> Date {
         return Date()
     }
+    
+    // 可选的 URL 类型解析失败的时候返回一个默认 url
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> URL? {
+        return URL(string: "https://google.com")
+    }
 }
 
 class ViewController: UIViewController {
@@ -77,6 +83,7 @@ class ViewController: UIViewController {
                  "date": "date",
                  "nested": "{\"a\": \"alpha\", \"b\": 1, \"c\": 2}",
                  "data": "",
+                 "url": null,
                  "dict": {"hello": 2}
              }
         """#.data(using: .utf8)!
@@ -105,6 +112,7 @@ class ViewController: UIViewController {
             debugPrint("snakeCase:", model.snakeCase)
             debugPrint("optional:", model.optional)
             debugPrint("date:", model.date)
+            debugPrint("url:", model.url)
             debugPrint("decimal:", model.decimal)
             debugPrint("data:", model.data)
             debugPrint("dict:", model.dict)
