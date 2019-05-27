@@ -1,5 +1,5 @@
 // 
-//  _CleanJSONKey.swift
+//  CleanJSONKey.swift
 //  CleanJSON
 //
 //  Created by Pircate(swifter.dev@gmail.com) on 2018/10/11
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct _CleanJSONKey : CodingKey {
+struct CleanJSONKey : CodingKey {
     
     public var stringValue: String
     
@@ -34,5 +34,5 @@ struct _CleanJSONKey : CodingKey {
         self.intValue = index
     }
     
-    static let `super` = _CleanJSONKey(stringValue: "super")!
+    static let `super` = CleanJSONKey(stringValue: "super")!
 }

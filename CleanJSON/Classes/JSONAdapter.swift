@@ -205,74 +205,92 @@ public extension JSONAdapter {
 
 public extension JSONAdapter {
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> Bool? {
         return nil
     }
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int? {
         return nil
     }
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int8? {
         return nil
     }
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int16? {
         return nil
     }
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int32? {
         return nil
     }
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int64? {
         return nil
     }
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt? {
         return nil
     }
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt8? {
         return nil
     }
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt16? {
         return nil
     }
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt32? {
         return nil
     }
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt64? {
         return nil
     }
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> Float? {
         return nil
     }
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> Double? {
         return nil
     }
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> String? {
         return nil
     }
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> Date? {
         return nil
     }
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> Data? {
         return nil
     }
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> URL? {
         return nil
     }
     
+    @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> Decimal? {
         return nil
     }

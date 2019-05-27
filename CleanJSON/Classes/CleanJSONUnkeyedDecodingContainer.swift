@@ -1,5 +1,5 @@
 // 
-//  _CleanJSONUnkeyedDecodingContainer.swift
+//  CleanJSONUnkeyedDecodingContainer.swift
 //  CleanJSON
 //
 //  Created by Pircate(swifter.dev@gmail.com) on 2018/10/11
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
+struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     // MARK: Properties
     
     /// A reference to the decoder we're reading from.
@@ -45,7 +45,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     
     public mutating func decodeNil() throws -> Bool {
         guard !self.isAtEnd else {
-            throw DecodingError.valueNotFound(Any?.self, DecodingError.Context(codingPath: self.decoder.codingPath + [_CleanJSONKey(index: self.currentIndex)], debugDescription: "Unkeyed container is at end."))
+            throw DecodingError.valueNotFound(Any?.self, DecodingError.Context(codingPath: self.decoder.codingPath + [CleanJSONKey(index: self.currentIndex)], debugDescription: "Unkeyed container is at end."))
         }
         
         if self.container[self.currentIndex] is NSNull {
@@ -61,7 +61,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return try decode(isAtEnd: true)
         }
         
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: Bool.self) else {
@@ -94,7 +94,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return try decode(isAtEnd: true)
         }
         
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: Int.self) else {
@@ -127,7 +127,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return Int8.defaultValue
         }
         
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: Int8.self) else {
@@ -143,7 +143,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return Int16.defaultValue
         }
         
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: Int16.self) else {
@@ -159,7 +159,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return Int32.defaultValue
         }
         
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: Int32.self) else {
@@ -175,7 +175,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return Int64.defaultValue
         }
         
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: Int64.self) else {
@@ -191,7 +191,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return try decode(isAtEnd: true)
         }
         
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: UInt.self) else {
@@ -224,7 +224,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return UInt8.defaultValue
         }
         
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: UInt8.self) else {
@@ -240,7 +240,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return UInt16.defaultValue
         }
         
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: UInt16.self) else {
@@ -256,7 +256,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return UInt32.defaultValue
         }
         
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: UInt32.self) else {
@@ -272,7 +272,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return UInt64.defaultValue
         }
         
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: UInt64.self) else {
@@ -288,7 +288,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return try decode(isAtEnd: true)
         }
         
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: Float.self) else {
@@ -321,7 +321,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return try decode(isAtEnd: true)
         }
         
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: Double.self) else {
@@ -354,7 +354,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             return try decode(isAtEnd: true)
         }
         
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: String.self) else {
@@ -384,14 +384,14 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     
     public mutating func decode<T : Decodable>(_ type: T.Type) throws -> T {
         guard !self.isAtEnd else {
-            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath + [_CleanJSONKey(index: self.currentIndex)], debugDescription: "Unkeyed container is at end."))
+            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath + [CleanJSONKey(index: self.currentIndex)], debugDescription: "Unkeyed container is at end."))
         }
         
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: type) else {
-            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath + [_CleanJSONKey(index: self.currentIndex)], debugDescription: "Expected \(type) but found null instead."))
+            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath + [CleanJSONKey(index: self.currentIndex)], debugDescription: "Expected \(type) but found null instead."))
         }
         
         self.currentIndex += 1
@@ -399,7 +399,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     }
     
     public mutating func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type) throws -> KeyedDecodingContainer<NestedKey> {
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard !self.isAtEnd else {
@@ -437,12 +437,12 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     }
     
     private func nestedContainer<NestedKey>(wrapping dictionary: [String: Any] = [:]) -> KeyedDecodingContainer<NestedKey> {
-        let container = _CleanJSONKeyedDecodingContainer<NestedKey>(referencing: self.decoder, wrapping: dictionary)
+        let container = CleanJSONKeyedDecodingContainer<NestedKey>(referencing: self.decoder, wrapping: dictionary)
         return KeyedDecodingContainer(container)
     }
     
     public mutating func nestedUnkeyedContainer() throws -> UnkeyedDecodingContainer {
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard !self.isAtEnd else {
@@ -461,7 +461,7 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                     debugDescription: "Cannot get keyed decoding container -- found null value instead.")
             case .useEmptyContainer:
                 self.currentIndex += 1
-                return _CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
+                return CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
             }
         }
         
@@ -471,16 +471,16 @@ struct _CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                 throw DecodingError._typeMismatch(at: self.codingPath, expectation: [Any].self, reality: value)
             case .useEmptyContainer:
                 self.currentIndex += 1
-                return _CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
+                return CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
             }
         }
         
         self.currentIndex += 1
-        return _CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: array)
+        return CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: array)
     }
     
     public mutating func superDecoder() throws -> Decoder {
-        self.decoder.codingPath.append(_CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard !self.isAtEnd else {

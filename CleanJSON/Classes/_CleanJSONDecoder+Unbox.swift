@@ -403,7 +403,7 @@ extension _CleanJSONDecoder {
         let elementType = type.elementType
         for (key, value) in dict {
             let key = key as! String
-            self.codingPath.append(_CleanJSONKey(stringValue: key, intValue: nil))
+            self.codingPath.append(CleanJSONKey(stringValue: key, intValue: nil))
             defer { self.codingPath.removeLast() }
             
             result[key] = try unbox_(value, as: elementType)

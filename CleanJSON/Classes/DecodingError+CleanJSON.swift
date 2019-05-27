@@ -79,7 +79,7 @@ extension DecodingError {
             return DecodingError.valueNotFound(
                 type,
                 DecodingError.Context(
-                    codingPath: codingPath + [_CleanJSONKey(index: currentIndex)],
+                    codingPath: codingPath + [CleanJSONKey(index: currentIndex)],
                     debugDescription: debugDescription))
         }
     }

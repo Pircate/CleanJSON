@@ -1,5 +1,5 @@
 //
-//  _CleanJSONKeyedDecodingContainer.swift
+//  CleanJSONKeyedDecodingContainer.swift
 //  CleanJSON
 //
 //  Created by Pircate(swifter.dev@gmail.com) on 2018/10/10
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerProtocol {
+struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerProtocol {
     
     typealias Key = K
     
@@ -39,7 +39,7 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
             }, uniquingKeysWith: { (first, _) in first })
         case .custom(let converter):
             self.container = Dictionary(container.map {
-                key, value in (converter(decoder.codingPath + [_CleanJSONKey(stringValue: key, intValue: nil)]).stringValue, value)
+                key, value in (converter(decoder.codingPath + [CleanJSONKey(stringValue: key, intValue: nil)]).stringValue, value)
             }, uniquingKeysWith: { (first, _) in first })
         @unknown default:
             self.container = container
@@ -486,7 +486,7 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     
     private func nestedContainer<NestedKey>(wrapping dictionary: [String: Any] = [:])
         -> KeyedDecodingContainer<NestedKey> {
-            let container = _CleanJSONKeyedDecodingContainer<NestedKey>(
+            let container = CleanJSONKeyedDecodingContainer<NestedKey>(
                 referencing: decoder,
                 wrapping: dictionary)
             return KeyedDecodingContainer(container)
@@ -501,7 +501,7 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
             case .throw:
                 throw DecodingError.Nested.keyNotFound(key, codingPath: codingPath, isUnkeyed: true)
             case .useEmptyContainer:
-                return _CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
+                return CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
             }
         }
         
@@ -512,11 +512,11 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
                     at: self.codingPath,
                     expectation: [Any].self, reality: value)
             case .useEmptyContainer:
-                return _CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
+                return CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
             }
         }
         
-        return _CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: array)
+        return CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: array)
     }
     
     private func _superDecoder(forKey key: CodingKey) throws -> Decoder {
@@ -528,7 +528,7 @@ struct _CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPr
     }
     
     public func superDecoder() throws -> Decoder {
-        return try _superDecoder(forKey: _CleanJSONKey.super)
+        return try _superDecoder(forKey: CleanJSONKey.super)
     }
     
     public func superDecoder(forKey key: Key) throws -> Decoder {
@@ -584,7 +584,7 @@ private extension CleanJSONDecoder.KeyDecodingStrategy {
     }
 }
 
-private extension _CleanJSONKeyedDecodingContainer {
+private extension CleanJSONKeyedDecodingContainer {
     
     func decodeIfKeyNotFound<T>(_ key: Key) throws -> T where T: Decodable, T: Defaultable {
         switch decoder.options.keyNotFoundDecodingStrategy {
@@ -630,7 +630,7 @@ extension _CleanJSONDecoder {
     }
 }
 
-extension _CleanJSONKeyedDecodingContainer {
+extension CleanJSONKeyedDecodingContainer {
     
     func decodeIfPresent(_ type: Bool.Type, forKey key: K) throws -> Bool? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
@@ -859,7 +859,7 @@ extension _CleanJSONKeyedDecodingContainer {
     }
 }
 
-private extension _CleanJSONKeyedDecodingContainer {
+private extension CleanJSONKeyedDecodingContainer {
     
     func decodeIfPresent(_ value: Any, as type: Date.Type, forKey key: K) throws -> Date? {
         if let date = try decoder.unbox(value, as: type) { return date }
@@ -916,7 +916,7 @@ private extension _CleanJSONKeyedDecodingContainer {
 
 private extension String {
     
-    func decode<T: Decodable>(to type: T.Type, options: CleanJSONDecoder._Options) -> T? {
+    func decode<T: Decodable>(to type: T.Type, options: CleanJSONDecoder.Options) -> T? {
         guard hasPrefix("{") || hasPrefix("[") else { return nil }
         
         guard let data = data(using: .utf8),
