@@ -409,7 +409,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
             case .useDefaultValue:
                 decoder.codingPath.append(key)
                 defer { decoder.codingPath.removeLast() }
-                return try decoder.decodeUsingDefaultValue()
+                return try decoder.decodeAsDefaultValue()
             }
         }
         
@@ -423,7 +423,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
             case .throw:
                 throw DecodingError.Keyed.valueNotFound(type, codingPath: decoder.codingPath)
             case .useDefaultValue:
-                return try decoder.decodeUsingDefaultValue()
+                return try decoder.decodeAsDefaultValue()
             case .custom:
                 decoder.storage.push(container: entry)
                 defer { decoder.storage.popContainer() }
@@ -533,100 +533,6 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
     
     public func superDecoder(forKey key: Key) throws -> Decoder {
         return try _superDecoder(forKey: key)
-    }
-}
-
-private extension CleanJSONDecoder.KeyDecodingStrategy {
-    
-    static func _convertFromSnakeCase(_ stringKey: String) -> String {
-        guard !stringKey.isEmpty else { return stringKey }
-        
-        // Find the first non-underscore character
-        guard let firstNonUnderscore = stringKey.firstIndex(where: { $0 != "_" }) else {
-            // Reached the end without finding an _
-            return stringKey
-        }
-        
-        // Find the last non-underscore character
-        var lastNonUnderscore = stringKey.index(before: stringKey.endIndex)
-        while lastNonUnderscore > firstNonUnderscore && stringKey[lastNonUnderscore] == "_" {
-            stringKey.formIndex(before: &lastNonUnderscore)
-        }
-        
-        let keyRange = firstNonUnderscore...lastNonUnderscore
-        let leadingUnderscoreRange = stringKey.startIndex..<firstNonUnderscore
-        let trailingUnderscoreRange = stringKey.index(after: lastNonUnderscore)..<stringKey.endIndex
-        
-        let components = stringKey[keyRange].split(separator: "_")
-        let joinedString : String
-        if components.count == 1 {
-            // No underscores in key, leave the word as is - maybe already camel cased
-            joinedString = String(stringKey[keyRange])
-        } else {
-            joinedString = ([components[0].lowercased()] + components[1...].map { $0.capitalized }).joined()
-        }
-        
-        // Do a cheap isEmpty check before creating and appending potentially empty strings
-        let result : String
-        if (leadingUnderscoreRange.isEmpty && trailingUnderscoreRange.isEmpty) {
-            result = joinedString
-        } else if (!leadingUnderscoreRange.isEmpty && !trailingUnderscoreRange.isEmpty) {
-            // Both leading and trailing underscores
-            result = String(stringKey[leadingUnderscoreRange]) + joinedString + String(stringKey[trailingUnderscoreRange])
-        } else if (!leadingUnderscoreRange.isEmpty) {
-            // Just leading
-            result = String(stringKey[leadingUnderscoreRange]) + joinedString
-        } else {
-            // Just trailing
-            result = joinedString + String(stringKey[trailingUnderscoreRange])
-        }
-        return result
-    }
-}
-
-private extension CleanJSONKeyedDecodingContainer {
-    
-    func decodeIfKeyNotFound<T>(_ key: Key) throws -> T where T: Decodable, T: Defaultable {
-        switch decoder.options.keyNotFoundDecodingStrategy {
-        case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
-        case .useDefaultValue:
-            return T.defaultValue
-        }
-    }
-}
-
-extension _CleanJSONDecoder {
-    
-    func decodeUsingDefaultValue<T: Decodable>() throws -> T {
-        if let array = [] as? T {
-            return array
-        } else if let string = String.defaultValue as? T {
-            return string
-        } else if let bool = Bool.defaultValue as? T {
-            return bool
-        } else if let int = Int.defaultValue as? T {
-            return int
-        }else if let double = Double.defaultValue as? T {
-            return double
-        } else if let date = Date.defaultValue(for: options.dateDecodingStrategy) as? T {
-            return date
-        } else if let data = Data.defaultValue as? T {
-            return data
-        } else if let decimal = Decimal.defaultValue as? T {
-            return decimal
-        } else if let object = try? unbox([:], as: T.self) {
-            #if swift(<5)
-            if let obj = object { return obj }
-            #else
-            return object
-            #endif
-        }
-        
-        let context = DecodingError.Context(
-            codingPath: codingPath,
-            debugDescription: "Key: <\(codingPath)> cannot be decoded as default value.")
-        throw DecodingError.dataCorrupted(context)
     }
 }
 
@@ -846,70 +752,77 @@ extension CleanJSONKeyedDecodingContainer {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
         if type == Date.self || type == NSDate.self {
-            return try decodeIfPresent(entry, as: Date.self, forKey: key) as? T
+            return try decoder.decodeIfPresent(entry, as: Date.self, forKey: key) as? T
         } else if type == Data.self || type == NSData.self {
-            return try decodeIfPresent(entry, as: Data.self, forKey: key) as? T
+            return try decoder.decodeIfPresent(entry, as: Data.self, forKey: key) as? T
         } else if type == URL.self || type == NSURL.self {
-            return try decodeIfPresent(entry, as: URL.self, forKey: key) as? T
+            return try decoder.decodeIfPresent(entry, as: URL.self, forKey: key) as? T
         } else if type == Decimal.self || type == NSDecimalNumber.self {
-            return try decodeIfPresent(entry, as: Decimal.self, forKey: key) as? T
+            return try decoder.decodeIfPresent(entry, as: Decimal.self, forKey: key) as? T
         }
+        
+        if try decodeNil(forKey: key) { return nil }
         
         return try decoder.unbox(entry, as: type)
     }
 }
 
+private extension CleanJSONDecoder.KeyDecodingStrategy {
+    
+    static func _convertFromSnakeCase(_ stringKey: String) -> String {
+        guard !stringKey.isEmpty else { return stringKey }
+        
+        // Find the first non-underscore character
+        guard let firstNonUnderscore = stringKey.firstIndex(where: { $0 != "_" }) else {
+            // Reached the end without finding an _
+            return stringKey
+        }
+        
+        // Find the last non-underscore character
+        var lastNonUnderscore = stringKey.index(before: stringKey.endIndex)
+        while lastNonUnderscore > firstNonUnderscore && stringKey[lastNonUnderscore] == "_" {
+            stringKey.formIndex(before: &lastNonUnderscore)
+        }
+        
+        let keyRange = firstNonUnderscore...lastNonUnderscore
+        let leadingUnderscoreRange = stringKey.startIndex..<firstNonUnderscore
+        let trailingUnderscoreRange = stringKey.index(after: lastNonUnderscore)..<stringKey.endIndex
+        
+        let components = stringKey[keyRange].split(separator: "_")
+        let joinedString : String
+        if components.count == 1 {
+            // No underscores in key, leave the word as is - maybe already camel cased
+            joinedString = String(stringKey[keyRange])
+        } else {
+            joinedString = ([components[0].lowercased()] + components[1...].map { $0.capitalized }).joined()
+        }
+        
+        // Do a cheap isEmpty check before creating and appending potentially empty strings
+        let result : String
+        if (leadingUnderscoreRange.isEmpty && trailingUnderscoreRange.isEmpty) {
+            result = joinedString
+        } else if (!leadingUnderscoreRange.isEmpty && !trailingUnderscoreRange.isEmpty) {
+            // Both leading and trailing underscores
+            result = String(stringKey[leadingUnderscoreRange]) + joinedString + String(stringKey[trailingUnderscoreRange])
+        } else if (!leadingUnderscoreRange.isEmpty) {
+            // Just leading
+            result = String(stringKey[leadingUnderscoreRange]) + joinedString
+        } else {
+            // Just trailing
+            result = joinedString + String(stringKey[trailingUnderscoreRange])
+        }
+        return result
+    }
+}
+
 private extension CleanJSONKeyedDecodingContainer {
     
-    func decodeIfPresent(_ value: Any, as type: Date.Type, forKey key: K) throws -> Date? {
-        if let date = try decoder.unbox(value, as: type) { return date }
-        
-        switch decoder.options.valueNotFoundDecodingStrategy {
+    func decodeIfKeyNotFound<T>(_ key: Key) throws -> T where T: Decodable, T: Defaultable {
+        switch decoder.options.keyNotFoundDecodingStrategy {
         case .throw:
             throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
         case .useDefaultValue:
-            return nil
-        case .custom(let adapter):
-            return try adapter.adaptIfPresent(decoder)
-        }
-    }
-    
-    func decodeIfPresent(_ value: Any, as type: Data.Type, forKey key: K) throws -> Data? {
-        if let data = try decoder.unbox(value, as: type) { return data }
-        
-        switch decoder.options.valueNotFoundDecodingStrategy {
-        case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
-        case .useDefaultValue:
-            return nil
-        case .custom(let adapter):
-            return try adapter.adaptIfPresent(decoder)
-        }
-    }
-    
-    func decodeIfPresent(_ value: Any, as type: URL.Type, forKey key: K) throws -> URL? {
-        if let url = try decoder.unbox(value, as: type) { return url }
-        
-        switch decoder.options.valueNotFoundDecodingStrategy {
-        case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
-        case .useDefaultValue:
-            return nil
-        case .custom(let adapter):
-            return try adapter.adaptIfPresent(decoder)
-        }
-    }
-    
-    func decodeIfPresent(_ value: Any, as type: Decimal.Type, forKey key: K) throws -> Decimal? {
-        if let decimal = try decoder.unbox(value, as: type) { return decimal }
-        
-        switch decoder.options.valueNotFoundDecodingStrategy {
-        case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
-        case .useDefaultValue:
-            return nil
-        case .custom(let adapter):
-            return try adapter.adaptIfPresent(decoder)
+            return T.defaultValue
         }
     }
 }

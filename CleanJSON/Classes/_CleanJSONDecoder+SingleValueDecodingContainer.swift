@@ -212,55 +212,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
         case .throw:
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue, .custom:
-            return try decodeUsingDefaultValue()
+            return try decodeAsDefaultValue()
         }
-    }
-}
-
-private extension _CleanJSONDecoder {
-    
-    func decode(as type: Date.Type) throws -> Date {
-        guard let date = try unbox(storage.topContainer, as: type) else {
-            switch options.valueNotFoundDecodingStrategy {
-            case .throw:
-                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
-            case .useDefaultValue:
-                return Date.defaultValue(for: options.dateDecodingStrategy)
-            case .custom(let adapter):
-                return try adapter.adapt(self)
-            }
-        }
-        
-        return date
-    }
-    
-    func decode(as type: Data.Type) throws -> Data {
-        guard let data = try unbox(storage.topContainer, as: type) else {
-            switch options.valueNotFoundDecodingStrategy {
-            case .throw:
-                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
-            case .useDefaultValue:
-                return Data.defaultValue
-            case .custom(let adapter):
-                return try adapter.adapt(self)
-            }
-        }
-        
-        return data
-    }
-    
-    func decode(as type: Decimal.Type) throws -> Decimal {
-        guard let decimal = try unbox(storage.topContainer, as: type) else {
-            switch options.valueNotFoundDecodingStrategy {
-            case .throw:
-                throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
-            case .useDefaultValue:
-                return Decimal.defaultValue
-            case .custom(let adapter):
-                return try adapter.adapt(self)
-            }
-        }
-        
-        return decimal
     }
 }
