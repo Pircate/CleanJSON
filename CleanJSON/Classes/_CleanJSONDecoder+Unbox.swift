@@ -290,9 +290,7 @@ extension _CleanJSONDecoder {
     func unbox(_ value: Any, as type: String.Type) throws -> String? {
         guard !(value is NSNull) else { return nil }
         
-        guard let string = value as? String else {
-            return nil
-        }
+        guard let string = value as? String else { return nil }
         
         return string
     }
@@ -332,18 +330,15 @@ extension _CleanJSONDecoder {
             
         case .formatted(let formatter):
             guard let string = try self.unbox(value, as: String.self) else { return nil }
-            guard let date = formatter.date(from: string) else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(
-                    codingPath: self.codingPath,
-                    debugDescription: "Date string does not match format expected by formatter."))
-            }
             
-            return date
+            return formatter.date(from: string)
             
         case .custom(let closure):
             self.storage.push(container: value)
             defer { self.storage.popContainer() }
+            
             return try closure(self)
+            
         @unknown default:
             self.storage.push(container: value)
             defer { self.storage.popContainer() }

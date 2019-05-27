@@ -254,6 +254,62 @@ class CleanJSONTests: XCTestCase {
         } catch {
             XCTAssertNil(error)
         }
+        
+        do {
+            let data = """
+                    {
+                      "null": null,
+                    }
+                """.data(using: .utf8)!
+            
+            let decoder = CleanJSONDecoder()
+            
+            let stringValue = try decoder.decode(ValueNotFound<String?>.self, from: data)
+            let intValue = try decoder.decode(ValueNotFound<Int?>.self, from: data)
+            let int8Value = try decoder.decode(ValueNotFound<Int8?>.self, from: data)
+            let int16Value = try decoder.decode(ValueNotFound<Int16?>.self, from: data)
+            let int32Value = try decoder.decode(ValueNotFound<Int32?>.self, from: data)
+            let int64Value = try decoder.decode(ValueNotFound<Int64?>.self, from: data)
+            let uintValue = try decoder.decode(ValueNotFound<UInt?>.self, from: data)
+            let uint8Value = try decoder.decode(ValueNotFound<UInt8?>.self, from: data)
+            let uint16Value = try decoder.decode(ValueNotFound<UInt16?>.self, from: data)
+            let uint32Value = try decoder.decode(ValueNotFound<UInt32?>.self, from: data)
+            let uint64Value = try decoder.decode(ValueNotFound<UInt64?>.self, from: data)
+            let floatValue = try decoder.decode(ValueNotFound<Float?>.self, from: data)
+            let doubleValue = try decoder.decode(ValueNotFound<Double?>.self, from: data)
+            let boolValue = try decoder.decode(ValueNotFound<Bool?>.self, from: data)
+            let arrayValue = try decoder.decode(ValueNotFound<[String]?>.self, from: data)
+            let objectValue = try decoder.decode(ValueNotFound<Nested?>.self, from: data)
+            let enumValue = try decoder.decode(ValueNotFound<Enum?>.self, from: data)
+            let dateValue = try decoder.decode(ValueNotFound<Date?>.self, from: data)
+            let decimalValue = try decoder.decode(ValueNotFound<Decimal?>.self, from: data)
+            let dataValue = try decoder.decode(ValueNotFound<Data?>.self, from: data)
+            let dictValue = try decoder.decode(ValueNotFound<[String: String]?>.self, from: data)
+            
+            XCTAssertEqual(stringValue.null, nil)
+            XCTAssertEqual(intValue.null, nil)
+            XCTAssertEqual(int8Value.null, nil)
+            XCTAssertEqual(int16Value.null, nil)
+            XCTAssertEqual(int32Value.null, nil)
+            XCTAssertEqual(int64Value.null, nil)
+            XCTAssertEqual(uintValue.null, nil)
+            XCTAssertEqual(uint8Value.null, nil)
+            XCTAssertEqual(uint16Value.null, nil)
+            XCTAssertEqual(uint32Value.null, nil)
+            XCTAssertEqual(uint64Value.null, nil)
+            XCTAssertEqual(floatValue.null, nil)
+            XCTAssertEqual(doubleValue.null, nil)
+            XCTAssertEqual(boolValue.null, nil)
+            XCTAssertEqual(arrayValue.null, nil)
+            XCTAssertEqual(objectValue.null?.string, nil)
+            XCTAssertEqual(enumValue.null, nil)
+            XCTAssertEqual(dateValue.null, nil)
+            XCTAssertEqual(decimalValue.null, nil)
+            XCTAssertEqual(dataValue.null, nil)
+            XCTAssertEqual(dictValue.null, nil)
+        } catch {
+            XCTAssertNil(error)
+        }
     }
     
     func testDecodeEnum() {

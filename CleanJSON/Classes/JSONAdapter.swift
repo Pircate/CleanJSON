@@ -41,6 +41,40 @@ public protocol JSONAdapter {
     func adapt(_ decoder: CleanDecoder) throws -> Data
     
     func adapt(_ decoder: CleanDecoder) throws -> Decimal
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Bool?
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int?
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int8?
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int16?
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int32?
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int64?
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt?
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt8?
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt16?
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt32?
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt64?
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Float?
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Double?
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> String?
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Date?
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Data?
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Decimal?
 }
 
 public extension JSONAdapter {
@@ -164,6 +198,77 @@ public extension JSONAdapter {
     @inline(__always)
     func adapt(_ decoder: CleanDecoder) throws -> Decimal {
         return Decimal.defaultValue
+    }
+}
+
+public extension JSONAdapter {
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Bool? {
+        return nil
+    }
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int? {
+        return nil
+    }
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int8? {
+        return nil
+    }
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int16? {
+        return nil
+    }
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int32? {
+        return nil
+    }
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int64? {
+        return nil
+    }
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt? {
+        return nil
+    }
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt8? {
+        return nil
+    }
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt16? {
+        return nil
+    }
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt32? {
+        return nil
+    }
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt64? {
+        return nil
+    }
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Float? {
+        return nil
+    }
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Double? {
+        return nil
+    }
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> String? {
+        return nil
+    }
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Date? {
+        return nil
+    }
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Data? {
+        return nil
+    }
+    
+    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Decimal? {
+        return nil
     }
 }
 
