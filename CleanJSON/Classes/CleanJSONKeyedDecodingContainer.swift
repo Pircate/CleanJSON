@@ -65,6 +65,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return entry is NSNull
     }
     
+    @inline(__always)
     public func decode(_ type: Bool.Type, forKey key: Key) throws -> Bool {
         guard let entry = self.container[key.stringValue] else {
             return try decodeIfKeyNotFound(key)
@@ -89,6 +90,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return value
     }
     
+    @inline(__always)
     public func decode(_ type: Int.Type, forKey key: Key) throws -> Int {
         guard let entry = self.container[key.stringValue] else {
             return try decodeIfKeyNotFound(key)
@@ -113,6 +115,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return value
     }
     
+    @inline(__always)
     public func decode(_ type: Int8.Type, forKey key: Key) throws -> Int8 {
         guard let entry = self.container[key.stringValue] else {
             return try decodeIfKeyNotFound(key)
@@ -137,6 +140,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return value
     }
     
+    @inline(__always)
     public func decode(_ type: Int16.Type, forKey key: Key) throws -> Int16 {
         guard let entry = self.container[key.stringValue] else {
             return try decodeIfKeyNotFound(key)
@@ -161,6 +165,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return value
     }
     
+    @inline(__always)
     public func decode(_ type: Int32.Type, forKey key: Key) throws -> Int32 {
         guard let entry = self.container[key.stringValue] else {
             return try decodeIfKeyNotFound(key)
@@ -185,6 +190,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return value
     }
     
+    @inline(__always)
     public func decode(_ type: Int64.Type, forKey key: Key) throws -> Int64 {
         guard let entry = self.container[key.stringValue] else {
             return try decodeIfKeyNotFound(key)
@@ -209,6 +215,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return value
     }
     
+    @inline(__always)
     public func decode(_ type: UInt.Type, forKey key: Key) throws -> UInt {
         guard let entry = self.container[key.stringValue] else {
             return try decodeIfKeyNotFound(key)
@@ -233,6 +240,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return value
     }
     
+    @inline(__always)
     public func decode(_ type: UInt8.Type, forKey key: Key) throws -> UInt8 {
         guard let entry = self.container[key.stringValue] else {
             return try decodeIfKeyNotFound(key)
@@ -257,6 +265,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return value
     }
     
+    @inline(__always)
     public func decode(_ type: UInt16.Type, forKey key: Key) throws -> UInt16 {
         guard let entry = self.container[key.stringValue] else {
             return try decodeIfKeyNotFound(key)
@@ -281,6 +290,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return value
     }
     
+    @inline(__always)
     public func decode(_ type: UInt32.Type, forKey key: Key) throws -> UInt32 {
         guard let entry = self.container[key.stringValue] else {
             return try decodeIfKeyNotFound(key)
@@ -305,6 +315,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return value
     }
     
+    @inline(__always)
     public func decode(_ type: UInt64.Type, forKey key: Key) throws -> UInt64 {
         guard let entry = self.container[key.stringValue] else {
             return try decodeIfKeyNotFound(key)
@@ -329,6 +340,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return value
     }
     
+    @inline(__always)
     public func decode(_ type: Float.Type, forKey key: Key) throws -> Float {
         guard let entry = self.container[key.stringValue] else {
             return try decodeIfKeyNotFound(key)
@@ -353,6 +365,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return value
     }
     
+    @inline(__always)
     public func decode(_ type: Double.Type, forKey key: Key) throws -> Double {
         guard let entry = self.container[key.stringValue] else {
             return try decodeIfKeyNotFound(key)
@@ -377,6 +390,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return value
     }
     
+    @inline(__always)
     public func decode(_ type: String.Type, forKey key: Key) throws -> String {
         guard let entry = self.container[key.stringValue] else {
             return try decodeIfKeyNotFound(key)
@@ -401,6 +415,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return value
     }
     
+    @inline(__always)
     public func decode<T : Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
         guard let entry = container[key.stringValue] else {
             switch decoder.options.keyNotFoundDecodingStrategy {
@@ -456,6 +471,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         }
     }
     
+    @inline(__always)
     public func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type, forKey key: Key) throws -> KeyedDecodingContainer<NestedKey> {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
@@ -484,6 +500,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return nestedContainer(wrapping: dictionary)
     }
     
+    @inline(__always)
     private func nestedContainer<NestedKey>(wrapping dictionary: [String: Any] = [:])
         -> KeyedDecodingContainer<NestedKey> {
             let container = CleanJSONKeyedDecodingContainer<NestedKey>(
@@ -492,6 +509,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
             return KeyedDecodingContainer(container)
     }
     
+    @inline(__always)
     public func nestedUnkeyedContainer(forKey key: Key) throws -> UnkeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
@@ -519,6 +537,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: array)
     }
     
+    @inline(__always)
     private func _superDecoder(forKey key: CodingKey) throws -> Decoder {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
@@ -527,10 +546,12 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         return _CleanJSONDecoder(referencing: value, at: self.decoder.codingPath, options: self.decoder.options)
     }
     
+    @inline(__always)
     public func superDecoder() throws -> Decoder {
         return try _superDecoder(forKey: CleanJSONKey.super)
     }
     
+    @inline(__always)
     public func superDecoder(forKey key: Key) throws -> Decoder {
         return try _superDecoder(forKey: key)
     }
@@ -538,6 +559,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
 
 extension CleanJSONKeyedDecodingContainer {
     
+    @inline(__always)
     func decodeIfPresent(_ type: Bool.Type, forKey key: K) throws -> Bool? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
@@ -553,6 +575,7 @@ extension CleanJSONKeyedDecodingContainer {
         }
     }
     
+    @inline(__always)
     func decodeIfPresent(_ type: Int.Type, forKey key: K) throws -> Int? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
@@ -568,6 +591,7 @@ extension CleanJSONKeyedDecodingContainer {
         }
     }
     
+    @inline(__always)
     func decodeIfPresent(_ type: Int8.Type, forKey key: K) throws -> Int8? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
@@ -583,6 +607,7 @@ extension CleanJSONKeyedDecodingContainer {
         }
     }
     
+    @inline(__always)
     func decodeIfPresent(_ type: Int16.Type, forKey key: K) throws -> Int16? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
@@ -598,6 +623,7 @@ extension CleanJSONKeyedDecodingContainer {
         }
     }
     
+    @inline(__always)
     func decodeIfPresent(_ type: Int32.Type, forKey key: K) throws -> Int32? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
@@ -613,6 +639,7 @@ extension CleanJSONKeyedDecodingContainer {
         }
     }
     
+    @inline(__always)
     func decodeIfPresent(_ type: Int64.Type, forKey key: K) throws -> Int64? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
@@ -628,6 +655,7 @@ extension CleanJSONKeyedDecodingContainer {
         }
     }
     
+    @inline(__always)
     func decodeIfPresent(_ type: UInt.Type, forKey key: K) throws -> UInt? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
@@ -643,6 +671,7 @@ extension CleanJSONKeyedDecodingContainer {
         }
     }
     
+    @inline(__always)
     func decodeIfPresent(_ type: UInt8.Type, forKey key: K) throws -> UInt8? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
@@ -658,6 +687,7 @@ extension CleanJSONKeyedDecodingContainer {
         }
     }
     
+    @inline(__always)
     func decodeIfPresent(_ type: UInt16.Type, forKey key: K) throws -> UInt16? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
@@ -673,6 +703,7 @@ extension CleanJSONKeyedDecodingContainer {
         }
     }
     
+    @inline(__always)
     func decodeIfPresent(_ type: UInt32.Type, forKey key: K) throws -> UInt32? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
@@ -688,6 +719,7 @@ extension CleanJSONKeyedDecodingContainer {
         }
     }
     
+    @inline(__always)
     func decodeIfPresent(_ type: UInt64.Type, forKey key: K) throws -> UInt64? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
@@ -703,6 +735,7 @@ extension CleanJSONKeyedDecodingContainer {
         }
     }
     
+    @inline(__always)
     func decodeIfPresent(_ type: Float.Type, forKey key: K) throws -> Float? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
@@ -718,6 +751,7 @@ extension CleanJSONKeyedDecodingContainer {
         }
     }
     
+    @inline(__always)
     func decodeIfPresent(_ type: Double.Type, forKey key: K) throws -> Double? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
@@ -733,6 +767,7 @@ extension CleanJSONKeyedDecodingContainer {
         }
     }
     
+    @inline(__always)
     func decodeIfPresent(_ type: String.Type, forKey key: K) throws -> String? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
@@ -748,6 +783,7 @@ extension CleanJSONKeyedDecodingContainer {
         }
     }
     
+    @inline(__always)
     func decodeIfPresent<T>(_ type: T.Type, forKey key: K) throws -> T? where T : Decodable {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         

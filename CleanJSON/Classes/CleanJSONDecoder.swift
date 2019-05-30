@@ -26,14 +26,14 @@ open class CleanJSONDecoder: JSONDecoder {
     /// The options set on the top-level decoder.
     var options: Options {
         return Options(dateDecodingStrategy: dateDecodingStrategy,
-                        dataDecodingStrategy: dataDecodingStrategy,
-                        nonConformingFloatDecodingStrategy: nonConformingFloatDecodingStrategy,
-                        keyDecodingStrategy: keyDecodingStrategy,
-                        keyNotFoundDecodingStrategy: keyNotFoundDecodingStrategy,
-                        valueNotFoundDecodingStrategy: valueNotFoundDecodingStrategy,
-                        nestedContainerDecodingStrategy: nestedContainerDecodingStrategy,
-                        jsonStringDecodingStrategy: jsonStringDecodingStrategy,
-                        userInfo: userInfo)
+                       dataDecodingStrategy: dataDecodingStrategy,
+                       nonConformingFloatDecodingStrategy: nonConformingFloatDecodingStrategy,
+                       keyDecodingStrategy: keyDecodingStrategy,
+                       keyNotFoundDecodingStrategy: keyNotFoundDecodingStrategy,
+                       valueNotFoundDecodingStrategy: valueNotFoundDecodingStrategy,
+                       nestedContainerDecodingStrategy: nestedContainerDecodingStrategy,
+                       jsonStringDecodingStrategy: jsonStringDecodingStrategy,
+                       userInfo: userInfo)
     }
     
     /// The strategy to use for decoding when key not found. Defaults to `.useDefaultValue`.

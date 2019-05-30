@@ -418,18 +418,18 @@ extension _CleanJSONDecoder {
     
     func unbox_(_ value: Any, as type: Decodable.Type) throws -> Any? {
         if type == Date.self || type == NSDate.self {
-            return try self.unbox(value, as: Date.self)
+            return try unbox(value, as: Date.self)
         } else if type == Data.self || type == NSData.self {
-            return try self.unbox(value, as: Data.self)
+            return try unbox(value, as: Data.self)
         } else if type == URL.self || type == NSURL.self {
             return try unbox(value, as: URL.self)
         } else if type == Decimal.self || type == NSDecimalNumber.self {
-            return try self.unbox(value, as: Decimal.self)
+            return try unbox(value, as: Decimal.self)
         } else if let stringKeyedDictType = type as? _JSONStringDictionaryDecodableMarker.Type {
-            return try self.unbox(value, as: stringKeyedDictType)
+            return try unbox(value, as: stringKeyedDictType)
         } else {
-            self.storage.push(container: value)
-            defer { self.storage.popContainer() }
+            storage.push(container: value)
+            defer { storage.popContainer() }
             return try type.init(from: self)
         }
     }
