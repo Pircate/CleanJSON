@@ -8,11 +8,15 @@
 
 public extension Encodable {
     
+    @inline(__always)
     func toJSON(using encoder: JSONEncoder = .init()) throws -> Data {
         return try encoder.encode(self)
     }
     
-    func toJSONString(using encoder: JSONEncoder = .init()) throws -> String? {
-        return String(data: try toJSON(using: encoder), encoding: .utf8)
+    @inline(__always)
+    func toJSONString(using encoder: JSONEncoder = .init()) -> String? {
+        guard let data = try? toJSON(using: encoder) else { return nil }
+        
+        return String(data: data, encoding: .utf8)
     }
 }

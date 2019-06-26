@@ -280,10 +280,6 @@ class CleanJSONTests: XCTestCase {
             any: "any",
             dict: ["key": "value"])
         
-        do {
-            debugPrint(try object.toJSONString() ?? "")
-        } catch {
-            XCTAssertNil(error)
-        }
+        XCTAssertNotNil(object.toJSONString())
     }
 }
