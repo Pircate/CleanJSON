@@ -94,6 +94,14 @@ struct CustomAdapter: JSONAdapter {
         return false
     }
     
+    // 为避免精度丢失所以没有提供浮点型转整型
+    // 可以通过下面适配器进行类型转换
+    func adapt(_ decoder: CleanDecoder) throws -> Int {
+        guard let doubleValue = try decoder.decodeIfPresent(Double.self) else { return 0 }
+        
+        return Int(doubleValue)
+    }
+    
     // 可选的 URL 类型解析失败的时候返回一个默认 url
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> URL? {
         return URL(string: "https://google.com")
