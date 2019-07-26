@@ -1,0 +1,11 @@
+framework module CleanJSON {
+  umbrella header "CleanJSON-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module CleanJSON.Swift {
+    header "CleanJSON-Swift.h"
+    requires objc
+}
