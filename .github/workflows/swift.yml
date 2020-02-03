@@ -8,8 +8,6 @@ jobs:
     runs-on: macOS-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build
-      run: swift build -v
+    - uses: actions/checkout@master
     - name: Run tests
-      run: swift test -v
+      run: xcodebuild test -workspace Example/CleanJSON.xcworkspace -scheme CleanJSON_Tests -destination 'platform=iOS Simulator,name=iPhone SE'
