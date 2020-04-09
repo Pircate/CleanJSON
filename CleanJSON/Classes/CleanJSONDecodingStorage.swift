@@ -12,7 +12,7 @@ struct CleanJSONDecodingStorage {
     
     /// The container stack.
     /// Elements may be any one of the JSON types (NSNull, NSNumber, String, Array, [String : Any]).
-    private(set) fileprivate var containers: [Any] = []
+    private(set) var containers: [Any] = []
     
     // MARK: - Initialization
     

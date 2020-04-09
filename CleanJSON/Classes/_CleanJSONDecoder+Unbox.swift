@@ -451,7 +451,7 @@ extension Dictionary : _JSONStringDictionaryDecodableMarker where Key == String,
 }
 
 @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
-fileprivate var _iso8601Formatter: ISO8601DateFormatter = {
+private var _iso8601Formatter: ISO8601DateFormatter = {
     let formatter = ISO8601DateFormatter()
     formatter.formatOptions = .withInternetDateTime
     return formatter
