@@ -60,7 +60,7 @@ open class CleanJSONDecoder: JSONDecoder {
     open override func decode<T : Decodable>(_ type: T.Type, from data: Data) throws -> T {
         let topLevel: Any
         do {
-            topLevel = try JSONSerialization.jsonObject(with: data)
+            topLevel = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
         } catch {
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid JSON.", underlyingError: error))
         }
