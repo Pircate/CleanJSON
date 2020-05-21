@@ -10,4 +10,4 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Run tests
-      run: xcodebuild test -workspace Example/CleanJSON.xcworkspace -scheme CleanJSON_Tests -destination 'platform=iOS Simulator,name=iPhone SE'
+      run: xcodebuild test -workspace Example/CleanJSON.xcworkspace -scheme CleanJSON_Tests -destination 'platform=iOS Simulator,name=iPhone 11'
