@@ -1,6 +1,6 @@
 # CleanJSON
 
-[![Swift](https://github.com/Pircate/CleanJSON/workflows/Swift/badge.svg)](https://github.com/Pircate/CleanJSON/actions?query=workflow%3ASwift)
+[![build](https://github.com/Pircate/CleanJSON/workflows/build/badge.svg)](https://github.com/Pircate/CleanJSON/actions?query=workflow%3ASwift)
 [![Version](https://img.shields.io/cocoapods/v/CleanJSON.svg?style=flat)](https://cocoapods.org/pods/CleanJSON)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![License](https://img.shields.io/cocoapods/l/CleanJSON.svg?style=flat)](https://cocoapods.org/pods/CleanJSON)
