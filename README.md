@@ -18,7 +18,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 * iOS 9.0
-* Swift 4.2
+* Swift 5.0
 
 ## Installation
 
@@ -56,7 +56,7 @@ try decoder.decode(Model.self, from: data)
 
 对于枚举类型请遵循 `CaseDefaultable` 协议，如果解析失败会返回默认 case
 
-Note: 枚举使用强类型解析，关联类型和数据类型不一致不会进行类型转换，会解析为默认 case
+**Note: 枚举使用强类型解析，关联类型和数据类型不一致不会进行类型转换，会解析为默认 case**
 
 ```swift
 enum Enum: Int, Codable, CaseDefaultable {
