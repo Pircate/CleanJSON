@@ -45,7 +45,13 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     
     public mutating func decodeNil() throws -> Bool {
         guard !self.isAtEnd else {
-            throw DecodingError.valueNotFound(Any?.self, DecodingError.Context(codingPath: self.decoder.codingPath + [CleanJSONKey(index: self.currentIndex)], debugDescription: "Unkeyed container is at end."))
+            throw DecodingError.valueNotFound(
+                Any?.self,
+                DecodingError.Context(
+                    codingPath: self.decoder.codingPath + [CleanJSONKey(index: self.currentIndex)],
+                    debugDescription: "Unkeyed container is at end."
+                )
+            )
         }
         
         if self.container[self.currentIndex] is NSNull {
@@ -79,7 +85,8 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                 Bool.self,
                 codingPath: decoder.codingPath,
                 currentIndex: currentIndex,
-                isAtEnd: isAtEnd)
+                isAtEnd: isAtEnd
+            )
         case .useDefaultValue:
             self.currentIndex += 1
             return Bool.defaultValue
@@ -112,7 +119,8 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                 Int.self,
                 codingPath: decoder.codingPath,
                 currentIndex: currentIndex,
-                isAtEnd: isAtEnd)
+                isAtEnd: isAtEnd
+            )
         case .useDefaultValue:
             self.currentIndex += 1
             return Int.defaultValue
@@ -209,7 +217,8 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                 UInt.self,
                 codingPath: decoder.codingPath,
                 currentIndex: currentIndex,
-                isAtEnd: isAtEnd)
+                isAtEnd: isAtEnd
+            )
         case .useDefaultValue:
             self.currentIndex += 1
             return UInt.defaultValue
@@ -306,7 +315,8 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                 Float.self,
                 codingPath: decoder.codingPath,
                 currentIndex: currentIndex,
-                isAtEnd: isAtEnd)
+                isAtEnd: isAtEnd
+            )
         case .useDefaultValue:
             self.currentIndex += 1
             return Float.defaultValue
@@ -339,7 +349,8 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                 Double.self,
                 codingPath: decoder.codingPath,
                 currentIndex: currentIndex,
-                isAtEnd: isAtEnd)
+                isAtEnd: isAtEnd
+            )
         case .useDefaultValue:
             self.currentIndex += 1
             return Double.defaultValue
@@ -372,7 +383,8 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                 String.self,
                 codingPath: decoder.codingPath,
                 currentIndex: currentIndex,
-                isAtEnd: isAtEnd)
+                isAtEnd: isAtEnd
+            )
         case .useDefaultValue:
             self.currentIndex += 1
             return String.defaultValue
@@ -384,14 +396,26 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     
     public mutating func decode<T : Decodable>(_ type: T.Type) throws -> T {
         guard !self.isAtEnd else {
-            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath + [CleanJSONKey(index: self.currentIndex)], debugDescription: "Unkeyed container is at end."))
+            throw DecodingError.valueNotFound(
+                type,
+                DecodingError.Context(
+                    codingPath: self.decoder.codingPath + [CleanJSONKey(index: self.currentIndex)],
+                    debugDescription: "Unkeyed container is at end."
+                )
+            )
         }
         
         self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard let decoded = try self.decoder.unbox(self.container[self.currentIndex], as: type) else {
-            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath + [CleanJSONKey(index: self.currentIndex)], debugDescription: "Expected \(type) but found null instead."))
+            throw DecodingError.valueNotFound(
+                type,
+                DecodingError.Context(
+                    codingPath: self.decoder.codingPath + [CleanJSONKey(index: self.currentIndex)],
+                    debugDescription: "Expected \(type) but found null instead."
+                )
+            )
         }
         
         self.currentIndex += 1
@@ -403,9 +427,13 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         defer { self.decoder.codingPath.removeLast() }
         
         guard !self.isAtEnd else {
-            throw DecodingError.valueNotFound(KeyedDecodingContainer<NestedKey>.self,
-                                              DecodingError.Context(codingPath: self.codingPath,
-                                                                    debugDescription: "Cannot get nested keyed container -- unkeyed container is at end."))
+            throw DecodingError.valueNotFound(
+                KeyedDecodingContainer<NestedKey>.self,
+                DecodingError.Context(
+                    codingPath: self.codingPath,
+                    debugDescription: "Cannot get nested keyed container -- unkeyed container is at end."
+                )
+            )
         }
         
         let value = self.container[self.currentIndex]
@@ -415,7 +443,8 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                 throw DecodingError.Nested.valueNotFound(
                     KeyedDecodingContainer<NestedKey>.self,
                     codingPath: codingPath,
-                    debugDescription: "Cannot get keyed decoding container -- found null value instead.")
+                    debugDescription: "Cannot get keyed decoding container -- found null value instead."
+                )
             case .useEmptyContainer:
                 self.currentIndex += 1
                 return nestedContainer()
@@ -425,7 +454,11 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         guard let dictionary = value as? [String : Any] else {
             switch decoder.options.nestedContainerDecodingStrategy.typeMismatch {
             case .throw:
-                throw DecodingError._typeMismatch(at: self.codingPath, expectation: [String : Any].self, reality: value)
+                throw DecodingError._typeMismatch(
+                    at: self.codingPath,
+                    expectation: [String : Any].self,
+                    reality: value
+                )
             case .useEmptyContainer:
                 self.currentIndex += 1
                 return nestedContainer()
@@ -437,7 +470,10 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     }
     
     private func nestedContainer<NestedKey>(wrapping dictionary: [String: Any] = [:]) -> KeyedDecodingContainer<NestedKey> {
-        let container = CleanJSONKeyedDecodingContainer<NestedKey>(referencing: self.decoder, wrapping: dictionary)
+        let container = CleanJSONKeyedDecodingContainer<NestedKey>(
+            referencing: self.decoder,
+            wrapping: dictionary
+        )
         return KeyedDecodingContainer(container)
     }
     
@@ -446,9 +482,13 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         defer { self.decoder.codingPath.removeLast() }
         
         guard !self.isAtEnd else {
-            throw DecodingError.valueNotFound(UnkeyedDecodingContainer.self,
-                                              DecodingError.Context(codingPath: self.codingPath,
-                                                                    debugDescription: "Cannot get nested keyed container -- unkeyed container is at end."))
+            throw DecodingError.valueNotFound(
+                UnkeyedDecodingContainer.self,
+                DecodingError.Context(
+                    codingPath: self.codingPath,
+                    debugDescription: "Cannot get nested keyed container -- unkeyed container is at end."
+                )
+            )
         }
         
         let value = self.container[self.currentIndex]
@@ -458,7 +498,8 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
                 throw DecodingError.Nested.valueNotFound(
                     UnkeyedDecodingContainer.self,
                     codingPath: codingPath,
-                    debugDescription: "Cannot get keyed decoding container -- found null value instead.")
+                    debugDescription: "Cannot get keyed decoding container -- found null value instead."
+                )
             case .useEmptyContainer:
                 self.currentIndex += 1
                 return CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
@@ -468,7 +509,10 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         guard let array = value as? [Any] else {
             switch decoder.options.nestedContainerDecodingStrategy.typeMismatch {
             case .throw:
-                throw DecodingError._typeMismatch(at: self.codingPath, expectation: [Any].self, reality: value)
+                throw DecodingError._typeMismatch(
+                    at: self.codingPath,
+                    expectation: [Any].self, reality: value
+                )
             case .useEmptyContainer:
                 self.currentIndex += 1
                 return CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
@@ -484,9 +528,13 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         defer { self.decoder.codingPath.removeLast() }
         
         guard !self.isAtEnd else {
-            throw DecodingError.valueNotFound(Decoder.self,
-                                              DecodingError.Context(codingPath: self.codingPath,
-                                                                    debugDescription: "Cannot get superDecoder() -- unkeyed container is at end."))
+            throw DecodingError.valueNotFound(
+                Decoder.self,
+                DecodingError.Context(
+                    codingPath: self.codingPath,
+                    debugDescription: "Cannot get superDecoder() -- unkeyed container is at end."
+                )
+            )
         }
         
         let value = self.container[self.currentIndex]

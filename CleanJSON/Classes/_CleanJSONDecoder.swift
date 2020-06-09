@@ -43,7 +43,8 @@ final class _CleanJSONDecoder: CleanDecoder {
                 throw DecodingError.Nested.valueNotFound(
                     KeyedDecodingContainer<Key>.self,
                     codingPath: codingPath,
-                    debugDescription: "Cannot get keyed decoding container -- found null value instead.")
+                    debugDescription: "Cannot get keyed decoding container -- found null value instead."
+                )
             case .useEmptyContainer:
                 let container = CleanJSONKeyedDecodingContainer<Key>(referencing: self, wrapping: [:])
                 return KeyedDecodingContainer(container)
@@ -74,7 +75,8 @@ final class _CleanJSONDecoder: CleanDecoder {
                 throw DecodingError.Nested.valueNotFound(
                     UnkeyedDecodingContainer.self,
                     codingPath: codingPath,
-                    debugDescription: "Cannot get unkeyed decoding container -- found null value instead.")
+                    debugDescription: "Cannot get unkeyed decoding container -- found null value instead."
+                )
             case .useEmptyContainer:
                 return CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
             }
@@ -86,7 +88,8 @@ final class _CleanJSONDecoder: CleanDecoder {
                 throw DecodingError._typeMismatch(
                     at: codingPath,
                     expectation: [Any].self,
-                    reality: storage.topContainer)
+                    reality: storage.topContainer
+                )
             case .useEmptyContainer:
                 return CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
             }

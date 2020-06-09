@@ -35,7 +35,8 @@ extension _CleanJSONDecoder {
         
         let context = DecodingError.Context(
             codingPath: codingPath,
-            debugDescription: "Key: <\(codingPath)> cannot be decoded as default value.")
+            debugDescription: "Key: <\(codingPath)> cannot be decoded as default value."
+        )
         throw DecodingError.dataCorrupted(context)
     }
 }
@@ -87,7 +88,8 @@ extension _CleanJSONDecoder {
     func decodeIfPresent<K: CodingKey>(
         _ value: Any,
         as type: Date.Type,
-        forKey key: K) throws -> Date? {
+        forKey key: K
+    ) throws -> Date? {
         if let date = try unbox(value, as: type) { return date }
         
         switch options.valueNotFoundDecodingStrategy {
@@ -103,7 +105,8 @@ extension _CleanJSONDecoder {
     func decodeIfPresent<K: CodingKey>(
         _ value: Any,
         as type: Data.Type,
-        forKey key: K) throws -> Data? {
+        forKey key: K
+    ) throws -> Data? {
         if let data = try unbox(value, as: type) { return data }
         
         switch options.valueNotFoundDecodingStrategy {
@@ -119,7 +122,8 @@ extension _CleanJSONDecoder {
     func decodeIfPresent<K: CodingKey>(
         _ value: Any,
         as type: URL.Type,
-        forKey key: K) throws -> URL? {
+        forKey key: K
+    ) throws -> URL? {
         if let url = try unbox(value, as: type) { return url }
         
         switch options.valueNotFoundDecodingStrategy {
@@ -135,7 +139,8 @@ extension _CleanJSONDecoder {
     func decodeIfPresent<K: CodingKey>(
         _ value: Any,
         as type: Decimal.Type,
-        forKey key: K) throws -> Decimal? {
+        forKey key: K
+    ) throws -> Decimal? {
         if let decimal = try unbox(value, as: type) { return decimal }
         
         switch options.valueNotFoundDecodingStrategy {

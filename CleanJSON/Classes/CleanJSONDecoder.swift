@@ -25,15 +25,17 @@ open class CleanJSONDecoder: JSONDecoder {
     
     /// The options set on the top-level decoder.
     var options: Options {
-        return Options(dateDecodingStrategy: dateDecodingStrategy,
-                       dataDecodingStrategy: dataDecodingStrategy,
-                       nonConformingFloatDecodingStrategy: nonConformingFloatDecodingStrategy,
-                       keyDecodingStrategy: keyDecodingStrategy,
-                       keyNotFoundDecodingStrategy: keyNotFoundDecodingStrategy,
-                       valueNotFoundDecodingStrategy: valueNotFoundDecodingStrategy,
-                       nestedContainerDecodingStrategy: nestedContainerDecodingStrategy,
-                       jsonStringDecodingStrategy: jsonStringDecodingStrategy,
-                       userInfo: userInfo)
+        return Options(
+            dateDecodingStrategy: dateDecodingStrategy,
+            dataDecodingStrategy: dataDecodingStrategy,
+            nonConformingFloatDecodingStrategy: nonConformingFloatDecodingStrategy,
+            keyDecodingStrategy: keyDecodingStrategy,
+            keyNotFoundDecodingStrategy: keyNotFoundDecodingStrategy,
+            valueNotFoundDecodingStrategy: valueNotFoundDecodingStrategy,
+            nestedContainerDecodingStrategy: nestedContainerDecodingStrategy,
+            jsonStringDecodingStrategy: jsonStringDecodingStrategy,
+            userInfo: userInfo
+        )
     }
     
     /// The strategy to use for decoding when key not found. Defaults to `.useDefaultValue`.
@@ -62,12 +64,22 @@ open class CleanJSONDecoder: JSONDecoder {
         do {
             topLevel = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
         } catch {
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid JSON.", underlyingError: error))
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(
+                    codingPath: [],
+                    debugDescription: "The given data was not valid JSON.", underlyingError: error
+                )
+            )
         }
         
         let decoder = _CleanJSONDecoder(referencing: topLevel, options: self.options)
         guard let value = try decoder.unbox(topLevel, as: type) else {
-            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: [], debugDescription: "The given data did not contain a top-level value."))
+            throw DecodingError.valueNotFound(
+                type, DecodingError.Context(
+                    codingPath: [],
+                    debugDescription: "The given data did not contain a top-level value."
+                )
+            )
         }
         
         return value

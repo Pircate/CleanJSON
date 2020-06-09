@@ -50,9 +50,11 @@ extension CleanJSONDecoder {
         
         public var typeMismatch: TypeMismatch
         
-        public init(keyNotFound: KeyNotFound = .useEmptyContainer,
-                    valueNotFound: ValueNotFound = .useEmptyContainer,
-                    typeMismatch: TypeMismatch = .useEmptyContainer) {
+        public init(
+            keyNotFound: KeyNotFound = .useEmptyContainer,
+            valueNotFound: ValueNotFound = .useEmptyContainer,
+            typeMismatch: TypeMismatch = .useEmptyContainer
+        ) {
             self.keyNotFound = keyNotFound
             self.valueNotFound = valueNotFound
             self.typeMismatch = typeMismatch
