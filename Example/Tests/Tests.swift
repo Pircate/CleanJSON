@@ -66,7 +66,7 @@ struct EnumStruct: Codable {
     let `enum`: Enum
     let enum1: Enum
     let enum2: Enum
-    let enum3: Enum
+    let enum3: Enum?
 }
 
 enum Enum: Int, CaseDefaultable, Codable {
