@@ -33,7 +33,7 @@ private extension _CleanJSONDecoder {
         T: Decodable,
         T.RawValue: Decodable
     {
-        guard !decodeNil(), !codingPath.isEmpty, storage.topContainer is T.RawValue else {
+        guard !decodeNil(), storage.topContainer is T.RawValue else {
             return T.defaultCase
         }
         
