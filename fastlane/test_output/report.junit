@@ -1,42 +1,42 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <testsuites name='CleanJSON_Tests.xctest' tests='23' failures='0'>
   <testsuite name='CleanJSON_Tests.CleanJSONTests' tests='6' failures='0'>
-    <testcase classname='CleanJSON_Tests.CleanJSONTests' name='testDecodeEnum' time='0.001'/>
-    <testcase classname='CleanJSON_Tests.CleanJSONTests' name='testKeyNotFound' time='0.003'/>
+    <testcase classname='CleanJSON_Tests.CleanJSONTests' name='testDecodeEnum' time='0.002'/>
+    <testcase classname='CleanJSON_Tests.CleanJSONTests' name='testKeyNotFound' time='0.005'/>
     <testcase classname='CleanJSON_Tests.CleanJSONTests' name='testNested' time='0.001'/>
-    <testcase classname='CleanJSON_Tests.CleanJSONTests' name='testToJSON' time='0.001'/>
+    <testcase classname='CleanJSON_Tests.CleanJSONTests' name='testToJSON' time='0.005'/>
     <testcase classname='CleanJSON_Tests.CleanJSONTests' name='testTypeMismatch' time='0.001'/>
-    <testcase classname='CleanJSON_Tests.CleanJSONTests' name='testValueNotFound' time='0.002'/>
+    <testcase classname='CleanJSON_Tests.CleanJSONTests' name='testValueNotFound' time='0.003'/>
   </testsuite>
   <testsuite name='CleanJSON_Tests.DecodeDateTests' tests='5' failures='0'>
-    <testcase classname='CleanJSON_Tests.DecodeDateTests' name='testDecodeDate' time='0.000'/>
-    <testcase classname='CleanJSON_Tests.DecodeDateTests' name='testDecodeDateCustom' time='0.000'/>
+    <testcase classname='CleanJSON_Tests.DecodeDateTests' name='testDecodeDate' time='0.001'/>
+    <testcase classname='CleanJSON_Tests.DecodeDateTests' name='testDecodeDateCustom' time='0.001'/>
     <testcase classname='CleanJSON_Tests.DecodeDateTests' name='testDecodeDateMillisecondsSince1970' time='0.000'/>
     <testcase classname='CleanJSON_Tests.DecodeDateTests' name='testDecodeDateNull' time='0.000'/>
     <testcase classname='CleanJSON_Tests.DecodeDateTests' name='testDecodeDateSecondsSince1970' time='0.000'/>
   </testsuite>
   <testsuite name='CleanJSON_Tests.DecodeDecimalTests' tests='1' failures='0'>
-    <testcase classname='CleanJSON_Tests.DecodeDecimalTests' name='testDecodeDecimal' time='0.000'/>
+    <testcase classname='CleanJSON_Tests.DecodeDecimalTests' name='testDecodeDecimal' time='0.001'/>
   </testsuite>
   <testsuite name='CleanJSON_Tests.DecodeOptionalTests' tests='2' failures='0'>
-    <testcase classname='CleanJSON_Tests.DecodeOptionalTests' name='testNestedOptional' time='0.000'/>
-    <testcase classname='CleanJSON_Tests.DecodeOptionalTests' name='testOptional' time='0.002'/>
+    <testcase classname='CleanJSON_Tests.DecodeOptionalTests' name='testNestedOptional' time='0.001'/>
+    <testcase classname='CleanJSON_Tests.DecodeOptionalTests' name='testOptional' time='0.004'/>
   </testsuite>
   <testsuite name='CleanJSON_Tests.JSONAdapterTests' tests='1' failures='0'>
-    <testcase classname='CleanJSON_Tests.JSONAdapterTests' name='testJSONAdapter' time='0.002'/>
+    <testcase classname='CleanJSON_Tests.JSONAdapterTests' name='testJSONAdapter' time='0.003'/>
   </testsuite>
   <testsuite name='CleanJSON_Tests.NestedContainerTests' tests='3' failures='0'>
     <testcase classname='CleanJSON_Tests.NestedContainerTests' name='testKeyNotFound' time='0.001'/>
-    <testcase classname='CleanJSON_Tests.NestedContainerTests' name='testNestedContainer' time='0.000'/>
-    <testcase classname='CleanJSON_Tests.NestedContainerTests' name='testValueNotFound' time='0.000'/>
+    <testcase classname='CleanJSON_Tests.NestedContainerTests' name='testNestedContainer' time='0.001'/>
+    <testcase classname='CleanJSON_Tests.NestedContainerTests' name='testValueNotFound' time='0.001'/>
   </testsuite>
   <testsuite name='CleanJSON_Tests.NestedUnkeyedContainerTests' tests='4' failures='0'>
-    <testcase classname='CleanJSON_Tests.NestedUnkeyedContainerTests' name='testKeyNotFound' time='0.000'/>
-    <testcase classname='CleanJSON_Tests.NestedUnkeyedContainerTests' name='testNestedUnkeyedContainer' time='0.000'/>
-    <testcase classname='CleanJSON_Tests.NestedUnkeyedContainerTests' name='testUnkeyedValueNotFound' time='0.000'/>
-    <testcase classname='CleanJSON_Tests.NestedUnkeyedContainerTests' name='testValueNotFound' time='0.000'/>
+    <testcase classname='CleanJSON_Tests.NestedUnkeyedContainerTests' name='testKeyNotFound' time='0.001'/>
+    <testcase classname='CleanJSON_Tests.NestedUnkeyedContainerTests' name='testNestedUnkeyedContainer' time='0.003'/>
+    <testcase classname='CleanJSON_Tests.NestedUnkeyedContainerTests' name='testUnkeyedValueNotFound' time='0.001'/>
+    <testcase classname='CleanJSON_Tests.NestedUnkeyedContainerTests' name='testValueNotFound' time='0.001'/>
   </testsuite>
   <testsuite name='CleanJSON_Tests.PerformanceTests' tests='1' failures='0'>
-    <testcase classname='CleanJSON_Tests.PerformanceTests' name='testExample' time='0.971'/>
+    <testcase classname='CleanJSON_Tests.PerformanceTests' name='testExample' time='1.210'/>
   </testsuite>
 </testsuites>
