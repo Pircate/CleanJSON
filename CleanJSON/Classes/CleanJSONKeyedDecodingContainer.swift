@@ -449,12 +449,23 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         let decodeJSONString = { (decoder: _CleanJSONDecoder) -> T in
             if let _ = String.defaultValue as? T { return try decodeObject(decoder) }
             
-            if let string = try decoder.unbox(entry, as: String.self),
-                let object = string.decode(to: type, options: decoder.options) {
-                return object
+            guard let string = try decoder.unbox(entry, as: String.self) else {
+                return try decodeObject(decoder)
             }
             
-            return try decodeObject(decoder)
+            // 过滤掉非 JSON 格式字符串
+            guard string.hasPrefix("{") || string.hasPrefix("[") else {
+                return try decodeObject(decoder)
+            }
+            
+            guard let data = string.data(using: .utf8),
+                let topLevel = try? JSONSerialization.jsonObject(with: data) else {
+                    return try decodeObject(decoder)
+            }
+            
+            decoder.storage.push(container: topLevel)
+            defer { decoder.storage.popContainer() }
+            return try decoder.decode(type)
         }
         
         switch decoder.options.jsonStringDecodingStrategy {
@@ -860,24 +871,5 @@ private extension CleanJSONKeyedDecodingContainer {
         case .useDefaultValue:
             return T.defaultValue
         }
-    }
-}
-
-private extension String {
-    
-    func decode<T: Decodable>(to type: T.Type, options: CleanJSONDecoder.Options) -> T? {
-        guard hasPrefix("{") || hasPrefix("[") else { return nil }
-        
-        guard let data = data(using: .utf8),
-            let topLevel = try? JSONSerialization.jsonObject(with: data) else { return nil }
-        
-        let decoder = _CleanJSONDecoder(referencing: topLevel, options: options)
-        #if swift(<5)
-        guard let obj = try? decoder.unbox(topLevel, as: type) else { return nil }
-        
-        return obj
-        #else
-        return try? decoder.unbox(topLevel, as: type)
-        #endif
     }
 }
