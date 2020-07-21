@@ -81,7 +81,7 @@ class ViewController: UIViewController {
                  "array": [1, 2.1, "3", true],
                  "snake_case": "convertFromSnakeCase",
                  "date": "date",
-                 "nested": "{\"a\": \"alpha\", \"b\": 1, \"c\": 2}",
+                 "nested": "{\"alpha\": \"alpha\", \"b\": 1, \"c\": 2}",
                  "data": "",
                  "url": null,
                  "dict": {"hello": 2}
@@ -90,7 +90,10 @@ class ViewController: UIViewController {
         
         do {
             let decoder = CleanJSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            decoder.keyDecodingStrategy = .mapper([
+                ["snake_case"]: "snakeCase",
+                ["nested", "alpha"]: "a"
+            ])
             decoder.dateDecodingStrategy = .secondsSince1970
             
             // 值为 null 或类型不匹配时解码策略

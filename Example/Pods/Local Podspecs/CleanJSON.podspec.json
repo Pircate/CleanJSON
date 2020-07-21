@@ -1,6 +1,6 @@
 {
   "name": "CleanJSON",
-  "version": "0.9.1",
+  "version": "1.0.3",
   "summary": "Swift JSON decoder for Codable.",
   "homepage": "https://github.com/Pircate/CleanJSON",
   "license": {
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/Pircate/CleanJSON.git",
-    "tag": "0.9.1"
+    "tag": "1.0.3"
   },
   "source_files": "CleanJSON/Classes/**/*",
   "platforms": {
@@ -22,7 +22,6 @@
     "watchos": "2.0"
   },
   "swift_versions": [
-    "4.2",
     "5.0"
   ],
   "swift_version": "5.0"

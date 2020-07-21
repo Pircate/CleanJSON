@@ -18,7 +18,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 * iOS 9.0
-* Swift 5.0
+* Swift 5.2
 
 ## Installation
 
@@ -119,6 +119,15 @@ decoder.jsonStringDecodingStrategy = .containsKeys([])
 
 // 所有 JSON 字符串都转成对象
 decoder.jsonStringDecodingStrategy = .all
+```
+
+为 `keyDecodingStrategy` 新增了一个自定义映射器，可以只映射指定 coding path 的 key 
+
+```swift
+decoder.keyDecodingStrategy = .mapper([
+    ["snake_case"]: "snakeCase",
+    ["nested", "alpha"]: "a"
+])
 ```
 
 ### For Moya

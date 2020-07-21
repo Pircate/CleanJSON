@@ -13,5 +13,5 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.10'
   s.tvos.deployment_target = '9.0'
   s.watchos.deployment_target = '2.0'
-  s.swift_versions = ['4.2', '5.0']
+  s.swift_versions = ['5.2']
 end
