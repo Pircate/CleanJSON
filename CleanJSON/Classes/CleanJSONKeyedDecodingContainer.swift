@@ -459,8 +459,8 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
             }
             
             guard let data = string.data(using: .utf8),
-                let topLevel = try? JSONSerialization.jsonObject(with: data) else {
-                    return try decodeObject(decoder)
+                  let topLevel = try? JSONSerialization.jsonObject(with: data) else {
+                return try decodeObject(decoder)
             }
             
             decoder.storage.push(container: topLevel)
@@ -483,7 +483,10 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
     }
     
     @inline(__always)
-    public func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type, forKey key: Key) throws -> KeyedDecodingContainer<NestedKey> {
+    public func nestedContainer<NestedKey>(
+        keyedBy type: NestedKey.Type,
+        forKey key: Key
+    ) throws -> KeyedDecodingContainer<NestedKey> {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
@@ -512,12 +515,14 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
     }
     
     @inline(__always)
-    private func nestedContainer<NestedKey>(wrapping dictionary: [String: Any] = [:])
-        -> KeyedDecodingContainer<NestedKey> {
-            let container = CleanJSONKeyedDecodingContainer<NestedKey>(
-                referencing: decoder,
-                wrapping: dictionary)
-            return KeyedDecodingContainer(container)
+    private func nestedContainer<NestedKey>(
+        wrapping dictionary: [String: Any] = [:]
+    ) -> KeyedDecodingContainer<NestedKey> {
+        let container = CleanJSONKeyedDecodingContainer<NestedKey>(
+            referencing: decoder,
+            wrapping: dictionary
+        )
+        return KeyedDecodingContainer(container)
     }
     
     @inline(__always)
@@ -539,7 +544,8 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
             case .throw:
                 throw DecodingError._typeMismatch(
                     at: self.codingPath,
-                    expectation: [Any].self, reality: value)
+                    expectation: [Any].self, reality: value
+                )
             case .useEmptyContainer:
                 return CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
             }
@@ -554,7 +560,11 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         defer { self.decoder.codingPath.removeLast() }
         
         let value: Any = self.container[key.stringValue] ?? NSNull()
-        return _CleanJSONDecoder(referencing: value, at: self.decoder.codingPath, options: self.decoder.options)
+        return _CleanJSONDecoder(
+            referencing: value,
+            at: self.decoder.codingPath,
+            options: self.decoder.options
+        )
     }
     
     @inline(__always)

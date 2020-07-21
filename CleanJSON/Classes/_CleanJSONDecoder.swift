@@ -64,7 +64,10 @@ final class _CleanJSONDecoder: CleanDecoder {
             }
         }
         
-        let container = CleanJSONKeyedDecodingContainer<Key>(referencing: self, wrapping: topContainer)
+        let container = CleanJSONKeyedDecodingContainer<Key>(
+            referencing: self,
+            wrapping: topContainer
+        )
         return KeyedDecodingContainer(container)
     }
     

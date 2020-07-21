@@ -539,6 +539,10 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         
         let value = self.container[self.currentIndex]
         self.currentIndex += 1
-        return _CleanJSONDecoder(referencing: value, at: self.decoder.codingPath, options: self.decoder.options)
+        return _CleanJSONDecoder(
+            referencing: value,
+            at: self.decoder.codingPath,
+            options: self.decoder.options
+        )
     }
 }
