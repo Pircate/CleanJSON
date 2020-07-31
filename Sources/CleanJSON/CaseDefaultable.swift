@@ -7,6 +7,8 @@
 //
 //  Reference: https://github.com/line/line-sdk-ios-swift/blob/master/LineSDK/LineSDK/Networking/Model/CustomizeCoding/CodingExtension.swift
 
+import Foundation
+
 public protocol CaseDefaultable: RawRepresentable {
     
     static var defaultCase: Self { get }

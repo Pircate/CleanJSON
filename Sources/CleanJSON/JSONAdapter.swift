@@ -6,6 +6,8 @@
 //  Copyright © 2018 Pircate. All rights reserved.
 //
 
+import Foundation
+
 public protocol JSONAdapter {
     
     func adapt(_ decoder: CleanDecoder) throws -> Bool

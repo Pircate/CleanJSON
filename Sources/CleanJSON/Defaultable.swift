@@ -6,6 +6,8 @@
 //  Copyright © 2018 Pircate. All rights reserved.
 //
 
+import Foundation
+
 protocol Defaultable {
     static var defaultValue: Self { get }
 }

@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Pircate' => 'gao497868860@163.com' }
   s.source           = { :git => 'https://github.com/Pircate/CleanJSON.git', :tag => s.version.to_s }
-  s.source_files     = 'CleanJSON/Classes/**/*'
+  s.source_files     = 'Sources/CleanJSON/**/*'
   
   s.ios.deployment_target = '9.0'
   s.osx.deployment_target = '10.10'

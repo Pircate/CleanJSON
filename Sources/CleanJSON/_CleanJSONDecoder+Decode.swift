@@ -6,6 +6,8 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
+import Foundation
+
 extension _CleanJSONDecoder {
     
     func decodeAsDefaultValue<T: Decodable>() throws -> T {
