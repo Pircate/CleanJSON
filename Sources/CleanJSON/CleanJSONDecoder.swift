@@ -67,13 +67,26 @@ open class CleanJSONDecoder: JSONDecoder {
             throw DecodingError.dataCorrupted(
                 DecodingError.Context(
                     codingPath: [],
-                    debugDescription: "The given data was not valid JSON.", underlyingError: error
+                    debugDescription: "The given data was not valid JSON.",
+                    underlyingError: error
                 )
             )
         }
         
-        let decoder = _CleanJSONDecoder(referencing: topLevel, options: self.options)
-        guard let value = try decoder.unbox(topLevel, as: type) else {
+        return try decode(type, from: topLevel)
+    }
+    
+    /// Decodes a top-level value of the given type from the given JSON representation.
+    ///
+    /// - parameter type: The type of the value to decode.
+    /// - parameter container: The container to decode from.
+    /// - returns: A value of the requested type.
+    /// - throws: `DecodingError.dataCorrupted` if values requested from the payload are corrupted.
+    /// - throws: An error if any value throws an error during decoding.
+    open func decode<T : Decodable>(_ type: T.Type, from container: Any) throws -> T {
+        let decoder = _CleanJSONDecoder(referencing: container, options: self.options)
+        
+        guard let value = try decoder.unbox(container, as: type) else {
             throw DecodingError.valueNotFound(
                 type, DecodingError.Context(
                     codingPath: [],
