@@ -85,36 +85,35 @@ open class CleanJSONDecoder: JSONDecoder {
             )
         }
         
-        let decoder = _CleanJSONDecoder(referencing: topLevel, options: self.options)
-        guard let value = try decoder.unbox(topLevel, as: type) else {
-            throw DecodingError.valueNotFound(
-                type, DecodingError.Context(
-                    codingPath: [],
-                    debugDescription: "The given data did not contain a top-level value."
-                )
-            )
-        }
-        
-        return value
+        return try decode(type, from: topLevel)
     }
     
-    /// Decodes a top-level value of the given type from the given JSON representation.
+    /// Decodes a top-level value of the given type.
     ///
     /// - parameter type: The type of the value to decode.
     /// - parameter convertible: The container to decode from.
     /// - returns: A value of the requested type.
-    /// - throws: `DecodingError.dataCorrupted` if values requested from the payload are corrupted.
     /// - throws: An error if any value throws an error during decoding.
     open func decode<T : Decodable>(
         _ type: T.Type,
         from convertible: JSONContainerConvertible
     ) throws -> T {
-        let container = convertible.asContainer()
+        try decode(type, from: convertible.asContainer())
+    }
+}
+
+private extension CleanJSONDecoder {
+    
+    func decode<T : Decodable>(
+        _ type: T.Type,
+        from container: Any
+    ) throws -> T {
         let decoder = _CleanJSONDecoder(referencing: container, options: self.options)
         
         guard let value = try decoder.unbox(container, as: type) else {
             throw DecodingError.valueNotFound(
-                type, DecodingError.Context(
+                type,
+                DecodingError.Context(
                     codingPath: [],
                     debugDescription: "The given data did not contain a top-level value."
                 )
