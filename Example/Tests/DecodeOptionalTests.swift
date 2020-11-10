@@ -12,6 +12,7 @@ import CleanJSON
 struct Model: Codable {
     let keyNotFound: Nested?
     let valueNotFound: Nested?
+    let jsonString: Nested?
     
     struct Nested: Codable {
         let value: String
@@ -108,15 +109,19 @@ class DecodeOptionalTests: XCTestCase {
     }
     
     func testNestedOptional() {
-        let data = """
+        let data = #"""
                     {
                       "valueNotFound": null,
+                      "jsonString": "{\"value\":\"jsonString\"}"
                     }
-                """.data(using: .utf8)!
+                """#.data(using: .utf8)!
         do {
-            let model = try CleanJSONDecoder().decode(Model.self, from: data)
+            let decoder = CleanJSONDecoder()
+            decoder.jsonStringDecodingStrategy = .all
+            let model = try decoder.decode(Model.self, from: data)
             XCTAssertEqual(model.keyNotFound?.value, nil)
             XCTAssertEqual(model.valueNotFound?.value, nil)
+            XCTAssertEqual(model.jsonString?.value, "jsonString")
         } catch {
             XCTAssertNil(error)
         }

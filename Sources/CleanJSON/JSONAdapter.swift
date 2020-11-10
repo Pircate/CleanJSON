@@ -79,6 +79,8 @@ public protocol JSONAdapter {
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> URL?
     
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> Decimal?
+    
+    func adaptIfPresent<T: Decodable>(_ decoder: CleanDecoder) throws -> T?
 }
 
 public extension JSONAdapter {
@@ -294,6 +296,11 @@ public extension JSONAdapter {
     
     @inline(__always)
     func adaptIfPresent(_ decoder: CleanDecoder) throws -> Decimal? {
+        return nil
+    }
+    
+    @inline(__always)
+    func adaptIfPresent<T: Decodable>(_ decoder: CleanDecoder) throws -> T? {
         return nil
     }
 }

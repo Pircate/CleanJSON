@@ -431,7 +431,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
         decoder.codingPath.append(key)
         defer { decoder.codingPath.removeLast() }
         
-        let decodeObject = { (decoder: _CleanJSONDecoder) -> T in
+        func decodeObject(from decoder: _CleanJSONDecoder) throws -> T {
             if let value = try decoder.unbox(entry, as: type) { return value }
             
             switch decoder.options.valueNotFoundDecodingStrategy {
@@ -446,39 +446,31 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
             }
         }
         
-        let decodeJSONString = { (decoder: _CleanJSONDecoder) -> T in
-            if let _ = String.defaultValue as? T { return try decodeObject(decoder) }
-            
-            guard let string = try decoder.unbox(entry, as: String.self) else {
-                return try decodeObject(decoder)
+        /// 若期望解析的类型是字符串类型，则正常解析
+        if let _ = String.defaultValue as? T { return try decodeObject(from: decoder) }
+        
+        /// 若原始 JSON 数据不是有效的字符串类型则正常解析
+        guard let string = try decoder.unbox(entry, as: String.self) else {
+            return try decodeObject(from: decoder)
+        }
+        
+        func decodeJSONString(from decoder: _CleanJSONDecoder) throws -> T {
+            guard let jsonObject = string.toJSONObject() else {
+                return try decodeObject(from: decoder)
             }
             
-            // 过滤掉非 JSON 格式字符串
-            guard string.hasPrefix("{") || string.hasPrefix("[") else {
-                return try decodeObject(decoder)
-            }
-            
-            guard let data = string.data(using: .utf8),
-                  let topLevel = try? JSONSerialization.jsonObject(with: data) else {
-                return try decodeObject(decoder)
-            }
-            
-            decoder.storage.push(container: topLevel)
+            decoder.storage.push(container: jsonObject)
             defer { decoder.storage.popContainer() }
             return try decoder.decode(type)
         }
         
         switch decoder.options.jsonStringDecodingStrategy {
-        case .containsKeys(let keys):
-            guard !keys.isEmpty else { return try decodeObject(decoder) }
-            
-            guard keys.contains(where: { $0.stringValue == key.stringValue }) else {
-                return try decodeObject(decoder)
-            }
-            
-            return try decodeJSONString(decoder)
+        case .containsKeys(let keys) where keys.contains(where: { $0.stringValue == key.stringValue }):
+            return try decodeJSONString(from: decoder)
         case .all:
-            return try decodeJSONString(decoder)
+            return try decodeJSONString(from: decoder)
+        default:
+            return try decodeObject(from: decoder)
         }
     }
     
@@ -588,7 +580,7 @@ extension CleanJSONKeyedDecodingContainer {
         
         switch decoder.options.valueNotFoundDecodingStrategy {
         case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: decoder.codingPath)
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
@@ -604,7 +596,7 @@ extension CleanJSONKeyedDecodingContainer {
         
         switch decoder.options.valueNotFoundDecodingStrategy {
         case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: decoder.codingPath)
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
@@ -620,7 +612,7 @@ extension CleanJSONKeyedDecodingContainer {
         
         switch decoder.options.valueNotFoundDecodingStrategy {
         case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: decoder.codingPath)
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
@@ -636,7 +628,7 @@ extension CleanJSONKeyedDecodingContainer {
         
         switch decoder.options.valueNotFoundDecodingStrategy {
         case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: decoder.codingPath)
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
@@ -652,7 +644,7 @@ extension CleanJSONKeyedDecodingContainer {
         
         switch decoder.options.valueNotFoundDecodingStrategy {
         case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: decoder.codingPath)
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
@@ -668,7 +660,7 @@ extension CleanJSONKeyedDecodingContainer {
         
         switch decoder.options.valueNotFoundDecodingStrategy {
         case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: decoder.codingPath)
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
@@ -684,7 +676,7 @@ extension CleanJSONKeyedDecodingContainer {
         
         switch decoder.options.valueNotFoundDecodingStrategy {
         case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: decoder.codingPath)
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
@@ -700,7 +692,7 @@ extension CleanJSONKeyedDecodingContainer {
         
         switch decoder.options.valueNotFoundDecodingStrategy {
         case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: decoder.codingPath)
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
@@ -716,7 +708,7 @@ extension CleanJSONKeyedDecodingContainer {
         
         switch decoder.options.valueNotFoundDecodingStrategy {
         case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: decoder.codingPath)
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
@@ -732,7 +724,7 @@ extension CleanJSONKeyedDecodingContainer {
         
         switch decoder.options.valueNotFoundDecodingStrategy {
         case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: decoder.codingPath)
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
@@ -748,7 +740,7 @@ extension CleanJSONKeyedDecodingContainer {
         
         switch decoder.options.valueNotFoundDecodingStrategy {
         case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: decoder.codingPath)
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
@@ -764,7 +756,7 @@ extension CleanJSONKeyedDecodingContainer {
         
         switch decoder.options.valueNotFoundDecodingStrategy {
         case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: decoder.codingPath)
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
@@ -780,7 +772,7 @@ extension CleanJSONKeyedDecodingContainer {
         
         switch decoder.options.valueNotFoundDecodingStrategy {
         case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: decoder.codingPath)
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
@@ -796,7 +788,7 @@ extension CleanJSONKeyedDecodingContainer {
         
         switch decoder.options.valueNotFoundDecodingStrategy {
         case .throw:
-            throw DecodingError.Keyed.keyNotFound(key, codingPath: decoder.codingPath)
+            throw DecodingError.Keyed.valueNotFound(type, codingPath: decoder.codingPath)
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
@@ -820,7 +812,43 @@ extension CleanJSONKeyedDecodingContainer {
         
         if try decodeNil(forKey: key) { return nil }
         
-        return try decoder.unbox(entry, as: type)
+        func decodeObject(from decoder: _CleanJSONDecoder) throws -> T? {
+            if let value = try decoder.unbox(entry, as: type) { return value }
+            
+            switch decoder.options.valueNotFoundDecodingStrategy {
+            case .throw:
+                throw DecodingError.Keyed.valueNotFound(type, codingPath: decoder.codingPath)
+            case .useDefaultValue:
+                return nil
+            case .custom(let adapter):
+                return try adapter.adaptIfPresent(decoder)
+            }
+        }
+        
+        /// 若期望解析的类型是字符串类型，则正常解析
+        if let _ = String.defaultValue as? T { return try decodeObject(from: decoder) }
+        
+        /// 若原始 JSON 数据不是有效的字符串类型则正常解析
+        guard let string = try decoder.unbox(entry, as: String.self) else {
+            return try decodeObject(from: decoder)
+        }
+        
+        func decodeJSONString(from decoder: _CleanJSONDecoder) throws -> T? {
+            guard let jsonObject = string.toJSONObject() else {
+                return try decodeObject(from: decoder)
+            }
+            
+            return try decoder.unbox(jsonObject, as: type)
+        }
+        
+        switch decoder.options.jsonStringDecodingStrategy {
+        case .containsKeys(let keys) where keys.contains(where: { $0.stringValue == key.stringValue }):
+            return try decodeJSONString(from: decoder)
+        case .all:
+            return try decodeJSONString(from: decoder)
+        default:
+            return try decodeObject(from: decoder)
+        }
     }
 }
 
@@ -881,5 +909,21 @@ private extension CleanJSONKeyedDecodingContainer {
         case .useDefaultValue:
             return T.defaultValue
         }
+    }
+}
+
+private extension String {
+    
+    func toJSONObject() -> Any? {
+        // 过滤掉非 JSON 格式字符串
+        guard hasPrefix("{") || hasPrefix("[") else { return nil }
+        
+        guard let data = data(using: .utf8),
+              let jsonObject = try? JSONSerialization.jsonObject(with: data)
+        else {
+            return nil
+        }
+        
+        return jsonObject
     }
 }
