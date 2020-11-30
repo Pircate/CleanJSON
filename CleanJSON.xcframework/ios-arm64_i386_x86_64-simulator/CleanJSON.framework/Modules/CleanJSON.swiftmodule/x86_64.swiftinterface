@@ -1,0 +1,200 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.0.41 clang-1200.0.32.8)
+// swift-module-flags: -target x86_64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name CleanJSON
+import Foundation
+import Swift
+public protocol CaseDefaultable : Swift.RawRepresentable {
+  static var defaultCase: Self { get }
+}
+extension CaseDefaultable where Self : Swift.Decodable, Self.RawValue : Swift.Decodable {
+  public init(from decoder: Swift.Decoder) throws
+}
+public protocol CleanDecoder : Swift.Decoder {
+  func decodeNil() -> Swift.Bool
+  func decodeIfPresent(_ type: Swift.Bool.Type) throws -> Swift.Bool?
+  func decodeIfPresent(_ type: Swift.Int.Type) throws -> Swift.Int?
+  func decodeIfPresent(_ type: Swift.Int8.Type) throws -> Swift.Int8?
+  func decodeIfPresent(_ type: Swift.Int16.Type) throws -> Swift.Int16?
+  func decodeIfPresent(_ type: Swift.Int32.Type) throws -> Swift.Int32?
+  func decodeIfPresent(_ type: Swift.Int64.Type) throws -> Swift.Int64?
+  func decodeIfPresent(_ type: Swift.UInt.Type) throws -> Swift.UInt?
+  func decodeIfPresent(_ type: Swift.UInt8.Type) throws -> Swift.UInt8?
+  func decodeIfPresent(_ type: Swift.UInt16.Type) throws -> Swift.UInt16?
+  func decodeIfPresent(_ type: Swift.UInt32.Type) throws -> Swift.UInt32?
+  func decodeIfPresent(_ type: Swift.UInt64.Type) throws -> Swift.UInt64?
+  func decodeIfPresent(_ type: Swift.Float.Type) throws -> Swift.Float?
+  func decodeIfPresent(_ type: Swift.Double.Type) throws -> Swift.Double?
+  func decodeIfPresent(_ type: Swift.String.Type) throws -> Swift.String?
+  func decodeIfPresent(_ type: Foundation.Date.Type) throws -> Foundation.Date?
+  func decodeIfPresent(_ type: Foundation.Data.Type) throws -> Foundation.Data?
+  func decodeIfPresent(_ type: Foundation.Decimal.Type) throws -> Foundation.Decimal?
+  func decodeIfPresent<T>(_ type: T.Type) throws -> T? where T : Swift.Decodable
+}
+public protocol JSONContainerConvertible {
+  func asContainer() -> Any
+}
+extension Dictionary : CleanJSON.JSONContainerConvertible where Key == Swift.String, Value == Any {
+  public func asContainer() -> Any
+}
+extension Array : CleanJSON.JSONContainerConvertible where Element == Any {
+  public func asContainer() -> Any
+}
+@_inheritsConvenienceInitializers open class CleanJSONDecoder : Foundation.JSONDecoder {
+  open var keyNotFoundDecodingStrategy: CleanJSON.CleanJSONDecoder.KeyNotFoundDecodingStrategy
+  open var valueNotFoundDecodingStrategy: CleanJSON.CleanJSONDecoder.ValueNotFoundDecodingStrategy
+  open var nestedContainerDecodingStrategy: CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy
+  open var jsonStringDecodingStrategy: CleanJSON.CleanJSONDecoder.JSONStringDecodingStrategy
+  override open func decode<T>(_ type: T.Type, from data: Foundation.Data) throws -> T where T : Swift.Decodable
+  open func decode<T>(_ type: T.Type, from convertible: CleanJSON.JSONContainerConvertible) throws -> T where T : Swift.Decodable
+  @objc deinit
+  override public init()
+}
+public typealias CodingPath = [Swift.String]
+extension JSONDecoder.KeyDecodingStrategy {
+  public static func mapper(_ container: [CleanJSON.CodingPath : Swift.String]) -> Foundation.JSONDecoder.KeyDecodingStrategy
+}
+extension CleanJSONDecoder {
+  public enum KeyNotFoundDecodingStrategy {
+    case `throw`
+    case useDefaultValue
+    public static func == (a: CleanJSON.CleanJSONDecoder.KeyNotFoundDecodingStrategy, b: CleanJSON.CleanJSONDecoder.KeyNotFoundDecodingStrategy) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public enum ValueNotFoundDecodingStrategy {
+    case `throw`
+    case useDefaultValue
+    case custom(CleanJSON.JSONAdapter)
+  }
+  public enum JSONStringDecodingStrategy {
+    case containsKeys([Swift.CodingKey])
+    case all
+  }
+}
+extension CleanJSONDecoder {
+  public struct NestedContainerDecodingStrategy {
+    public enum KeyNotFound {
+      case `throw`
+      case useEmptyContainer
+      public static func == (a: CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.KeyNotFound, b: CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.KeyNotFound) -> Swift.Bool
+      public var hashValue: Swift.Int {
+        get
+      }
+      public func hash(into hasher: inout Swift.Hasher)
+    }
+    public enum ValueNotFound {
+      case `throw`
+      case useEmptyContainer
+      public static func == (a: CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.ValueNotFound, b: CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.ValueNotFound) -> Swift.Bool
+      public var hashValue: Swift.Int {
+        get
+      }
+      public func hash(into hasher: inout Swift.Hasher)
+    }
+    public enum TypeMismatch {
+      case `throw`
+      case useEmptyContainer
+      public static func == (a: CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.TypeMismatch, b: CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.TypeMismatch) -> Swift.Bool
+      public var hashValue: Swift.Int {
+        get
+      }
+      public func hash(into hasher: inout Swift.Hasher)
+    }
+    public var keyNotFound: CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.KeyNotFound
+    public var valueNotFound: CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.ValueNotFound
+    public var typeMismatch: CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.TypeMismatch
+    public init(keyNotFound: CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.KeyNotFound = .useEmptyContainer, valueNotFound: CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.ValueNotFound = .useEmptyContainer, typeMismatch: CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.TypeMismatch = .useEmptyContainer)
+  }
+}
+public protocol JSONAdapter {
+  func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Bool
+  func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int
+  func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int8
+  func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int16
+  func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int32
+  func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int64
+  func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt
+  func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt8
+  func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt16
+  func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt32
+  func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt64
+  func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Float
+  func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Double
+  func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.String
+  func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Foundation.Date
+  func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Foundation.Data
+  func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Foundation.Decimal
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Bool?
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int?
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int8?
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int16?
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int32?
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int64?
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt?
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt8?
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt16?
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt32?
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt64?
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Float?
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Double?
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.String?
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Foundation.Date?
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Foundation.Data?
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Foundation.URL?
+  func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Foundation.Decimal?
+  func adaptIfPresent<T>(_ decoder: CleanJSON.CleanDecoder) throws -> T? where T : Swift.Decodable
+}
+extension JSONAdapter {
+  @inline(__always) public func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Bool
+  @inline(__always) public func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int
+  @inline(__always) public func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int8
+  @inline(__always) public func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int16
+  @inline(__always) public func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int32
+  @inline(__always) public func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int64
+  @inline(__always) public func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt
+  @inline(__always) public func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt8
+  @inline(__always) public func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt16
+  @inline(__always) public func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt32
+  @inline(__always) public func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt64
+  @inline(__always) public func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Float
+  @inline(__always) public func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Double
+  @inline(__always) public func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.String
+  @inline(__always) public func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Foundation.Date
+  @inline(__always) public func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Foundation.Data
+  @inline(__always) public func adapt(_ decoder: CleanJSON.CleanDecoder) throws -> Foundation.Decimal
+}
+extension JSONAdapter {
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Bool?
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int?
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int8?
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int16?
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int32?
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Int64?
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt?
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt8?
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt16?
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt32?
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.UInt64?
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Float?
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.Double?
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Swift.String?
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Foundation.Date?
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Foundation.Data?
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Foundation.URL?
+  @inline(__always) public func adaptIfPresent(_ decoder: CleanJSON.CleanDecoder) throws -> Foundation.Decimal?
+  @inline(__always) public func adaptIfPresent<T>(_ decoder: CleanJSON.CleanDecoder) throws -> T? where T : Swift.Decodable
+}
+extension Encodable {
+  @inline(__always) public func toJSON(using encoder: Foundation.JSONEncoder = .init()) throws -> Foundation.Data
+  @inline(__always) public func toJSONString(using encoder: Foundation.JSONEncoder = .init()) -> Swift.String?
+}
+extension CleanJSON.CleanJSONDecoder.KeyNotFoundDecodingStrategy : Swift.Equatable {}
+extension CleanJSON.CleanJSONDecoder.KeyNotFoundDecodingStrategy : Swift.Hashable {}
+extension CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.KeyNotFound : Swift.Equatable {}
+extension CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.KeyNotFound : Swift.Hashable {}
+extension CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.ValueNotFound : Swift.Equatable {}
+extension CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.ValueNotFound : Swift.Hashable {}
+extension CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.TypeMismatch : Swift.Equatable {}
+extension CleanJSON.CleanJSONDecoder.NestedContainerDecodingStrategy.TypeMismatch : Swift.Hashable {}
