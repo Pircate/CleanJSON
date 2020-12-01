@@ -11,6 +11,10 @@ let package = Package(
             name: "CleanJSON",
             targets: ["CleanJSON"]
         ),
+        .library(
+            name: "Storable",
+            targets: ["Storable"]
+        )
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -19,7 +23,8 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
-        .binaryTarget(name: "CleanJSON", path: "CleanJSON.xcframework"),
+        .target(name: "CleanJSON"),
+        .target(name: "Storable"),
         .testTarget(
             name: "CleanJSONTests",
             dependencies: ["CleanJSON"]
