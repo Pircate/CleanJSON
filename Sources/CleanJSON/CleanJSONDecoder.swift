@@ -9,15 +9,15 @@
 import Foundation
 
 public protocol JSONContainerConvertible {
-    func asContainer() -> Any
+    func asJSONContainer() -> Any
 }
 
 extension Dictionary: JSONContainerConvertible where Key == String, Value == Any {
-    public func asContainer() -> Any { self }
+    public func asJSONContainer() -> Any { self }
 }
 
 extension Array: JSONContainerConvertible where Element == Any {
-    public func asContainer() -> Any { self }
+    public func asJSONContainer() -> Any { self }
 }
 
 open class CleanJSONDecoder: JSONDecoder {
@@ -98,7 +98,7 @@ open class CleanJSONDecoder: JSONDecoder {
         _ type: T.Type,
         from convertible: JSONContainerConvertible
     ) throws -> T {
-        try decode(type, from: convertible.asContainer())
+        try decode(type, from: convertible.asJSONContainer())
     }
 }
 

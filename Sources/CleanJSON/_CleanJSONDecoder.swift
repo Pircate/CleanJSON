@@ -46,7 +46,10 @@ final class _CleanJSONDecoder: CleanDecoder {
                     debugDescription: "Cannot get keyed decoding container -- found null value instead."
                 )
             case .useEmptyContainer:
-                let container = CleanJSONKeyedDecodingContainer<Key>(referencing: self, wrapping: [:])
+                let container = CleanJSONKeyedDecodingContainer<Key>(
+                    referencing: self,
+                    wrapping: [:]
+                )
                 return KeyedDecodingContainer(container)
             }
         }

@@ -96,6 +96,8 @@ extension _CleanJSONDecoder {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            storage.push(container: value)
+            defer { storage.popContainer() }
             return try adapter.adaptIfPresent(self)
         }
     }
@@ -113,6 +115,8 @@ extension _CleanJSONDecoder {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            storage.push(container: value)
+            defer { storage.popContainer() }
             return try adapter.adaptIfPresent(self)
         }
     }
@@ -130,6 +134,8 @@ extension _CleanJSONDecoder {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            storage.push(container: value)
+            defer { storage.popContainer() }
             return try adapter.adaptIfPresent(self)
         }
     }
@@ -147,6 +153,8 @@ extension _CleanJSONDecoder {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            storage.push(container: value)
+            defer { storage.popContainer() }
             return try adapter.adaptIfPresent(self)
         }
     }

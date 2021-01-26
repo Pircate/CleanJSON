@@ -60,6 +60,7 @@ struct Optional: Codable {
     let uint: UInt?
     let float: Float?
     let double: Double?
+    let date: Date?
 }
 
 struct EnumStruct: Codable {

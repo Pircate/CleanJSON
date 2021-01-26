@@ -50,6 +50,9 @@ import CleanJSON
 ```swift
 let decoder = CleanJSONDecoder()
 try decoder.decode(Model.self, from: data)
+
+// 支持直接解析符合 JSON 规范的字典和数组
+try decoder.decode(Model.self, from: ["key": value])
 ```
 
 ### Enum

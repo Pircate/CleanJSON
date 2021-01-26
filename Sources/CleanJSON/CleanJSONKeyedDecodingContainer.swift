@@ -572,6 +572,9 @@ extension CleanJSONKeyedDecodingContainer {
     func decodeIfPresent(_ type: Bool.Type, forKey key: K) throws -> Bool? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
         if let value = try decoder.unbox(entry, as: type) { return value }
         
         switch decoder.options.valueNotFoundDecodingStrategy {
@@ -580,6 +583,8 @@ extension CleanJSONKeyedDecodingContainer {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
             return try adapter.adaptIfPresent(decoder)
         }
     }
@@ -588,6 +593,9 @@ extension CleanJSONKeyedDecodingContainer {
     func decodeIfPresent(_ type: Int.Type, forKey key: K) throws -> Int? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
         if let value = try decoder.unbox(entry, as: type) { return value }
         
         switch decoder.options.valueNotFoundDecodingStrategy {
@@ -596,6 +604,8 @@ extension CleanJSONKeyedDecodingContainer {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
             return try adapter.adaptIfPresent(decoder)
         }
     }
@@ -604,6 +614,9 @@ extension CleanJSONKeyedDecodingContainer {
     func decodeIfPresent(_ type: Int8.Type, forKey key: K) throws -> Int8? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
         if let value = try decoder.unbox(entry, as: type) { return value }
         
         switch decoder.options.valueNotFoundDecodingStrategy {
@@ -612,6 +625,8 @@ extension CleanJSONKeyedDecodingContainer {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
             return try adapter.adaptIfPresent(decoder)
         }
     }
@@ -620,6 +635,9 @@ extension CleanJSONKeyedDecodingContainer {
     func decodeIfPresent(_ type: Int16.Type, forKey key: K) throws -> Int16? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
         if let value = try decoder.unbox(entry, as: type) { return value }
         
         switch decoder.options.valueNotFoundDecodingStrategy {
@@ -628,6 +646,8 @@ extension CleanJSONKeyedDecodingContainer {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
             return try adapter.adaptIfPresent(decoder)
         }
     }
@@ -636,6 +656,9 @@ extension CleanJSONKeyedDecodingContainer {
     func decodeIfPresent(_ type: Int32.Type, forKey key: K) throws -> Int32? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
         if let value = try decoder.unbox(entry, as: type) { return value }
         
         switch decoder.options.valueNotFoundDecodingStrategy {
@@ -644,6 +667,8 @@ extension CleanJSONKeyedDecodingContainer {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
             return try adapter.adaptIfPresent(decoder)
         }
     }
@@ -652,6 +677,9 @@ extension CleanJSONKeyedDecodingContainer {
     func decodeIfPresent(_ type: Int64.Type, forKey key: K) throws -> Int64? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
         if let value = try decoder.unbox(entry, as: type) { return value }
         
         switch decoder.options.valueNotFoundDecodingStrategy {
@@ -660,6 +688,8 @@ extension CleanJSONKeyedDecodingContainer {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
             return try adapter.adaptIfPresent(decoder)
         }
     }
@@ -668,6 +698,9 @@ extension CleanJSONKeyedDecodingContainer {
     func decodeIfPresent(_ type: UInt.Type, forKey key: K) throws -> UInt? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
         if let value = try decoder.unbox(entry, as: type) { return value }
         
         switch decoder.options.valueNotFoundDecodingStrategy {
@@ -676,6 +709,8 @@ extension CleanJSONKeyedDecodingContainer {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
             return try adapter.adaptIfPresent(decoder)
         }
     }
@@ -684,6 +719,9 @@ extension CleanJSONKeyedDecodingContainer {
     func decodeIfPresent(_ type: UInt8.Type, forKey key: K) throws -> UInt8? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
         if let value = try decoder.unbox(entry, as: type) { return value }
         
         switch decoder.options.valueNotFoundDecodingStrategy {
@@ -692,6 +730,8 @@ extension CleanJSONKeyedDecodingContainer {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
             return try adapter.adaptIfPresent(decoder)
         }
     }
@@ -700,6 +740,9 @@ extension CleanJSONKeyedDecodingContainer {
     func decodeIfPresent(_ type: UInt16.Type, forKey key: K) throws -> UInt16? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
         if let value = try decoder.unbox(entry, as: type) { return value }
         
         switch decoder.options.valueNotFoundDecodingStrategy {
@@ -708,6 +751,8 @@ extension CleanJSONKeyedDecodingContainer {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
             return try adapter.adaptIfPresent(decoder)
         }
     }
@@ -716,6 +761,9 @@ extension CleanJSONKeyedDecodingContainer {
     func decodeIfPresent(_ type: UInt32.Type, forKey key: K) throws -> UInt32? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
         if let value = try decoder.unbox(entry, as: type) { return value }
         
         switch decoder.options.valueNotFoundDecodingStrategy {
@@ -724,6 +772,8 @@ extension CleanJSONKeyedDecodingContainer {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
             return try adapter.adaptIfPresent(decoder)
         }
     }
@@ -732,6 +782,9 @@ extension CleanJSONKeyedDecodingContainer {
     func decodeIfPresent(_ type: UInt64.Type, forKey key: K) throws -> UInt64? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
         if let value = try decoder.unbox(entry, as: type) { return value }
         
         switch decoder.options.valueNotFoundDecodingStrategy {
@@ -740,6 +793,8 @@ extension CleanJSONKeyedDecodingContainer {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
             return try adapter.adaptIfPresent(decoder)
         }
     }
@@ -748,6 +803,9 @@ extension CleanJSONKeyedDecodingContainer {
     func decodeIfPresent(_ type: Float.Type, forKey key: K) throws -> Float? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
         if let value = try decoder.unbox(entry, as: type) { return value }
         
         switch decoder.options.valueNotFoundDecodingStrategy {
@@ -756,6 +814,8 @@ extension CleanJSONKeyedDecodingContainer {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
             return try adapter.adaptIfPresent(decoder)
         }
     }
@@ -764,6 +824,9 @@ extension CleanJSONKeyedDecodingContainer {
     func decodeIfPresent(_ type: Double.Type, forKey key: K) throws -> Double? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
         if let value = try decoder.unbox(entry, as: type) { return value }
         
         switch decoder.options.valueNotFoundDecodingStrategy {
@@ -772,6 +835,8 @@ extension CleanJSONKeyedDecodingContainer {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
             return try adapter.adaptIfPresent(decoder)
         }
     }
@@ -780,6 +845,9 @@ extension CleanJSONKeyedDecodingContainer {
     func decodeIfPresent(_ type: String.Type, forKey key: K) throws -> String? {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
         if let value = try decoder.unbox(entry, as: type) { return value }
         
         switch decoder.options.valueNotFoundDecodingStrategy {
@@ -788,6 +856,8 @@ extension CleanJSONKeyedDecodingContainer {
         case .useDefaultValue:
             return nil
         case .custom(let adapter):
+            decoder.storage.push(container: entry)
+            defer { decoder.storage.popContainer() }
             return try adapter.adaptIfPresent(decoder)
         }
     }
@@ -795,6 +865,9 @@ extension CleanJSONKeyedDecodingContainer {
     @inline(__always)
     func decodeIfPresent<T>(_ type: T.Type, forKey key: K) throws -> T? where T : Decodable {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
+        
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
         
         if type == Date.self || type == NSDate.self {
             return try decoder.decodeIfPresent(entry, as: Date.self, forKey: key) as? T
@@ -817,6 +890,8 @@ extension CleanJSONKeyedDecodingContainer {
             case .useDefaultValue:
                 return nil
             case .custom(let adapter):
+                decoder.storage.push(container: entry)
+                defer { decoder.storage.popContainer() }
                 return try adapter.adaptIfPresent(decoder)
             }
         }

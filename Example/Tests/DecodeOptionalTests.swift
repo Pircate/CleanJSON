@@ -28,23 +28,46 @@ class DecodeOptionalTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    struct CustomAdapter: JSONAdapter {
+        func adaptIfPresent(_ decoder: CleanDecoder) throws -> Double? {
+            guard let stringValue = try decoder.decodeIfPresent(String.self) else {
+                return nil
+            }
+            
+            return Double(stringValue) ?? 0
+        }
+        
+        func adaptIfPresent(_ decoder: CleanDecoder) throws -> Date? {
+            guard let stringValue = try decoder.decodeIfPresent(String.self) else {
+                return nil
+            }
+            
+            return Date(timeIntervalSince1970: Double(stringValue) ?? 0)
+        }
+    }
 
     func testOptional() {
         let data = """
                     {
                       "string": null,
                       "uint": 10,
-                      "float": 4.9
+                      "float": 4.9,
+                      "double": "3.14",
+                      "date": "1611555423"
                     }
                 """.data(using: .utf8)!
         do {
-            let object = try CleanJSONDecoder().decode(Optional.self, from: data)
+            let decoder = CleanJSONDecoder()
+            decoder.valueNotFoundDecodingStrategy = .custom(CustomAdapter())
+            let object = try decoder.decode(Optional.self, from: data)
             XCTAssertNil(object.string)
             XCTAssertNil(object.boolean)
             XCTAssertNil(object.int)
             XCTAssertEqual(object.uint, 10)
             XCTAssertEqual(object.float, 4.9)
-            XCTAssertNil(object.double)
+            XCTAssertEqual(object.double, 3.14)
+            XCTAssertEqual(object.date, Date(timeIntervalSince1970: 1611555423))
         } catch {
             XCTAssertNil(error)
         }
