@@ -178,15 +178,7 @@ public extension JSONAdapter {
     func adapt(_ decoder: CleanDecoder) throws -> String {
         guard !decoder.decodeNil() else { return String.defaultValue }
         
-        if let intValue = try decoder.decodeIfPresent(Int.self) {
-            return String(intValue)
-        } else if let doubleValue = try decoder.decodeIfPresent(Double.self) {
-            return String(doubleValue)
-        } else if let boolValue = try decoder.decodeIfPresent(Bool.self) {
-            return String(boolValue)
-        }
-        
-        return String.defaultValue
+        return String(describing: decoder.topContainer)
     }
     
     @inline(__always)

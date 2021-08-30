@@ -984,8 +984,7 @@ private extension String {
         guard hasPrefix("{") || hasPrefix("[") else { return nil }
         
         guard let data = data(using: .utf8),
-              let jsonObject = try? JSONSerialization.jsonObject(with: data)
-        else {
+              let jsonObject = try? JSONSerialization.jsonObject(with: data) else {
             return nil
         }
         

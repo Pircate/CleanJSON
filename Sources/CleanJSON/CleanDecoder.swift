@@ -10,6 +10,8 @@ import Foundation
 
 public protocol CleanDecoder: Decoder {
     
+    var topContainer: Any { get }
+    
     func decodeNil() -> Bool
     
     func decodeIfPresent(_ type: Bool.Type) throws -> Bool?
@@ -51,6 +53,10 @@ public protocol CleanDecoder: Decoder {
 
 // MARK: CleanDecoder Methods
 extension _CleanJSONDecoder {
+    
+    var topContainer: Any {
+        storage.topContainer
+    }
     
     func decodeIfPresent(_ type: Bool.Type) throws -> Bool? {
         return try unbox(storage.topContainer, as: type)
