@@ -30,16 +30,16 @@ class DecodeOptionalTests: XCTestCase {
     }
     
     struct CustomAdapter: JSONAdapter {
-        func adaptIfPresent(_ decoder: CleanDecoder) throws -> Double? {
-            guard let stringValue = try decoder.decodeIfPresent(String.self) else {
+        func adaptIfPresent<T>(_ value: JSONValue) throws -> T? where T : BinaryFloatingPoint, T : LosslessStringConvertible {
+            guard case .string(let stringValue) = value else {
                 return nil
             }
             
-            return Double(stringValue) ?? 0
+            return T(stringValue) ?? 0
         }
         
-        func adaptIfPresent(_ decoder: CleanDecoder) throws -> Date? {
-            guard let stringValue = try decoder.decodeIfPresent(String.self) else {
+        func adaptIfPresent(_ value: JSONValue) throws -> Date? {
+            guard case .string(let stringValue) = value else {
                 return nil
             }
             
@@ -59,6 +59,7 @@ class DecodeOptionalTests: XCTestCase {
                 """.data(using: .utf8)!
         do {
             let decoder = CleanJSONDecoder()
+            decoder.dateDecodingStrategy = .secondsSince1970
             decoder.valueNotFoundDecodingStrategy = .custom(CustomAdapter())
             let object = try decoder.decode(Optional.self, from: data)
             XCTAssertNil(object.string)

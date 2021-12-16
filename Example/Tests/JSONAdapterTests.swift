@@ -11,36 +11,47 @@ import CleanJSON
 
 struct CustomAdapter: JSONAdapter {
     
-    func adapt(_ decoder: CleanDecoder) throws -> Bool {
-        return decoder.decodeNil()
+    func adapt(_ value: JSONValue) -> Bool {
+        value == .null
     }
     
-    func adapt(_ decoder: CleanDecoder) throws -> Int {
-        if let stringValue = try decoder.decodeIfPresent(String.self) {
+    func adapt<T>(_ value: JSONValue) -> T where T : FixedWidthInteger {
+        switch value {
+        case .string(let string):
             let formatter = NumberFormatter()
             formatter.generatesDecimalNumbers = true
             formatter.numberStyle = .decimal
-            return formatter.number(from: stringValue)?.intValue ?? 0
+            return T(formatter.number(from: string)?.intValue ?? 0)
+        default:
+            return 0
         }
-        return 0
     }
     
-    func adapt(_ decoder: CleanDecoder) throws -> Double {
-        if let stringValue = try decoder.decodeIfPresent(String.self) {
-            return Double(stringValue)?.advanced(by: 1) ?? 0
+    func adapt<T>(_ value: JSONValue) -> T where T : BinaryFloatingPoint, T : LosslessStringConvertible {
+        switch value {
+        case .string(let string):
+            return T(Double(string)?.advanced(by: 1) ?? 0)
+        default:
+            return 0
         }
-        return 0
     }
     
-    func adapt(_ decoder: CleanDecoder) throws -> String {
-        if let intValue = try decoder.decodeIfPresent(Int.self) {
-            return "$" + String(intValue)
-        } else if let doubleValue = try decoder.decodeIfPresent(Double.self) {
-            return String(format: "%.f", doubleValue)
-        } else if let boolValue = try decoder.decodeIfPresent(Bool.self) {
-            return String(boolValue).uppercased()
+    func adapt(_ value: JSONValue) -> String {
+        switch value {
+        case .string(let string):
+            return string
+        case .number(let string):
+            if let intValue = Int(string) {
+                return "$" + "\(intValue)"
+            } else if let doubleValue = Double(string) {
+                return String(format: "%.f", doubleValue)
+            }
+            return ""
+        case .bool(let bool):
+            return String(bool).uppercased()
+        default:
+            return ""
         }
-        return ""
     }
 }
 

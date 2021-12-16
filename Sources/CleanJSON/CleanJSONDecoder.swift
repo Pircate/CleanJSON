@@ -8,16 +8,12 @@
 
 import Foundation
 
-public protocol JSONContainerConvertible {
-    func asJSONContainer() -> Any
+protocol _JSONStringDictionaryDecodableMarker {
+    static var elementType: Decodable.Type { get }
 }
 
-extension Dictionary: JSONContainerConvertible where Key == String, Value == Any {
-    public func asJSONContainer() -> Any { self }
-}
-
-extension Array: JSONContainerConvertible where Element == Any {
-    public func asJSONContainer() -> Any { self }
+extension Dictionary: _JSONStringDictionaryDecodableMarker where Key == String, Value: Decodable {
+    static var elementType: Decodable.Type { return Value.self }
 }
 
 open class CleanJSONDecoder: JSONDecoder {
@@ -72,54 +68,19 @@ open class CleanJSONDecoder: JSONDecoder {
     /// - throws: `DecodingError.dataCorrupted` if values requested from the payload are corrupted, or if the given data is not valid JSON.
     /// - throws: An error if any value throws an error during decoding.
     open override func decode<T : Decodable>(_ type: T.Type, from data: Data) throws -> T {
-        let topLevel: Any
         do {
-            topLevel = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+            var parser = JSONParser(bytes: Array(data))
+            let json = try parser.parse()
+            return try JSONDecoderImpl(
+                userInfo: self.userInfo,
+                from: json,
+                codingPath: [],
+                options: self.options
+            ).unwrap(as: T.self)
+        } catch let error as JSONError {
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid JSON.", underlyingError: error))
         } catch {
-            throw DecodingError.dataCorrupted(
-                DecodingError.Context(
-                    codingPath: [],
-                    debugDescription: "The given data was not valid JSON.",
-                    underlyingError: error
-                )
-            )
+            throw error
         }
-        
-        return try decode(type, from: topLevel)
-    }
-    
-    /// Decodes a top-level value of the given type.
-    ///
-    /// - parameter type: The type of the value to decode.
-    /// - parameter convertible: The container to decode from.
-    /// - returns: A value of the requested type.
-    /// - throws: An error if any value throws an error during decoding.
-    open func decode<T : Decodable>(
-        _ type: T.Type,
-        from convertible: JSONContainerConvertible
-    ) throws -> T {
-        try decode(type, from: convertible.asJSONContainer())
-    }
-}
-
-private extension CleanJSONDecoder {
-    
-    func decode<T : Decodable>(
-        _ type: T.Type,
-        from container: Any
-    ) throws -> T {
-        let decoder = _CleanJSONDecoder(referencing: container, options: self.options)
-        
-        guard let value = try decoder.unbox(container, as: type) else {
-            throw DecodingError.valueNotFound(
-                type,
-                DecodingError.Context(
-                    codingPath: [],
-                    debugDescription: "The given data did not contain a top-level value."
-                )
-            )
-        }
-        
-        return value
     }
 }
