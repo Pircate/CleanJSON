@@ -25,12 +25,12 @@ struct CodingKeysConverter {
     }
 
     func callAsFunction(_ codingPath: [CodingKey]) -> CodingKey {
-        guard !codingPath.isEmpty else { return CleanJSONKey.super }
+        guard !codingPath.isEmpty else { return JSONKey.super }
         
         let stringKeys = codingPath.map { $0.stringValue }
         
         guard container.keys.contains(stringKeys) else { return codingPath.last! }
         
-        return CleanJSONKey(stringValue: container[stringKeys]!, intValue: nil)
+        return JSONKey(stringValue: container[stringKeys]!, intValue: nil)
     }
 }

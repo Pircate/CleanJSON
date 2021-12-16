@@ -50,7 +50,7 @@ struct TestAdapter: JSONAdapter {
     
     // 由于 Swift 布尔类型不是非 0 即 true，所以默认没有提供类型转换。
     // 如果想实现 Int 转 Bool 可以自定义解码。
-    func adapt(_ value: JSONValue) -> Bool {
+    func adapt(_ value: JSONValue, from decoder: Decoder) throws -> Bool {
         guard case .number(let value) = value, let intValue = Int(value) else {
             return false
         }
@@ -58,11 +58,11 @@ struct TestAdapter: JSONAdapter {
         return intValue != 0
     }
     
-    func adapt(_ value: JSONValue) -> Date {
+    func adapt(_ value: JSONValue, from decoder: Decoder) -> Date {
         Date()
     }
     
-    func adapt(_ value: JSONValue) -> URL {
+    func adapt(_ value: JSONValue, from decoder: Decoder) -> URL {
         URL(string: "https://google.com")!
     }
 }

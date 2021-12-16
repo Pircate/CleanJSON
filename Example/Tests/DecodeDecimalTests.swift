@@ -16,7 +16,8 @@ class DecodeDecimalTests: XCTestCase {
     }
     
     struct Adapter: JSONAdapter {
-        func adapt(_ value: JSONValue) -> Decimal {
+        
+        func adapt(_ value: JSONValue, from decoder: Decoder) throws -> Decimal {
             Decimal(9999)
         }
     }

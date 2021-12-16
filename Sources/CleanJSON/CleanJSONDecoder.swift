@@ -8,14 +8,6 @@
 
 import Foundation
 
-protocol _JSONStringDictionaryDecodableMarker {
-    static var elementType: Decodable.Type { get }
-}
-
-extension Dictionary: _JSONStringDictionaryDecodableMarker where Key == String, Value: Decodable {
-    static var elementType: Decodable.Type { return Value.self }
-}
-
 open class CleanJSONDecoder: JSONDecoder {
     
     /// Options set on the top-level encoder to pass down the decoding hierarchy.
@@ -71,12 +63,14 @@ open class CleanJSONDecoder: JSONDecoder {
         do {
             var parser = JSONParser(bytes: Array(data))
             let json = try parser.parse()
-            return try JSONDecoderImpl(
+            let decoder = JSONDecoderImpl(
                 userInfo: self.userInfo,
                 from: json,
                 codingPath: [],
                 options: self.options
-            ).unwrap(as: T.self)
+            )
+            
+            return try decoder.unwrap(as: T.self)
         } catch let error as JSONError {
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid JSON.", underlyingError: error))
         } catch {

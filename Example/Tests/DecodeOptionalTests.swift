@@ -13,6 +13,7 @@ struct Model: Codable {
     let keyNotFound: Nested?
     let valueNotFound: Nested?
     let jsonString: Nested?
+    let array: [Nested?]
     
     struct Nested: Codable {
         let value: String
@@ -30,7 +31,7 @@ class DecodeOptionalTests: XCTestCase {
     }
     
     struct CustomAdapter: JSONAdapter {
-        func adaptIfPresent<T>(_ value: JSONValue) throws -> T? where T : BinaryFloatingPoint, T : LosslessStringConvertible {
+        func adaptIfPresent<T>(_ value: JSONValue, from decoder: Decoder) throws -> T? where T : BinaryFloatingPoint, T : LosslessStringConvertible {
             guard case .string(let stringValue) = value else {
                 return nil
             }
@@ -38,7 +39,7 @@ class DecodeOptionalTests: XCTestCase {
             return T(stringValue) ?? 0
         }
         
-        func adaptIfPresent(_ value: JSONValue) throws -> Date? {
+        func adaptIfPresent(_ value: JSONValue, from decoder: Decoder) throws -> Date? {
             guard case .string(let stringValue) = value else {
                 return nil
             }
@@ -136,7 +137,15 @@ class DecodeOptionalTests: XCTestCase {
         let data = #"""
                     {
                       "valueNotFound": null,
-                      "jsonString": "{\"value\":\"jsonString\"}"
+                      "jsonString": "{\"value\":\"jsonString\"}",
+                      "array": [
+                          {
+                              "value": "ss"
+                          },
+                          {
+                              "value": "ss"
+                          }
+                      ]
                     }
                 """#.data(using: .utf8)!
         do {
@@ -146,6 +155,34 @@ class DecodeOptionalTests: XCTestCase {
             XCTAssertEqual(model.keyNotFound?.value, nil)
             XCTAssertEqual(model.valueNotFound?.value, nil)
             XCTAssertEqual(model.jsonString?.value, "jsonString")
+            XCTAssertEqual(model.array.count, 2)
+        } catch {
+            XCTAssertNil(error)
+        }
+    }
+    
+    func testOptionalArray() {
+        let data = #"""
+                  [
+                      null,
+                      {
+                          "value": "ss"
+                      }
+                  ]
+                """#.data(using: .utf8)!
+        do {
+            let decoder = CleanJSONDecoder()
+            let int = try decoder.decode([Int?].self, from: data)
+            let string = try decoder.decode([String?].self, from: data)
+            let float = try decoder.decode([Float?].self, from: data)
+            let double = try decoder.decode([Double?].self, from: data)
+            let model = try decoder.decode([Model.Nested?].self, from: data)
+            
+            XCTAssertEqual(int.count, 2)
+            XCTAssertEqual(string.count, 2)
+            XCTAssertEqual(float.count, 2)
+            XCTAssertEqual(double.count, 2)
+            XCTAssertEqual(model.count, 2)
         } catch {
             XCTAssertNil(error)
         }

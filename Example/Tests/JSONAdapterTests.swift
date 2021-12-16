@@ -11,11 +11,11 @@ import CleanJSON
 
 struct CustomAdapter: JSONAdapter {
     
-    func adapt(_ value: JSONValue) -> Bool {
+    func adapt(_ value: JSONValue, from decoder: Decoder) throws -> Bool {
         value == .null
     }
     
-    func adapt<T>(_ value: JSONValue) -> T where T : FixedWidthInteger {
+    func adapt<T>(_ value: JSONValue, from decoder: Decoder) throws -> T where T : FixedWidthInteger {
         switch value {
         case .string(let string):
             let formatter = NumberFormatter()
@@ -27,7 +27,7 @@ struct CustomAdapter: JSONAdapter {
         }
     }
     
-    func adapt<T>(_ value: JSONValue) -> T where T : BinaryFloatingPoint, T : LosslessStringConvertible {
+    func adapt<T>(_ value: JSONValue, from decoder: Decoder) throws -> T where T : BinaryFloatingPoint, T : LosslessStringConvertible {
         switch value {
         case .string(let string):
             return T(Double(string)?.advanced(by: 1) ?? 0)
@@ -36,7 +36,7 @@ struct CustomAdapter: JSONAdapter {
         }
     }
     
-    func adapt(_ value: JSONValue) -> String {
+    func adapt(_ value: JSONValue, from decoder: Decoder) -> String {
         switch value {
         case .string(let string):
             return string

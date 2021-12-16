@@ -68,6 +68,11 @@ struct EnumStruct: Codable {
     let enum1: Enum
     let enum2: Enum
     let enum3: Enum?
+    
+    let stringEnum: StringEnum
+    let stringEnum1: StringEnum
+    let stringEnum2: StringEnum
+    let stringEnum3: StringEnum?
 }
 
 enum Enum: Int, CaseDefaultable, Codable {
@@ -77,6 +82,16 @@ enum Enum: Int, CaseDefaultable, Codable {
     
     static var defaultCase: Enum {
         return .case2
+    }
+}
+
+enum StringEnum: String, Codable, CaseDefaultable {
+    case case1
+    case case2
+    case case3
+    
+    static var defaultCase: StringEnum {
+        .case1
     }
 }
 
@@ -242,7 +257,11 @@ class CleanJSONTests: XCTestCase {
                       "enum": 3,
                       "enum1": false,
                       "enum2": 0,
-                      "enum3": 2.0
+                      "enum3": 2.0,
+                      "stringEnum": "case4",
+                      "stringEnum1": false,
+                      "stringEnum2": "case2",
+                      "stringEnum3": "case3",
                     }
                 """.data(using: .utf8)!
         do {
@@ -251,6 +270,10 @@ class CleanJSONTests: XCTestCase {
             XCTAssertEqual(object.enum1, Enum.defaultCase)
             XCTAssertEqual(object.enum2, .case1)
             XCTAssertEqual(object.enum3, .case3)
+            XCTAssertEqual(object.stringEnum, .defaultCase)
+            XCTAssertEqual(object.stringEnum1, .defaultCase)
+            XCTAssertEqual(object.stringEnum2, .case2)
+            XCTAssertEqual(object.stringEnum3, .case3)
         } catch {
             XCTAssertNil(error)
         }

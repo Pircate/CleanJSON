@@ -48,7 +48,9 @@ enum Enum: Int, Codable, CaseDefaultable {
 
 struct CustomAdapter: JSONAdapter {
     
-    func adapt(_ value: JSONValue) -> Bool {
+    // 由于 Swift 布尔类型不是非 0 即 true，所以默认没有提供类型转换。
+    // 如果想实现 Int 转 Bool 可以自定义解码。
+    func adapt(_ value: JSONValue, from decoder: Decoder) throws -> Bool {
         switch value {
         case .number(let string):
             guard let doubleValue = Double(string) else { return false }
@@ -58,23 +60,16 @@ struct CustomAdapter: JSONAdapter {
             return false
         }
     }
-//    // 由于 Swift 布尔类型不是非 0 即 true，所以默认没有提供类型转换。
-//    // 如果想实现 Int 转 Bool 可以自定义解码。
-//    func adapt(_ decoder: CleanDecoder) throws -> Bool {
-//        guard let intValue = try decoder.decodeIfPresent(Int.self) else { return false }
-//        
-//        return intValue != 0
-//    }
-//    
-//    // 日期为 null 或者类型不匹配时使用当前时间
-//    func adapt(_ decoder: CleanDecoder) throws -> Date {
-//        return Date()
-//    }
-//    
-//    // 可选的 URL 类型解析失败的时候返回一个默认 url
-//    func adaptIfPresent(_ decoder: CleanDecoder) throws -> URL? {
-//        return URL(string: "https://google.com")
-//    }
+    
+    // 日期为 null 或者类型不匹配时使用当前时间
+    func adapt(_ value: JSONValue, from decoder: Decoder) throws -> Date {
+        Date()
+    }
+    
+    // 可选的 URL 类型解析失败的时候返回一个默认 url
+    func adaptIfPresent(_ value: JSONValue, from decoder: Decoder) throws -> URL? {
+        return URL(string: "https://google.com")
+    }
 }
 
 class ViewController: UIViewController {

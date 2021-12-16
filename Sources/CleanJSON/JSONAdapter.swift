@@ -10,290 +10,128 @@ import Foundation
 
 public protocol JSONAdapter {
     
-    func adapt(_ decoder: CleanDecoder) throws -> Bool
+    func adapt(_ value: JSONValue, from decoder: Decoder) throws -> Bool
     
-    func adapt(_ decoder: CleanDecoder) throws -> Int
+    func adapt(_ value: JSONValue, from decoder: Decoder) throws -> String
     
-    func adapt(_ decoder: CleanDecoder) throws -> Int8
+    func adapt<T: FixedWidthInteger>(_ value: JSONValue, from decoder: Decoder) throws -> T
     
-    func adapt(_ decoder: CleanDecoder) throws -> Int16
+    func adapt<T: LosslessStringConvertible & BinaryFloatingPoint>(
+        _ value: JSONValue,
+        from decoder: Decoder
+    ) throws -> T
     
-    func adapt(_ decoder: CleanDecoder) throws -> Int32
+    func adapt(_ value: JSONValue, from decoder: Decoder) throws -> Date
     
-    func adapt(_ decoder: CleanDecoder) throws -> Int64
+    func adapt(_ value: JSONValue, from decoder: Decoder) throws -> Data
     
-    func adapt(_ decoder: CleanDecoder) throws -> UInt
+    func adapt(_ value: JSONValue, from decoder: Decoder) throws -> Decimal
     
-    func adapt(_ decoder: CleanDecoder) throws -> UInt8
+    func adaptIfPresent(_ value: JSONValue, from decoder: Decoder) throws -> Bool?
     
-    func adapt(_ decoder: CleanDecoder) throws -> UInt16
+    func adaptIfPresent(_ value: JSONValue, from decoder: Decoder) throws -> String?
     
-    func adapt(_ decoder: CleanDecoder) throws -> UInt32
+    func adaptIfPresent<T: FixedWidthInteger>(_ value: JSONValue, from decoder: Decoder) throws -> T?
     
-    func adapt(_ decoder: CleanDecoder) throws -> UInt64
+    func adaptIfPresent<T: LosslessStringConvertible & BinaryFloatingPoint>(
+        _ value: JSONValue,
+        from decoder: Decoder
+    ) throws -> T?
     
-    func adapt(_ decoder: CleanDecoder) throws -> Float
+    func adaptIfPresent(_ value: JSONValue, from decoder: Decoder) throws -> Date?
     
-    func adapt(_ decoder: CleanDecoder) throws -> Double
+    func adaptIfPresent(_ value: JSONValue, from decoder: Decoder) throws -> Data?
     
-    func adapt(_ decoder: CleanDecoder) throws -> String
+    func adaptIfPresent(_ value: JSONValue, from decoder: Decoder) throws -> URL?
     
-    func adapt(_ decoder: CleanDecoder) throws -> Date
-    
-    func adapt(_ decoder: CleanDecoder) throws -> Data
-    
-    func adapt(_ decoder: CleanDecoder) throws -> Decimal
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Bool?
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int?
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int8?
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int16?
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int32?
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int64?
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt?
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt8?
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt16?
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt32?
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt64?
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Float?
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Double?
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> String?
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Date?
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Data?
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> URL?
-    
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Decimal?
-    
-    func adaptIfPresent<T: Decodable>(_ decoder: CleanDecoder) throws -> T?
+    func adaptIfPresent(_ value: JSONValue, from decoder: Decoder) throws -> Decimal?
 }
 
 public extension JSONAdapter {
     
-    @inline(__always)
-    func adapt(_ decoder: CleanDecoder) throws -> Bool {
-        return Bool.defaultValue
+    func adapt(_ value: JSONValue, from decoder: Decoder) throws -> Bool {
+        .defaultValue
     }
     
-    @inline(__always)
-    func adapt(_ decoder: CleanDecoder) throws -> Int {
-        guard !decoder.decodeNil() else { return Int.defaultValue }
-        
-        guard let stringValue = try decoder.decodeIfPresent(String.self) else {
-            return Int.defaultValue
+    func adapt(_ value: JSONValue, from decoder: Decoder) throws -> String {
+        switch value {
+        case .number(let stringValue):
+            return stringValue
+        case .bool(let boolValue):
+            return String(describing: boolValue)
+        default:
+            return .defaultValue
         }
-        
-        return Int(stringValue) ?? Int.defaultValue
     }
     
-    @inline(__always)
-    func adapt(_ decoder: CleanDecoder) throws -> Int8 {
-        return Int8.defaultValue
-    }
-    
-    @inline(__always)
-    func adapt(_ decoder: CleanDecoder) throws -> Int16 {
-        return Int16.defaultValue
-    }
-    
-    @inline(__always)
-    func adapt(_ decoder: CleanDecoder) throws -> Int32 {
-        return Int32.defaultValue
-    }
-    
-    @inline(__always)
-    func adapt(_ decoder: CleanDecoder) throws -> Int64 {
-        return Int64.defaultValue
-    }
-    
-    @inline(__always)
-    func adapt(_ decoder: CleanDecoder) throws -> UInt {
-        guard !decoder.decodeNil() else { return UInt.defaultValue }
-        
-        guard let stringValue = try decoder.decodeIfPresent(String.self) else {
-            return UInt.defaultValue
+    func adapt<T: FixedWidthInteger>(_ value: JSONValue, from decoder: Decoder) throws -> T {
+        switch value {
+        case .string(let stringValue):
+            return T.init(stringValue) ?? 0
+        default:
+            return 0
         }
-        
-        return UInt(stringValue) ?? UInt.defaultValue
     }
     
-    @inline(__always)
-    func adapt(_ decoder: CleanDecoder) throws -> UInt8 {
-        return UInt8.defaultValue
-    }
-    
-    @inline(__always)
-    func adapt(_ decoder: CleanDecoder) throws -> UInt16 {
-        return UInt16.defaultValue
-    }
-    
-    @inline(__always)
-    func adapt(_ decoder: CleanDecoder) throws -> UInt32 {
-        return UInt32.defaultValue
-    }
-    
-    @inline(__always)
-    func adapt(_ decoder: CleanDecoder) throws -> UInt64 {
-        return UInt64.defaultValue
-    }
-    
-    @inline(__always)
-    func adapt(_ decoder: CleanDecoder) throws -> Float {
-        guard !decoder.decodeNil() else { return Float.defaultValue }
-        
-        guard let stringValue = try decoder.decodeIfPresent(String.self) else {
-            return Float.defaultValue
+    func adapt<T: LosslessStringConvertible & BinaryFloatingPoint>(
+        _ value: JSONValue,
+        from decoder: Decoder
+    ) throws -> T {
+        switch value {
+        case .string(let stringValue):
+            return T.init(stringValue) ?? 0
+        default:
+            return 0
         }
+    }
+    
+    func adapt(_ value: JSONValue, from decoder: Decoder) throws -> Date {
+        guard let decoder = decoder as? JSONDecoderImpl else { return .defaultValue }
         
-        return Float(stringValue) ?? Float.defaultValue
+        return .defaultValue(for: decoder.options.dateDecodingStrategy)
     }
     
-    @inline(__always)
-    func adapt(_ decoder: CleanDecoder) throws -> Double {
-        guard !decoder.decodeNil() else { return Double.defaultValue }
-        
-        guard let stringValue = try decoder.decodeIfPresent(String.self) else {
-            return Double.defaultValue
-        }
-        
-        return Double(stringValue) ?? Double.defaultValue
+    func adapt(_ value: JSONValue, from decoder: Decoder) throws -> Data {
+        .defaultValue
     }
     
-    @inline(__always)
-    func adapt(_ decoder: CleanDecoder) throws -> String {
-        guard !decoder.decodeNil() else { return String.defaultValue }
-        
-        return String(describing: decoder.topContainer)
+    func adapt(_ value: JSONValue, from decoder: Decoder) throws -> Decimal {
+        .defaultValue
     }
     
-    @inline(__always)
-    func adapt(_ decoder: CleanDecoder) throws -> Date {
-        guard let decoder = decoder as? _CleanJSONDecoder else { return Date.defaultValue }
-        
-        return Date.defaultValue(for: decoder.options.dateDecodingStrategy)
+    func adaptIfPresent(_ value: JSONValue, from decoder: Decoder) throws -> Bool? {
+        nil
     }
     
-    @inline(__always)
-    func adapt(_ decoder: CleanDecoder) throws -> Data {
-        return Data.defaultValue
+    func adaptIfPresent(_ value: JSONValue, from decoder: Decoder) throws -> String? {
+        nil
     }
     
-    @inline(__always)
-    func adapt(_ decoder: CleanDecoder) throws -> Decimal {
-        return Decimal.defaultValue
-    }
-}
-
-public extension JSONAdapter {
-    
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Bool? {
-        return nil
+    func adaptIfPresent<T: FixedWidthInteger>(_ value: JSONValue, from decoder: Decoder) throws -> T? {
+        nil
     }
     
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int? {
-        return nil
+    func adaptIfPresent<T: LosslessStringConvertible & BinaryFloatingPoint>(
+        _ value: JSONValue,
+        from decoder: Decoder
+    ) throws -> T? {
+        nil
     }
     
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int8? {
-        return nil
+    func adaptIfPresent(_ value: JSONValue, from decoder: Decoder) throws -> Date? {
+        nil
     }
     
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int16? {
-        return nil
+    func adaptIfPresent(_ value: JSONValue, from decoder: Decoder) throws -> Data? {
+        nil
     }
     
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int32? {
-        return nil
+    func adaptIfPresent(_ value: JSONValue, from decoder: Decoder) throws -> URL? {
+        nil
     }
     
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Int64? {
-        return nil
-    }
-    
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt? {
-        return nil
-    }
-    
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt8? {
-        return nil
-    }
-    
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt16? {
-        return nil
-    }
-    
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt32? {
-        return nil
-    }
-    
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> UInt64? {
-        return nil
-    }
-    
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Float? {
-        return nil
-    }
-    
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Double? {
-        return nil
-    }
-    
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> String? {
-        return nil
-    }
-    
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Date? {
-        return nil
-    }
-    
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Data? {
-        return nil
-    }
-    
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> URL? {
-        return nil
-    }
-    
-    @inline(__always)
-    func adaptIfPresent(_ decoder: CleanDecoder) throws -> Decimal? {
-        return nil
-    }
-    
-    @inline(__always)
-    func adaptIfPresent<T: Decodable>(_ decoder: CleanDecoder) throws -> T? {
-        return nil
+    func adaptIfPresent(_ value: JSONValue, from decoder: Decoder) throws -> Decimal? {
+        nil
     }
 }
 
