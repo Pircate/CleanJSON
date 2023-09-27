@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CleanJSONKey : CodingKey {
+struct CleanJSONKey: CodingKey {
     
     public var stringValue: String
     

@@ -32,7 +32,7 @@ open class CleanJSONDecoder: JSONDecoder {
         let valueNotFoundDecodingStrategy: ValueNotFoundDecodingStrategy
         let nestedContainerDecodingStrategy: NestedContainerDecodingStrategy
         let jsonStringDecodingStrategy: JSONStringDecodingStrategy
-        let userInfo: [CodingUserInfoKey : Any]
+        let userInfo: [CodingUserInfoKey: Any]
     }
     
     /// The options set on the top-level decoder.
@@ -71,7 +71,7 @@ open class CleanJSONDecoder: JSONDecoder {
     /// - returns: A value of the requested type.
     /// - throws: `DecodingError.dataCorrupted` if values requested from the payload are corrupted, or if the given data is not valid JSON.
     /// - throws: An error if any value throws an error during decoding.
-    open override func decode<T : Decodable>(_ type: T.Type, from data: Data) throws -> T {
+    open override func decode<T: Decodable>(_ type: T.Type, from data: Data) throws -> T {
         let topLevel: Any
         do {
             topLevel = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
@@ -94,7 +94,7 @@ open class CleanJSONDecoder: JSONDecoder {
     /// - parameter convertible: The container to decode from.
     /// - returns: A value of the requested type.
     /// - throws: An error if any value throws an error during decoding.
-    open func decode<T : Decodable>(
+    open func decode<T: Decodable>(
         _ type: T.Type,
         from convertible: JSONContainerConvertible
     ) throws -> T {
@@ -104,7 +104,7 @@ open class CleanJSONDecoder: JSONDecoder {
 
 private extension CleanJSONDecoder {
     
-    func decode<T : Decodable>(
+    func decode<T: Decodable>(
         _ type: T.Type,
         from container: Any
     ) throws -> T {

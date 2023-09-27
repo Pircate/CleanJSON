@@ -399,7 +399,7 @@ extension _CleanJSONDecoder {
         
         guard let dict = value as? NSDictionary else { return nil }
         
-        var result = [String : Any]()
+        var result = [String: Any]()
         let elementType = type.elementType
         for (key, value) in dict {
             let key = key as! String
@@ -412,7 +412,7 @@ extension _CleanJSONDecoder {
         return result as? T
     }
     
-    func unbox<T : Decodable>(_ value: Any, as type: T.Type) throws -> T? {
+    func unbox<T: Decodable>(_ value: Any, as type: T.Type) throws -> T? {
         return try unbox_(value, as: type) as? T
     }
     
@@ -446,7 +446,7 @@ protocol _JSONStringDictionaryDecodableMarker {
 }
 #endif
 
-extension Dictionary : _JSONStringDictionaryDecodableMarker where Key == String, Value: Decodable {
+extension Dictionary: _JSONStringDictionaryDecodableMarker where Key == String, Value: Decodable {
     static var elementType: Decodable.Type { return Value.self }
 }
 

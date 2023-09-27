@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension _CleanJSONDecoder : SingleValueDecodingContainer {
+extension _CleanJSONDecoder: SingleValueDecodingContainer {
     // MARK: SingleValueDecodingContainer Methods
     
     public func decodeNil() -> Bool {
@@ -197,7 +197,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
         }
     }
     
-    public func decode<T : Decodable>(_ type: T.Type) throws -> T {
+    public func decode<T: Decodable>(_ type: T.Type) throws -> T {
         if type == Date.self || type == NSDate.self {
             return try decode(as: Date.self) as! T
         } else if type == Data.self || type == NSData.self {

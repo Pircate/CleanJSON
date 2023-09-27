@@ -33,14 +33,13 @@ private extension _CleanJSONDecoder {
     func decodeCase<T>(_ type: T.Type) throws -> T
         where T: CaseDefaultable,
         T: Decodable,
-        T.RawValue: Decodable
-    {
+        T.RawValue: Decodable {
         guard !decodeNil(), !storage.containers.isEmpty, storage.topContainer is T.RawValue else {
             return T.defaultCase
         }
         
         if let number = storage.topContainer as? NSNumber,
-            (number === kCFBooleanTrue || number === kCFBooleanFalse) {
+            number === kCFBooleanTrue || number === kCFBooleanFalse {
             guard let rawValue = number.boolValue as? T.RawValue else {
                 return T.defaultCase
             }

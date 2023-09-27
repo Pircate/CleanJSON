@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
+struct CleanJSONUnkeyedDecodingContainer: UnkeyedDecodingContainer {
     // MARK: Properties
     
     /// A reference to the decoder we're reading from.
@@ -394,7 +394,7 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         }
     }
     
-    public mutating func decode<T : Decodable>(_ type: T.Type) throws -> T {
+    public mutating func decode<T: Decodable>(_ type: T.Type) throws -> T {
         guard !self.isAtEnd else {
             throw DecodingError.valueNotFound(
                 type,
@@ -451,12 +451,12 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             }
         }
         
-        guard let dictionary = value as? [String : Any] else {
+        guard let dictionary = value as? [String: Any] else {
             switch decoder.options.nestedContainerDecodingStrategy.typeMismatch {
             case .throw:
                 throw DecodingError._typeMismatch(
                     at: self.codingPath,
-                    expectation: [String : Any].self,
+                    expectation: [String: Any].self,
                     reality: value
                 )
             case .useEmptyContainer:

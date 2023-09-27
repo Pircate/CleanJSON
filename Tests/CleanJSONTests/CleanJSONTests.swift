@@ -10,6 +10,6 @@ final class CleanJSONTests: XCTestCase {
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testExample", testExample)
     ]
 }

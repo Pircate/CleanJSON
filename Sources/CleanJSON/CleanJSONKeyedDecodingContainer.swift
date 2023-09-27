@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerProtocol {
+struct CleanJSONKeyedDecodingContainer<K: CodingKey>: KeyedDecodingContainerProtocol {
     
     typealias Key = K
     
@@ -18,7 +18,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
     private let decoder: _CleanJSONDecoder
     
     /// A reference to the container we're reading from.
-    private let container: [String : Any]
+    private let container: [String: Any]
     
     /// The path of coding keys taken to get to this point in decoding.
     private(set) public var codingPath: [CodingKey]
@@ -26,7 +26,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
     // MARK: - Initialization
     
     /// Initializes `self` by referencing the given decoder and container.
-    init(referencing decoder: _CleanJSONDecoder, wrapping container: [String : Any]) {
+    init(referencing decoder: _CleanJSONDecoder, wrapping container: [String: Any]) {
         self.decoder = decoder
         switch decoder.options.keyDecodingStrategy {
         case .useDefaultKeys:
@@ -416,7 +416,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
     }
     
     @inline(__always)
-    public func decode<T : Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
+    public func decode<T: Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
         guard let entry = container[key.stringValue] else {
             switch decoder.options.keyNotFoundDecodingStrategy {
             case .throw:
@@ -487,12 +487,12 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
             }
         }
         
-        guard let dictionary = value as? [String : Any] else {
+        guard let dictionary = value as? [String: Any] else {
             switch decoder.options.nestedContainerDecodingStrategy.typeMismatch {
             case .throw:
                 throw DecodingError._typeMismatch(
                     at: self.codingPath,
-                    expectation: [String : Any].self,
+                    expectation: [String: Any].self,
                     reality: value)
             case .useEmptyContainer:
                 return nestedContainer()
@@ -863,7 +863,7 @@ extension CleanJSONKeyedDecodingContainer {
     }
     
     @inline(__always)
-    func decodeIfPresent<T>(_ type: T.Type, forKey key: K) throws -> T? where T : Decodable {
+    func decodeIfPresent<T>(_ type: T.Type, forKey key: K) throws -> T? where T: Decodable {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
         decoder.codingPath.append(key)
@@ -939,7 +939,7 @@ private extension CleanJSONDecoder.KeyDecodingStrategy {
         let trailingUnderscoreRange = stringKey.index(after: lastNonUnderscore)..<stringKey.endIndex
         
         let components = stringKey[keyRange].split(separator: "_")
-        let joinedString : String
+        let joinedString: String
         if components.count == 1 {
             // No underscores in key, leave the word as is - maybe already camel cased
             joinedString = String(stringKey[keyRange])
@@ -948,13 +948,13 @@ private extension CleanJSONDecoder.KeyDecodingStrategy {
         }
         
         // Do a cheap isEmpty check before creating and appending potentially empty strings
-        let result : String
-        if (leadingUnderscoreRange.isEmpty && trailingUnderscoreRange.isEmpty) {
+        let result: String
+        if leadingUnderscoreRange.isEmpty && trailingUnderscoreRange.isEmpty {
             result = joinedString
-        } else if (!leadingUnderscoreRange.isEmpty && !trailingUnderscoreRange.isEmpty) {
+        } else if !leadingUnderscoreRange.isEmpty && !trailingUnderscoreRange.isEmpty {
             // Both leading and trailing underscores
             result = String(stringKey[leadingUnderscoreRange]) + joinedString + String(stringKey[trailingUnderscoreRange])
-        } else if (!leadingUnderscoreRange.isEmpty) {
+        } else if !leadingUnderscoreRange.isEmpty {
             // Just leading
             result = String(stringKey[leadingUnderscoreRange]) + joinedString
         } else {

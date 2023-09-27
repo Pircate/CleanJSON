@@ -34,7 +34,7 @@ extension DecodingError {
             return "a string/data"
         } else if value is [Any] {
             return "an array"
-        } else if value is [String : Any] {
+        } else if value is [String: Any] {
             return "a dictionary"
         } else {
             return "\(type(of: value))"

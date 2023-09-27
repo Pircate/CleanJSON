@@ -19,7 +19,7 @@ extension _CleanJSONDecoder {
             return bool
         } else if let int = Int.defaultValue as? T {
             return int
-        }else if let double = Double.defaultValue as? T {
+        } else if let double = Double.defaultValue as? T {
             return double
         } else if let date = Date.defaultValue(for: options.dateDecodingStrategy) as? T {
             return date

@@ -20,7 +20,7 @@ final class _CleanJSONDecoder: CleanDecoder {
     public var codingPath: [CodingKey]
     
     /// Contextual user-provided information for use during encoding.
-    public var userInfo: [CodingUserInfoKey : Any] {
+    public var userInfo: [CodingUserInfoKey: Any] {
         return self.options.userInfo
     }
     
@@ -54,12 +54,12 @@ final class _CleanJSONDecoder: CleanDecoder {
             }
         }
         
-        guard let topContainer = self.storage.topContainer as? [String : Any] else {
+        guard let topContainer = self.storage.topContainer as? [String: Any] else {
             switch options.nestedContainerDecodingStrategy.typeMismatch {
             case .throw:
                 throw DecodingError._typeMismatch(
                     at: codingPath,
-                    expectation: [String : Any].self,
+                    expectation: [String: Any].self,
                     reality: storage.topContainer
                 )
             case .useEmptyContainer:
