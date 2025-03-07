@@ -20,7 +20,7 @@ extension Array: JSONContainerConvertible where Element == Any {
     public func asJSONContainer() -> Any { self }
 }
 
-open class CleanJSONDecoder: JSONDecoder {
+open class CleanJSONDecoder: JSONDecoder, @unchecked Sendable {
     
     /// Options set on the top-level encoder to pass down the decoding hierarchy.
     struct Options {
@@ -121,5 +121,39 @@ private extension CleanJSONDecoder {
         }
         
         return value
+    }
+}
+
+// Add an internal empty type in the CleanJSON framework to skip elements
+private struct _CleanJSONSkip: Decodable { }
+
+// Extend KeyedDecodingContainer to add special decoding for array types
+public extension KeyedDecodingContainer {
+    func decode<Element: Decodable>(_ type: [Element].Type, forKey key: Key) throws -> [Element] {
+        // If the key does not exist or its value is null, return an empty array (without throwing an error)
+        guard contains(key), (try? decodeNil(forKey: key)) == false else {
+            return []
+        }
+        var container = try nestedUnkeyedContainer(forKey: key)
+        var result: [Element] = []
+        // Iterate through the unkeyed container and decode each element
+        while !container.isAtEnd {
+            if let element = try? container.decode(Element.self) {
+                result.append(element)  // Successfully decoded, add to the result
+            } else {
+                // Decoding failed, skip the current element:
+                _ = try? container.decode(_CleanJSONSkip.self)
+                // ↑ Decode into an empty Decodable type to discard the invalid element
+            }
+        }
+        return result
+    }
+
+    func decodeIfPresent<Element: Decodable>(_ type: [Element].Type, forKey key: Key) throws -> [Element]? {
+        // If the key does not exist or its value is null, return nil indicating the absence of this array
+        guard contains(key), (try? decodeNil(forKey: key)) == false else {
+            return nil
+        }
+        return try decode([Element].self, forKey: key)  // Call the decode implementation above
     }
 }
