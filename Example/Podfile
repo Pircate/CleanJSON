@@ -2,7 +2,9 @@ platform :ios, '9.0'
 
 use_frameworks!
 
-install! 'cocoapods', :disable_input_output_paths => true
+install! 'cocoapods',
+  :disable_input_output_paths => true,
+  :share_schemes_for_development_pods => true
 
 target 'CleanJSON_Example' do
   pod 'CleanJSON', :path => '../'

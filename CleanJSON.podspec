@@ -9,9 +9,14 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/Pircate/CleanJSON.git', :tag => s.version.to_s }
   s.source_files     = 'Sources/CleanJSON/**/*'
   
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '12.0'
   s.osx.deployment_target = '10.10'
   s.tvos.deployment_target = '9.0'
   s.watchos.deployment_target = '2.0'
   s.swift_versions = ['5.2']
+  
+  s.pod_target_xcconfig = {
+    "BUILD_LIBRARY_FOR_DISTRIBUTION" => 'YES'
+  }
+  
 end
